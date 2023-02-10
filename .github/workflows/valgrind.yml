@@ -16,7 +16,6 @@ jobs:
         sudo apt install valgrind
         pip install ValgrindCI
         pip install ValgrindCI --no-index -f dist
-        pip install -r requirements.txt
     - name: Run tests
       run: |
         make && valgrind --leak-check=full --tool=memcheck --xml=yes --xml-file==output_file.xml ./cub3D
