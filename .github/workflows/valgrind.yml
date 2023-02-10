@@ -18,7 +18,7 @@ jobs:
         pip install ValgrindCI --no-index -f dist
     - name: Run tests
       run: |
-        make && valgrind --leak-check=full --tool=memcheck --xml=yes --xml-file==output_file.xml ./cub3D
+        make && valgrind --leak-check=full --tool=memcheck --xml=yes --xml-file=output_file.xml ./cub3D
         pwd
         cat output_file.xml
         valgrind-ci output_file.xml --number-of-errors
