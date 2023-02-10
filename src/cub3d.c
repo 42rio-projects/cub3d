@@ -6,6 +6,6 @@ int	main(void)
 	char	*ola;
 
 	ola = malloc(10);
-	ola = "eae";
+	ola = "esta vazando\n";
 	printf("%s\n", ola);
 }
