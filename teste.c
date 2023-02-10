@@ -1,3 +1,6 @@
-int main(void){
-	int salve = 1;
+int	main(void)
+{
+	int	salve;
+
+	salve = 1;
 }
