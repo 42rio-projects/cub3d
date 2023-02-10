@@ -20,6 +20,7 @@ jobs:
       run: |
         make && valgrind --leak-check=full --tool=memcheck --xml=yes --xml-file==output_file.xml ./cub3D
         pwd
+        cat output_file.txt
         valgrind-ci output_file.xml --number-of-errors
         valgrind-ci output_file.xml --abort-on-errors
         valgrind-ci output_file.xml --summary
