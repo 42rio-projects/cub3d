@@ -1,14 +1,7 @@
 name: "Build and run tests with memory check"
 
-on:
-  pull_request:
-  push:
-    branches:
-      - main
-            - 6-create-valgrind-actions
+on: [push, pull_request]
 
-env:
-  RUN_MEMORY_CHECK: ${{ (github.base_ref == '6-create-valgrind-actions') || ((secrets.RUN_MEMORY_CHECK == 'true') }}
 jobs:
   build:
     name: "Build"
@@ -26,7 +19,6 @@ jobs:
           sudo apt update
           sudo apt install -y libev-dev
       - name: Install Valgrind
-        if: ${{ env.RUN_MEMORY_CHECK == 'true' }}
         run: |
           sudo apt install valgrind
           echo "Valgrind installed"
@@ -40,7 +32,6 @@ jobs:
                     gcc test.c && valgrind --leak-check=full --xml=yes --xml-file=unit_tests_valgrind.xml ./a.out
 
       - name: Valgrind Memory check
-        if: ${{ env.RUN_MEMORY_CHECK == 'true' }}
         run: |
           echo "Checking Valgrind xml ..."
             ./check-memory.sh
