@@ -16,10 +16,10 @@ jobs:
         sudo apt install valgrind
         pip install ValgrindCI
         pip install ValgrindCI --no-index -f dist
-    - name: make
+    - name: Run tests
       run: |
         make && valgrind --leak-check=full --tool=memcheck --xml=yes --xml-file==output_file.xml ./cub3D
         pwd
-        valgrind-ci output_file.xml --number-of-errors
-        valgrind-ci output_file.xml --abort-on-errors
-        valgrind-ci output_file.xml --summary
+        valgrind-ci /home/runner/work/cub3d/cub3d/output_file.xml --number-of-errors
+        valgrind-ci /home/runner/work/cub3d/cub3d/output_file.xml --abort-on-errors
+        valgrind-ci /home/runner/work/cub3d/cub3d/output_file.xml --summary
