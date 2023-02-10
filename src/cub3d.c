@@ -3,10 +3,5 @@
 
 int	main(void)
 {
-	char	*ola;
-
-	ola = malloc(10);
-	ola = "hi\n";
-	printf("%s\n", ola);
-	free(ola);
+	printf("ola\n");
 }
