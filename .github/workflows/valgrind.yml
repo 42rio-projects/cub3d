@@ -22,6 +22,7 @@ jobs:
         run: |
           sudo apt install valgrind
           pip install ValgrindCI
+          pip install -r requirements.txt
           python setup.py bdist_wheel
           pip install ValgrindCI --no-index -f dist
           echo "Valgrind installed"
