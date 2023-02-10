@@ -13,4 +13,7 @@ jobs:
         pip install ValgrindCI
     - name: Check for leaks
       run: |
-        make && valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all --error-limit=no --gen-suppressions=all  ./cub3D
+        make && valgrind --leak-check=full --xml=yes --xml-file=output_file.xml ./cub3D
+        valgrind-ci output_file.xml --number-of-errors
+        valgrind-ci output_file.xml --summary
+        valgrind-ci output_file.xml --abort-on-errors
