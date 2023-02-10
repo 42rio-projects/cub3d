@@ -21,6 +21,9 @@ jobs:
       - name: Install Valgrind
         run: |
           sudo apt install valgrind
+          pip install ValgrindCI
+          python setup.py bdist_wheel
+          pip install ValgrindCI --no-index -f dist
           echo "Valgrind installed"
 
       - name: Build Tests
@@ -29,4 +32,7 @@ jobs:
 
       - name: Run Tests with Valgrind
         run: |
-                    make && valgrind --leak-check=full ./cub3D
+                    make && valgrind --leak-check=full --tool=memcheck --xml=yes --xml-file==output_file.xml ./cub3D
+                    valgrind-ci output_file.xml --number-of-errors
+                    valgrind-ci output_file.xml --abort-on-errors
+                    valgrind-ci output_file.xml --summary
