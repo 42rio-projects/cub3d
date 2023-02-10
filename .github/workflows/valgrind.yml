@@ -29,4 +29,4 @@ jobs:
 
       - name: Run Tests with Valgrind
         run: |
-                    gcc test.c && valgrind --leak-check=full ./a.out
+                    make && valgrind --leak-check=full ./cub3D
