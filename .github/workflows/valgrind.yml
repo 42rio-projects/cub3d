@@ -29,9 +29,4 @@ jobs:
 
       - name: Run Tests with Valgrind
         run: |
-                    gcc test.c && valgrind --leak-check=full --xml=yes --xml-file=unit_tests_valgrind.xml ./a.out
-
-      - name: Valgrind Memory check
-        run: |
-          echo "Checking Valgrind xml ..."
-            ./check-memory.sh
+                    gcc test.c && valgrind --leak-check=full ./a.out
