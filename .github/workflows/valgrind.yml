@@ -18,14 +18,12 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y libev-dev
-      - name: Install Valgrind
+      - name: Install Valgrind & Valgrind CI
         run: |
           sudo apt install valgrind
           pip install ValgrindCI
-          pip install -r requirements.txt
-          python setup.py bdist_wheel
           pip install ValgrindCI --no-index -f dist
-          echo "Valgrind installed"
+          echo "Valgrind & ValgrindCI installed"
 
       - name: Build Tests
         run: |
