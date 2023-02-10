@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-            - development
+            - 6-create-valgrind-actions
 
 env:
   RUN_MEMORY_CHECK: ${{ (github.base_ref == '6-create-valgrind-actions') || ((secrets.RUN_MEMORY_CHECK == 'true') }}
