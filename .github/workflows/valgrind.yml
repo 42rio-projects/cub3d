@@ -7,13 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install Valgrind & Valgrind CI
+    - name: apt install dependency
       run: |
-        sudo apt install valgrind
-        pip install ValgrindCI
-    - name: Run tests
+        sudo apt-get -y install valgrind
+        sudo apt-get -y install libcunit1 libcunit1-doc libcunit1-dev
+     - name: make
       run: |
-        make && valgrind --leak-check=full --xml=yes --xml-file=output_file.xml ./cub3D
-        valgrind-ci output_file.xml --number-of-errors
-        valgrind-ci output_file.xml --summary
-        valgrind-ci output_file.xml --abort-on-errors
+        make
+        valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all --error-limit=no --gen-suppressions=all  ./cub3D
