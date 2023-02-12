@@ -19,7 +19,7 @@
 # include <fcntl.h>
 // open
 
-# include <error.h>
+# include <errno.h>
 // strerror, perror
 
 /* _______________________Color Section___________________ */
@@ -35,6 +35,6 @@
 
 /* ________________________Structs_________________________ */
 
-/* _______________________Funtions_________________________ */
-
+/* _______________________Functions_________________________ */
+int	check_argc(int argc);
 #endif

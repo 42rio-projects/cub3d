@@ -1,0 +1,34 @@
+Start testing: Feb 12 16:22 -03
+----------------------------------------------------------
+1/1 Testing: InputTests
+1/1 Test: InputTests
+Command: "/Users/vitor/Documents/Estudos/42/Github/cub3d/unitTests/build/InputTests/InputTests"
+Directory: /Users/vitor/Documents/Estudos/42/Github/cub3d/unitTests/build/InputTests
+"InputTests" start time: Feb 12 16:22 -03
+Output:
+----------------------------------------------------------
+Running main() from /Users/vitor/Documents/Estudos/42/Github/cub3d/unitTests/build/_deps/googletest-src/googletest/src/gtest_main.cc
+[==========] Running 2 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 2 tests from InputTests
+[ RUN      ] InputTests.SucessfullArgcTest
+[       OK ] InputTests.SucessfullArgcTest (0 ms)
+[ RUN      ] InputTests.FailArgcTest
+Invalid argument
+Invalid argument
+Invalid argument
+[       OK ] InputTests.FailArgcTest (0 ms)
+[----------] 2 tests from InputTests (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 2 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 2 tests.
+<end of output>
+Test time =   0.44 sec
+----------------------------------------------------------
+Test Passed.
+"InputTests" end time: Feb 12 16:22 -03
+"InputTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Feb 12 16:22 -03

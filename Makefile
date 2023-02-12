@@ -1,12 +1,14 @@
 NAME = cub3D
 
+BUILD = unitTests/build
+
 FLAGS = -Wall -Wextra -Werror -g
 
 CC = cc
 
 SRC_DIR = ./src/
 
-SRCS = cub3d.c
+SRCS = cub3d.c check_arguments.c
 
 FUNCS = $(addprefix $(SRC_DIR), $(SRCS))
 
@@ -18,7 +20,14 @@ $(NAME):	$(FUNCS)
 			@$(CC) $(FLAGS) $(FUNCS) -o $(NAME)
 			@echo "\033[32m 💯 | cub3d created."
 
-clean: 
+${BUILD}:
+			cd unitTests && cmake -S . -B build
+
+test: ${BUILD}
+			cd unitTests && cmake --build build
+			cd unitTests/build && ctest --output-on-failure
+
+clean:
 			@${RM} ${NAME}.dSYM
 			@echo "\033[33m 🧹  | cub3d cleaned."
 

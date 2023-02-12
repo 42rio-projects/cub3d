@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libUnitTesting.a CMakeFiles/UnitTesting.dir/Users/vitor/Documents/Estudos/42/Github/cub3d/src/check_arguments.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libUnitTesting.a
