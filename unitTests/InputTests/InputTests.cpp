@@ -14,14 +14,14 @@ extern "C"
 TEST(InputTests, SucessfullArgcTest)
 {
     // Nesses próximos testes utilizamos a macro EXPECT_EQ, enviamos parametro == 2 e esperamos que retorne 0
-    EXPECT_EQ(check_argc(2), 1);
+    EXPECT_EQ(check_argc(2), 0);
 }
 
 // Aqui chamaremos a macro TEST nas mesma suite, porém com o nome da bateria de testes alterado para FailArgcTest
 TEST(InputTests, FailArgcTest)
 {
     // Nesses próximos testes utilizamos a macro EXPECT_EQ, enviamos parametros != de 2 e esperamos que retorne 1
-    EXPECT_EQ(check_argc(3), 1);
-    EXPECT_EQ(check_argc(1), 1);
+    EXPECT_EQ(check_argc(10), 1);
     EXPECT_EQ(check_argc(-10), 1);
+    EXPECT_EQ(check_argc(0), 1);
 }
