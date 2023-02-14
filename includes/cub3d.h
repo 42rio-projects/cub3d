@@ -6,17 +6,21 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/02/14 18:36:01 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/02/14 19:07:28 by mpinna-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# if defined(__linux__) 
+# include "../mlx_linux/mlx.h"
+# else
 # include "../mlx/mlx.h"
+# endif
 // Minilib X funtions
 
-//#include "../libft/libft.h"
+# include "libft/libft.h"
 // Set of utility
 
 # include <stdlib.h>
