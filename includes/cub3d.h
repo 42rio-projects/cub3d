@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
 /*   Updated: 2023/02/14 19:07:28 by mpinna-l         ###   ########.fr       */
@@ -38,6 +38,9 @@
 # include <errno.h>
 // strerror, perror
 
+# include <math.h>
+// all functions from this lib
+
 /* _______________________Color Section___________________ */
 
 # define BLACK 0x000000
@@ -49,8 +52,24 @@
 # define CYAN 0x00FFFF
 # define WHITE 0xFFFFFF
 
+/* _______________________Window___________________ */
+# define WIDTH 700
+# define HEIGHT 700
+
 /* ________________________Structs_________________________ */
 
+typedef struct s_data
+{
+	void	*init;
+	void	*win;
+	void	*img;
+	void	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}			t_data;
+
 /* _______________________Functions_________________________ */
-int	check_argc(int argc);
+int			check_argc(int argc);
+void		init_data(t_data *info);
 #endif
