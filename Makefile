@@ -30,17 +30,11 @@ MLX_O	= -Imlx
 MLX_DIR		= mlx
 endif
 
-MLX = ./mlx/libmlx.a
+MLX = ./$(MLX_DIR)/libmlx.a
 
-LIBFT = ./libft/libft.a
+LIBFT = ./includes/libft/libft.a
 
 FLAGS_MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
-
-$(MLX):
-			make -C ./${MLX_DIR}
-
-$(LIBFT):
-			make -C includes/libft
 
 # Compile Rules 
 
@@ -53,6 +47,12 @@ $(NAME):	$(OBJS) $(LIBFT) $(MLX)
 			$(CC) $(FLAGS) $(OBJS) $(LIBS) -o $(NAME)
 			@echo "\033[32m 💯 | cub3d created."
 
+$(MLX):
+			make -C ./${MLX_DIR}
+
+$(LIBFT):
+			make -C includes/libft
+
 ${BUILD}:
 			cd unitTests && cmake -S . -B build
 
@@ -62,12 +62,14 @@ test: ${BUILD}
 
 clean:
 			@make -C ./includes/libft clean
+			@make -C ./$(MLX_DIR) clean
 			@${RM} ${NAME}.dSYM $(OBJS)
 			@echo "\033[33m 🧹  | cub3d cleaned."
 
 fclean: 	clean
 			@make -C ./includes/libft fclean
 			@$(RM) $(NAME)
+			@$(RM) ./$(BUILD)
 			@echo "\033[33m 🌪️  | cub3d all cleaned."
 
 re:			fclean all
