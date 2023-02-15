@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/02/14 23:39:47 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/02/15 10:46:18 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(void)
 	init_data(&info);
 	mlx_key_hook(info.win, key_event, &info);
 	mlx_hook(info.win, 17, 0, close_win, &info);
+	render_background(&info);
 	mlx_loop(info.init);
 }
 

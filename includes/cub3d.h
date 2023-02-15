@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/02/14 23:40:37 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/02/15 10:47:24 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,7 @@ int			check_argc(int argc);
 void		init_data(t_data *info);
 int			key_event(int keycode, t_data *info);
 int			close_win(t_data *info);
+void		my_mlx_pixel_put(t_data *info, int x, int y, int color);
+void		render_background(t_data *info);
 
 #endif
