@@ -55,7 +55,7 @@ test: ${BUILD}
 
 clean:
 			@make -C ./includes/libft clean
-			@${RM} ${NAME}.dSYM $(OBJS)
+			@${RM} ${NAME}.dSYM
 			@echo "\033[33m 🧹  | cub3d cleaned."
 
 fclean: 	clean
