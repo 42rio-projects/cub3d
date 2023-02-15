@@ -12,13 +12,11 @@ SRC = cub3d.c check_arguments.c
 
 SRCS = $(addprefix src/, $(SRC))
 
-OBJS = $(SRCS:.c=.o)
-
 RM = rm -rf
 
 INCLUDES = -I./includes
 
-# Change MLX to match OS 
+# Change MLX to match OS
 
 ifeq ($(shell uname), Linux)
 LIBS	= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz includes/libft/libft.a
@@ -34,23 +32,18 @@ MLX = ./mlx/libmlx.a
 
 LIBFT = ./libft/libft.a
 
-FLAGS_MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
-
 $(MLX):
 			make -C ./${MLX_DIR}
 
 $(LIBFT):
 			make -C includes/libft
 
-# Compile Rules 
-
-%.o: %.c
-			@${CC} -c ${FLAGS} ${INCLUDES} ${MLX_O} $< -o $@
+# Compile Rules
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(LIBFT) $(MLX)	
-			$(CC) $(FLAGS) $(OBJS) $(LIBS) -o $(NAME)
+$(NAME):	$(SRCS) $(LIBFT) $(MLX)
+			$(CC) $(FLAGS) $(SRCS) $(LIBS) $(INCLUDES) -o $(NAME)
 			@echo "\033[32m 💯 | cub3d created."
 
 ${BUILD}:
