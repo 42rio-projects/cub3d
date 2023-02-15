@@ -61,6 +61,7 @@ clean:
 fclean: 	clean
 			@make -C ./includes/libft fclean
 			@$(RM) $(NAME)
+			@$(RM) unitTests/build/
 			@echo "\033[33m 🌪️  | cub3d all cleaned."
 
 re:			fclean all
