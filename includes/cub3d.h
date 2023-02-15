@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/02/14 19:07:28 by mpinna-l         ###   ########.fr       */
+/*   Updated: 2023/02/14 23:24:47 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# if defined(__linux__) 
-# include "../mlx_linux/mlx.h"
+# if defined(__linux__)
+#  include "../mlx_linux/mlx.h"
 # else
-# include "../mlx/mlx.h"
+#  include "../mlx/mlx.h"
 # endif
 // Minilib X funtions
 
@@ -72,4 +72,6 @@ typedef struct s_data
 /* _______________________Functions_________________________ */
 int			check_argc(int argc);
 void		init_data(t_data *info);
+int			key_event(int keycode, t_data *info);
+
 #endif

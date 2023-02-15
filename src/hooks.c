@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/02/14 23:33:54 by vsergio          ###   ########.fr       */
+/*   Created: 2023/02/14 23:23:17 by vsergio           #+#    #+#             */
+/*   Updated: 2023/02/14 23:25:21 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(void)
+int	key_event(int keycode, t_data *info)
 {
-	t_data	info;
-
-	init_data(&info);
-	mlx_key_hook(info.win, key_event, &info);
-	mlx_loop(info.init);
-}
-
-void	init_data(t_data *info)
-{
-	info->init = mlx_init();
-	info->win = mlx_new_window(info->init, WIDTH, HEIGHT, "cub3d");
-	info->img = mlx_new_image(info->init, WIDTH, HEIGHT);
-	info->addr = mlx_get_data_addr(info->img, &info->bpp, &info->line_len,
-			&info->endian);
+	if (keycode == 53)
+	{
+		mlx_destroy_window(info->init, info->win);
+		exit(EXIT_FAILURE);
+	}
+	return (0);
 }
