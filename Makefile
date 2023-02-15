@@ -8,13 +8,15 @@ FLAGS = -Wall -Wextra -Werror -g
 
 CC = cc
 
-SRC = cub3d.c check_arguments.c hooks.c
+FILES = cub3d.c check_arguments.c hooks.c
 
-SRCS = $(addprefix src/, $(SRC))
+SRCS = $(addprefix src/, $(FILES))
 
 RM = rm -rf
 
-INCLUDES = -I./includes
+INCLUDES = -I ./includes
+
+LIBFT = ./includes/libft/libft.a
 
 # Change MLX to match OS
 
@@ -22,29 +24,26 @@ ifeq ($(shell uname), Linux)
 LIBS	= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz includes/libft/libft.a
 MLX_O	= -I/usr/include -lmlx_Linux -O3
 MLX_DIR	= mlx_linux
+MLX = ./mlx_linux/libmlx.a
 else
 LIBS	= -Lmlx -lmlx -framework OpenGL -framework AppKit includes/libft/libft.a
-MLX_O	= -Imlx
 MLX_DIR		= mlx
-endif
-
 MLX = ./mlx/libmlx.a
-
-LIBFT = ./libft/libft.a
-
-$(MLX):
-			make -C ./${MLX_DIR}
-
-$(LIBFT):
-			make -C includes/libft
+endif
 
 # Compile Rules
 
 all:		$(NAME)
 
 $(NAME):	$(SRCS) $(LIBFT) $(MLX)
-			$(CC) $(FLAGS) $(SRCS) $(LIBS) $(INCLUDES) -o $(NAME)
-			@echo "\033[32m 💯 | cub3d created."
+					$(CC) $(FLAGS) $(SRCS) $(LIBS) $(INCLUDES) -o $(NAME)
+					@echo "\033[32m 💯 | cub3d created."
+
+$(LIBFT):
+			make -C ./includes/libft
+
+$(MLX):
+			make -C ./${MLX_DIR}
 
 ${BUILD}:
 			cd unitTests && cmake -S . -B build
@@ -55,6 +54,7 @@ test: ${BUILD}
 
 clean:
 			@make -C ./includes/libft clean
+			@make -C ./$(MLX_DIR) clean
 			@${RM} ${NAME}.dSYM
 			@echo "\033[33m 🧹  | cub3d cleaned."
 
