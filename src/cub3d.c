@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/02/15 10:46:18 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/02/15 17:46:44 by mpinna-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 int	main(void)
 {
 	t_data	info;
+	t_data	QUADRADO;
 
 	init_data(&info);
+	QUADRADO = square_img(WIDTH, HEIGHT, RED, info.init);
+	mlx_put_image_to_window(info.init, info.win, QUADRADO.img, 0, 0);	
 	mlx_key_hook(info.win, key_event, &info);
 	mlx_hook(info.win, 17, 0, close_win, &info);
-	render_background(&info);
 	mlx_loop(info.init);
 }
 
@@ -30,4 +32,22 @@ void	init_data(t_data *info)
 	info->img = mlx_new_image(info->init, WIDTH, HEIGHT);
 	info->addr = mlx_get_data_addr(info->img, &info->bpp, &info->line_len,
 			&info->endian);
+}
+
+t_data	square_img(int width, int height, int color, void *mlx)
+{
+	t_data	sqr_image;
+	int		x;
+	int		y;
+
+	x = -1;
+	sqr_image.img = mlx_new_image(mlx, width, height);
+	sqr_image.addr = mlx_get_data_addr(sqr_image.img, &sqr_image.bpp, &sqr_image.line_len, &sqr_image.endian);
+	while (++x < width)
+	{
+		y = -1;
+		while (++y < height)
+			my_mlx_pixel_put(&sqr_image, x, y, color);
+	}	
+	return (sqr_image);
 }
