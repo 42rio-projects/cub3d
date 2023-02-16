@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 int	main(void)
 {
@@ -20,6 +20,8 @@ int	main(void)
 	init_data(&info);
 	QUADRADO = square_img(WIDTH, HEIGHT, RED, info.init);
 	mlx_put_image_to_window(info.init, info.win, QUADRADO.img, 0, 0);	
+	mlx_key_hook(info.win, key_event, &info);
+	mlx_hook(info.win, 17, 0, close_win, &info);
 	mlx_loop(info.init);
 }
 
@@ -31,7 +33,6 @@ void	init_data(t_data *info)
 	info->addr = mlx_get_data_addr(info->img, &info->bpp, &info->line_len,
 			&info->endian);
 }
-
 
 t_data	square_img(int width, int height, int color, void *mlx)
 {

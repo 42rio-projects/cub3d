@@ -34,8 +34,6 @@ MLX = ./$(MLX_DIR)/libmlx.a
 
 LIBFT = ./includes/libft/libft.a
 
-FLAGS_MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
-
 # Compile Rules 
 
 %.o: %.c

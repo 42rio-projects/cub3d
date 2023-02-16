@@ -13,10 +13,10 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# if defined(__linux__) 
-# include "../mlx_linux/mlx.h"
+# if defined(__linux__)
+#  include "../mlx_linux/mlx.h"
 # else
-# include "../mlx/mlx.h"
+#  include "../mlx/mlx.h"
 # endif
 // Minilib X funtions
 
@@ -73,5 +73,9 @@ typedef struct s_data
 int			check_argc(int argc);
 void		init_data(t_data *info);
 t_data  square_img(int width, int height, int color, void *mlx);
+int			key_event(int keycode, t_data *info);
+int			close_win(t_data *info);
+void		my_mlx_pixel_put(t_data *info, int x, int y, int color);
+void		render_background(t_data *info);
 
 #endif
