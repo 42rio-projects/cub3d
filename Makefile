@@ -8,7 +8,7 @@ FLAGS = -Wall -Wextra -Werror -g
 
 CC = cc
 
-SRC = cub3d.c check_arguments.c
+SRC = check_arguments.c create_image.c  cub3d.c hooks.c  mlx_utils.c 
 
 SRCS = $(addprefix src/, $(SRC))
 
