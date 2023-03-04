@@ -6,20 +6,24 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/02/15 17:46:44 by mpinna-l         ###   ########.fr       */
+/*   Updated: 2023/03/04 17:10:21 by mpinna-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_data	info;
-	t_data	QUADRADO;
+	t_data	background;
 
+	if (check_argc(argc))
+		return (print_error(ARG_ERROR, 1));
+	if (!check_extension(argv[1], EXT))
+		return (print_error(EXT_ERROR, 1));
 	init_data(&info);
-	QUADRADO = square_img(WIDTH, HEIGHT, RED, info.init);
-	mlx_put_image_to_window(info.init, info.win, QUADRADO.img, 0, 0);	
+	background = square_img(WIDTH, HEIGHT, RED, info.init);
+	mlx_put_image_to_window(info.init, info.win, background.img, 0, 0);
 	mlx_key_hook(info.win, key_event, &info);
 	mlx_hook(info.win, 17, 0, close_win, &info);
 	mlx_loop(info.init);
@@ -36,18 +40,18 @@ void	init_data(t_data *info)
 
 t_data	square_img(int width, int height, int color, void *mlx)
 {
-	t_data	sqr_image;
+	t_data	sqr;
 	int		x;
 	int		y;
 
 	x = -1;
-	sqr_image.img = mlx_new_image(mlx, width, height);
-	sqr_image.addr = mlx_get_data_addr(sqr_image.img, &sqr_image.bpp, &sqr_image.line_len, &sqr_image.endian);
+	sqr.img = mlx_new_image(mlx, width, height);
+	sqr.addr = mlx_get_data_addr(sqr.img, &sqr.bpp, &sqr.line_len, &sqr.endian);
 	while (++x < width)
 	{
 		y = -1;
 		while (++y < height)
-			my_mlx_pixel_put(&sqr_image, x, y, color);
+			my_mlx_pixel_put(&sqr, x, y, color);
 	}	
-	return (sqr_image);
+	return (sqr);
 }
