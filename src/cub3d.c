@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/04 17:10:21 by mpinna-l         ###   ########.fr       */
+/*   Updated: 2023/03/04 17:39:00 by mpinna-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 
 	if (check_argc(argc))
 		return (print_error(ARG_ERROR, 1));
-	if (!check_extension(argv[1], EXT))
+	if (!check_extention(argv[1], EXT))
 		return (print_error(EXT_ERROR, 1));
 	init_data(&info);
 	background = square_img(WIDTH, HEIGHT, RED, info.init);
