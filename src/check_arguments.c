@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:05 by vsergio           #+#    #+#             */
-/*   Updated: 2023/02/16 19:54:01 by mpinna-l         ###   ########.fr       */
+/*   Updated: 2023/03/04 17:09:48 by mpinna-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,15 @@
 int	check_argc(int argc)
 {
 	if (argc != 2)
-	{
-		errno = 22;
-		perror(NULL);
 		return (1);
-	}
+	return (0);
+}
+
+int	check_extension(char *filename, char *ext)
+{
+	if (!filename || !ext || !ft_strrchr(filename, '.'))
+		return (0);
+	if (!ft_strncmp(ft_strrchr(filename, '.'), ext, ft_strlen(ext) + 1))
+		return (1);
 	return (0);
 }

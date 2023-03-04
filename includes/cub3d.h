@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/02/15 17:46:35 by mpinna-l         ###   ########.fr       */
+/*   Updated: 2023/03/04 17:11:59 by mpinna-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,14 @@
 # define CYAN 0x00FFFF
 # define WHITE 0xFFFFFF
 
-/* _______________________Window___________________ */
+/* ___________________String Defines_______________________ */
+
+#define ARG_ERROR "Wrong number of arguments!\nUsage: ./cub3d <map.cub>\n"
+#define EXT ".cub"
+#define EXT_ERROR "Wrong file extension! It needs to be a .cub\n"
+
+/* _______________________Window___________________________ */
+
 # define WIDTH 700
 # define HEIGHT 700
 
@@ -70,7 +77,15 @@ typedef struct s_data
 }			t_data;
 
 /* _______________________Functions_________________________ */
+
+// error handling
+int			print_error(char *error_str, int return_value);
+
+// argument checking
 int			check_argc(int argc);
+int			check_extension(char *filename, char *extension);
+
+
 void		init_data(t_data *info);
 t_data  square_img(int width, int height, int color, void *mlx);
 int			key_event(int keycode, t_data *info);
