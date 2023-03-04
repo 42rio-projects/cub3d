@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/04 17:11:59 by mpinna-l         ###   ########.fr       */
+/*   Updated: 2023/03/04 17:21:53 by mpinna-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@
 
 /* ___________________String Defines_______________________ */
 
-#define ARG_ERROR "Wrong number of arguments!\nUsage: ./cub3d <map.cub>\n"
-#define EXT ".cub"
-#define EXT_ERROR "Wrong file extension! It needs to be a .cub\n"
+# define ARG_ERROR "Error\nWrong number of arguments!\nUsage: ./cub3d <map.cub>\n"
+# define EXT ".cub"
+# define EXT_ERROR "Error\nWrong file extension! It needs to be a .cub\n"
 
 /* _______________________Window___________________________ */
 
@@ -85,9 +85,8 @@ int			print_error(char *error_str, int return_value);
 int			check_argc(int argc);
 int			check_extension(char *filename, char *extension);
 
-
 void		init_data(t_data *info);
-t_data  square_img(int width, int height, int color, void *mlx);
+t_data		square_img(int width, int height, int color, void *mlx);
 int			key_event(int keycode, t_data *info);
 int			close_win(t_data *info);
 void		my_mlx_pixel_put(t_data *info, int x, int y, int color);
