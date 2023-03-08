@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/07 15:32:17 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/08 15:23:45 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ typedef struct s_scene_info
 	char	*so_path;
 	char	*we_path;
 	char	*ea_path;
-	int		floor_color;
-	int		ceiling_color;
+	char	*floor_color;
+	char	*ceiling_color;
 	char	**map;
-	char	**raw_content;
+	char **raw_content;
 }			t_scene_info;
 
 /* _______________________Functions_________________________ */
@@ -105,5 +105,5 @@ void		my_mlx_pixel_put(t_data *info, int x, int y, int color);
 void		render_background(t_data *info);
 
 //scene functions
-void		get_scene(t_scene_info *scene, char *scene_filename);
+int		get_scene_content(t_scene_info *scene, char *scene_filename);
 #endif
