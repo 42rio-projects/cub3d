@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 10:27:10 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/09 10:33:57 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/09 12:18:31 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_matrix(char **matrix)
 	temp = matrix;
 	while (*temp)
 	{
-		printf("%s\n", *temp);
+		printf("%s", *temp);
 		temp++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/09 10:41:23 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/09 12:57:32 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_scene_info
 	char	*ceiling_color;
 	char	**map;
 	char **matrix_content;
+	t_list *raw_content;
 }			t_scene_info;
 
 /* _______________________Functions_________________________ */

@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:21:19 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/09 11:01:30 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/09 13:31:00 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,15 @@ void	print_matrix(char **matrix);
 int	get_texture_paths(t_scene_info *scene);
 int	get_map(t_scene_info *scene);
 int is_map_line(char *line);
+void get_matrix_content(t_scene_info *scene, int matrix_size, char *scene_filename);
+int get_matrix_size(char *scene_filename);
 
 int	get_scene_content(t_scene_info *scene, char *scene_filename)
 {
-	char	*inline_content;
-	char	*buffer;
-	int		scene_fd;
+	int 	matrix_size;
 
-	scene_fd = open(scene_filename, O_RDONLY, 0666);
-	buffer = get_next_line(scene_fd);
-	if (!buffer)
-	{
-		free(buffer);
-		print_error("empty file\n", 0);
-	}
-	inline_content = ft_strdup(buffer);
-	while (buffer)
-	{
-	  free(buffer);
-		buffer = get_next_line(scene_fd);
-		if (buffer)
-			inline_content = ft_strjoin_autofree(inline_content, buffer, 'f');
-	}
-  scene->matrix_content = ft_split(inline_content, '\n');
-  free(inline_content);
+	matrix_size = get_matrix_size(scene_filename);
+	get_matrix_content(scene, matrix_size, scene_filename);
 	if (!get_texture_paths(scene) || !get_map(scene))
 	{
 		free_matrix(scene->matrix_content);
@@ -47,6 +32,58 @@ int	get_scene_content(t_scene_info *scene, char *scene_filename)
 	}
 	print_scene(scene);
 	return (1);
+}
+
+int get_matrix_size(char *scene_filename)
+{
+	int file_fd;
+	char *buffer;
+	int size;
+
+	size = 0;
+	file_fd = open(scene_filename, O_RDONLY, 0666);
+	buffer = get_next_line(file_fd);
+	if (!buffer)
+	{
+		free(buffer);
+		print_error("empty file\n", 0);
+	}
+	size++;
+	while (buffer)
+	{
+	  free(buffer);
+		buffer = get_next_line(file_fd);
+		if (buffer)
+			size++;
+	}
+	close(file_fd);
+	return (size);
+}
+
+void get_matrix_content(t_scene_info *scene, int matrix_size, char *scene_filename)
+{
+	int		scene_fd;
+	int 	m_index;
+	char	*buffer;
+
+	scene_fd = open(scene_filename, O_RDONLY, 0666);
+	buffer = get_next_line(scene_fd);
+	// if (!buffer)
+	// {
+	// 	free(buffer);
+	// 	print_error("empty file\n", 0);
+	// }
+	m_index = 0;
+	scene->matrix_content = malloc(sizeof(char *) * (matrix_size + 1));
+	scene->matrix_content[m_index++] = ft_strdup(buffer);
+	while(buffer)
+	{
+		free(buffer);
+		buffer = get_next_line(scene_fd);
+		if (buffer)
+			scene->matrix_content[m_index++] = ft_strdup(buffer);
+	}
+	scene->matrix_content[m_index] = NULL;
 }
 
 int	get_texture_paths(t_scene_info *scene)
@@ -98,29 +135,34 @@ int	get_texture_paths(t_scene_info *scene)
 
 int	get_map(t_scene_info *scene)
 {
+	int start_map;
+	int end_map;
 	int map_lines;
-	int map_index;
-  char **temp;
+	int m_index;
 
-	map_index = 0;
+	start_map = 0;
+	end_map = 0;
 	map_lines = 0;
-  temp = scene->matrix_content;
-	while(*temp)
+	m_index = 0;
+	while(scene->matrix_content[start_map])
 	{
-		if (is_map_line(*temp))
+		if (is_map_line(scene->matrix_content[start_map]))
+			break;
+		start_map++;
+	}
+	end_map = start_map;
+	while(scene->matrix_content[end_map])
+	{
+		if (is_map_line(scene->matrix_content[end_map]))
 			map_lines++;
-		temp++;
+		else
+			break;
+		end_map++;
 	}
-	printf("map lines: %i\n", map_lines);
   scene->map = malloc(sizeof(char *) * (map_lines + 1));
-	temp = scene->matrix_content;
-	while(*temp)
-	{
-		if (is_map_line(*temp))
-			scene->map[map_index++] = ft_strdup(*temp);
-		temp++;
-	}
-	scene->map[map_index] = NULL;
+	while(start_map < end_map)
+		scene->map[m_index++] = ft_strdup(scene->matrix_content[start_map++]);
+	scene->map[m_index] = NULL;
 	return (1);
 }
 
@@ -129,9 +171,11 @@ int is_map_line(char *line)
 	char *temp;
 
 	temp = line;
+	if (*temp == '\n')
+		return (0);
 	while(*temp)
 	{
-		if (*temp != '0' && *temp != '1' && *temp != 'N' && *temp != 'S' && *temp != 'E' && *temp != 'W' && *temp != ' ')
+		if (*temp != '0' && *temp != '1' && *temp != 'N' && *temp != 'S' && *temp != 'E' && *temp != 'W' && *temp != ' ' && *temp != '\n')
 			return (0);
 		temp++;
 	}

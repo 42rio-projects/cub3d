@@ -49,6 +49,7 @@ $(MLX):
 
 $(LIBFT):
 			make -C includes/libft
+			make -C includes/libft bonus
 
 ${BUILD}:
 			cd unitTests && cmake -S . -B build
