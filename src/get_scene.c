@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:21:19 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/09 15:55:15 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/09 15:56:36 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int	get_map(t_scene_info *scene)
   scene->map = malloc(sizeof(char *) * (map_lines + 1));
 	while(start_map < end_map)
 		scene->map[m_index++] = ft_strdup(scene->matrix_content[start_map++]);
+	//map must be freed in the end
 	scene->map[m_index] = NULL;
 	return (1);
 }
