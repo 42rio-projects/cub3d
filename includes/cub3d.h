@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/08 15:23:45 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/09 10:41:23 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef struct s_scene_info
 	char	*floor_color;
 	char	*ceiling_color;
 	char	**map;
-	char **raw_content;
+	char **matrix_content;
 }			t_scene_info;
 
 /* _______________________Functions_________________________ */
@@ -106,4 +106,9 @@ void		render_background(t_data *info);
 
 //scene functions
 int		get_scene_content(t_scene_info *scene, char *scene_filename);
+
+//utils functions
+void	free_matrix(char **matrix);
+void	print_scene(t_scene_info *scene);
+
 #endif
