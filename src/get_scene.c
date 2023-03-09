@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:21:19 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/09 13:31:00 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/09 15:55:15 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ int	get_scene_content(t_scene_info *scene, char *scene_filename)
 
 int get_matrix_size(char *scene_filename)
 {
-	int file_fd;
+	int scene_fd;
 	char *buffer;
 	int size;
 
 	size = 0;
-	file_fd = open(scene_filename, O_RDONLY, 0666);
-	buffer = get_next_line(file_fd);
+	scene_fd = open(scene_filename, O_RDONLY, 0666);
+	buffer = get_next_line(scene_fd);
 	if (!buffer)
 	{
 		free(buffer);
@@ -52,11 +52,11 @@ int get_matrix_size(char *scene_filename)
 	while (buffer)
 	{
 	  free(buffer);
-		buffer = get_next_line(file_fd);
+		buffer = get_next_line(scene_fd);
 		if (buffer)
 			size++;
 	}
-	close(file_fd);
+	close(scene_fd);
 	return (size);
 }
 
@@ -68,11 +68,6 @@ void get_matrix_content(t_scene_info *scene, int matrix_size, char *scene_filena
 
 	scene_fd = open(scene_filename, O_RDONLY, 0666);
 	buffer = get_next_line(scene_fd);
-	// if (!buffer)
-	// {
-	// 	free(buffer);
-	// 	print_error("empty file\n", 0);
-	// }
 	m_index = 0;
 	scene->matrix_content = malloc(sizeof(char *) * (matrix_size + 1));
 	scene->matrix_content[m_index++] = ft_strdup(buffer);
@@ -84,6 +79,7 @@ void get_matrix_content(t_scene_info *scene, int matrix_size, char *scene_filena
 			scene->matrix_content[m_index++] = ft_strdup(buffer);
 	}
 	scene->matrix_content[m_index] = NULL;
+	close(scene_fd);
 }
 
 int	get_texture_paths(t_scene_info *scene)
