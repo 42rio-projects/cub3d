@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_scene.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:21:19 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/09 16:37:47 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/11 13:46:51 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,71 +32,67 @@ int	get_scene_content(t_scene_info *scene, char *scene_filename)
 
 void get_raw_content(t_scene_info *scene, char *scene_filename)
 {
-	char	*buffer;
+	char	buffer[4097];
+	char *content;
 	int		scene_fd;
+	int readed;
 
+	readed = 4096;
+	content = ft_strdup("");
 	scene_fd = open(scene_filename, O_RDONLY, 0666);
-	buffer = get_next_line(scene_fd);
-	if (!buffer)
+	if (scene_fd == -1)
+		print_error("Invalid file", 0);
+	while(readed == 4096)
 	{
-		print_error("Empty file!", 0);
-		return ;
+		readed = read(scene_fd, buffer, 4096);
+		buffer[readed] = '\0';
+		if (readed >= 1)
+			content = ft_strjoin_autofree(content, buffer, 'f');
 	}
-	scene->raw_size = 0;
-	ft_lstadd_back(&scene->raw_content, ft_lstnew(buffer));
-	scene->raw_size++;
-	while(buffer)
-	{
-		buffer = get_next_line(scene_fd);
-		if (buffer)
-		{
-			ft_lstadd_back(&scene->raw_content, ft_lstnew(buffer));
-			scene->raw_size++;
-		}
-	}
+	scene->raw_content = ft_split(content, '\n');
 	close(scene_fd);
 }
 
 int	get_texture_paths(t_scene_info *scene)
 {
-	t_list	*temp;
+	char **temp;
 	int paths_quantity[6];
 
 	ft_memset(paths_quantity, 0, sizeof(int) * 6);
 	temp = scene->raw_content;
-	while (temp)
+	while (*temp)
 	{
-		if (!ft_strncmp(temp->content, "NO", 2))
+		if (!ft_strncmp(*temp, "NO", 2))
 		{
-			scene->no_path = temp->content;
+			scene->no_path = *temp;
 			paths_quantity[0]++;
 		}
-		else if (!ft_strncmp(temp->content, "SO", 2))
+		else if (!ft_strncmp(*temp, "SO", 2))
 		{
-			scene->so_path = temp->content;
+			scene->so_path = *temp;
 			paths_quantity[1]++;
 		}
-		else if (!ft_strncmp(temp->content, "WE", 2))
+		else if (!ft_strncmp(*temp, "WE", 2))
 		{
-			scene->we_path = temp->content;
+			scene->we_path = *temp;
 			paths_quantity[2]++;
 		}
-		else if (!ft_strncmp(temp->content, "EA", 2))
+		else if (!ft_strncmp(*temp, "EA", 2))
 		{
-			scene->ea_path = temp->content;
+			scene->ea_path = *temp;
 			paths_quantity[3]++;
 		}
-		else if (!ft_strncmp(temp->content, "F", 1))
+		else if (!ft_strncmp(*temp, "F", 1))
 		{
-			scene->floor_color = temp->content;
+			scene->floor_color = *temp;
 			paths_quantity[4]++;
 		}
-		else if (!ft_strncmp(temp->content, "C", 1))
+		else if (!ft_strncmp(*temp, "C", 1))
 		{
-			scene->ceiling_color = temp->content;
+			scene->ceiling_color = *temp;
 			paths_quantity[5]++;
 		}
-		temp = temp->next;
+		temp++;
 	}
 	if (paths_quantity[0] == 1 && paths_quantity[1] == 1 && paths_quantity[2] == 1 && paths_quantity[3] == 1 && paths_quantity[4] == 1 && paths_quantity[5] == 1)
 		return (1);
@@ -106,51 +102,48 @@ int	get_texture_paths(t_scene_info *scene)
 
 int	get_map(t_scene_info *scene)
 {
-	t_list *start_map;
-	t_list *end_map;
+	int start_map;
+	int end_map;
 	int map_lines;
 	int map_index;
 
-	start_map = scene->raw_content;
+	start_map = 0;
 	map_lines = 0;
 	map_index = 0;
-	while(start_map)
+	while(scene->raw_content[start_map])
 	{
-		if (is_map_line(start_map->content))
+		if (is_map_line(scene->raw_content[start_map]))
 			break;
-		start_map = start_map->next;
+		start_map++;
 	}
 	end_map = start_map;
-	while(end_map)
+	while(scene->raw_content[end_map])
 	{
-		if (is_map_line(end_map->content))
+		if (is_map_line(scene->raw_content[end_map]))
 			map_lines++;
 		else
 			break;
-		end_map = end_map->next;
+		end_map++;
 	}
   scene->map = malloc(sizeof(char *) * (map_lines + 1));
 	while(map_index < map_lines)
 	{
-		scene->map[map_index] = ft_strdup(start_map->content);
+		scene->map[map_index] = ft_strdup(scene->raw_content[start_map]);
 		map_index++;
-		start_map = start_map->next;
+		start_map++;
 	}
 	return (1);
 }
 
 int is_map_line(char *line)
 {
-	char *temp;
-
-	temp = line;
-	if (*temp == '\n')
+	if (*line == '\n')
 		return (0);
-	while(*temp)
+	while(*line)
 	{
-		if (*temp != '0' && *temp != '1' && *temp != 'N' && *temp != 'S' && *temp != 'E' && *temp != 'W' && *temp != ' ' && *temp != '\n')
+		if (*line != '0' && *line != '1' && *line != 'N' && *line != 'S' && *line != 'E' && *line != 'W' && *line != ' ' && *line != '\n')
 			return (0);
-		temp++;
+		line++;
 	}
 	return (1);
 }

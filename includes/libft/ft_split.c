@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:35:39 by vsergio           #+#    #+#             */
-/*   Updated: 2022/05/21 12:36:33 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/11 13:13:10 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ char	**ft_split(char const *s, char c)
 	final[splits] = NULL;
 	while (offset < splits)
 	{
-		while (*(char *)s != '\0' && *(char *)s == c)
-			s++;
 		substring = sub_len((char *)s, c);
 		final[offset] = ft_substr(s, 0, substring);
 		if (!final[offset++])
@@ -54,18 +52,14 @@ static void	ft_free(char **final, int offset)
 
 static int	count_splits(char *str, char c)
 {
-	int	sublen;
 	int	splitnum;
 
-	splitnum = 0;
-	while (*str != '\0')
+	splitnum = 1;
+	while (*str)
 	{
-		while (*str && *str == c)
-			str++;
-		sublen = sub_len(str, c);
-		str += sublen;
-		if (sublen)
+		if (*str == c)
 			splitnum++;
+		str++;
 	}
 	return (splitnum);
 }
@@ -75,9 +69,10 @@ static int	sub_len(char *str, char c)
 	int	len;
 
 	len = 0;
-	while (*str != '\0' && *str != c)
+	while (str[len])
 	{
-		str++;
+		if (str[len] == c)
+			return (len + 1);
 		len++;
 	}
 	return (len);

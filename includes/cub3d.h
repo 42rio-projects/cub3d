@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/09 16:25:38 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/11 12:49:13 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,7 @@ typedef struct s_scene_info
 	char	*floor_color;
 	char	*ceiling_color;
 	char	**map;
-	t_list *raw_content;
-	int raw_size;
+	char	**raw_content;
 }			t_scene_info;
 
 /* _______________________Functions_________________________ */
