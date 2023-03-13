@@ -6,11 +6,11 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:05 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/04 17:38:46 by mpinna-l         ###   ########.fr       */
+/*   Updated: 2023/03/12 22:53:57 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int	check_argc(int argc)
 {
