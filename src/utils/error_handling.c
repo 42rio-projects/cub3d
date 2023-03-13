@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpinna-l <mpinna-l@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:12:47 by mpinna-l          #+#    #+#             */
-/*   Updated: 2023/03/04 17:13:00 by mpinna-l         ###   ########.fr       */
+/*   Updated: 2023/03/13 11:30:36 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	print_error(char *error_str, int return_value)
 {
-	ft_putstr_fd(error_str, 2);
+	ft_putstr_fd(error_str, STDERR_FILENO);
 	return (return_value);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/13 10:19:56 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/13 12:01:25 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_data
 	int		endian;
 }			t_data;
 
-typedef struct s_scene_info
+typedef struct s_scene
 {
 	char	*no_path;
 	char	*so_path;
@@ -85,7 +85,7 @@ typedef struct s_scene_info
 	char	*floor_color;
 	char	*ceiling_color;
 	char	**map;
-}			t_scene_info;
+}			t_scene;
 
 /* _______________________Functions_________________________ */
 
@@ -105,14 +105,16 @@ void	my_mlx_pixel_put(t_data *info, int x, int y, int color);
 void	render_background(t_data *info);
 
 // scene functions
-void	free_scene(t_scene_info *scene);
-int		build_scene(t_scene_info *scene, char *filename);
+int		build_scene(t_scene *scene, char *filename);
+void	free_scene(t_scene *scene);
 int		is_map_line(char *line);
 char	*read_file(int fd);
-int		set_scene(t_scene_info *scene, char **raw_content);
+int		set_scene(t_scene *scene, char **raw_content);
+int		validate_map(char **map);
 
 //utils functions
 void	free_matrix(char **matrix);
-void	print_scene(t_scene_info *scene);
+void	print_scene(t_scene *scene);
+void	print_matrix(char **matrix);
 
 #endif

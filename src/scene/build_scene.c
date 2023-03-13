@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_scene.c                                        :+:      :+:    :+:   */
+/*   build_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/13 10:18:57 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/13 11:29:40 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static char	**get_raw_content(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
-		print_error("Error\nCould not open file\n", 1);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
+		perror(filename);
 		return (NULL);
 	}
 	full_file = read_file(fd);
@@ -31,11 +32,11 @@ static char	**get_raw_content(char *filename)
 	return (raw_content);
 }
 
-int	build_scene(t_scene_info *scene, char *filename)
+int	build_scene(t_scene *scene, char *filename)
 {
 	char	**raw_content;
 
-	ft_memset(scene, 0, sizeof(t_scene_info));
+	ft_memset(scene, 0, sizeof(t_scene));
 	raw_content = get_raw_content(filename);
 	if (raw_content == NULL)
 		return (1);

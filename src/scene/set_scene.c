@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   set_scene.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:19:42 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/13 00:02:18 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/13 12:30:05 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	check_scene_line(t_scene_info *scene, char *line)
+static int	check_scene_line(t_scene *scene, char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3) && scene->no_path == NULL)
 		scene->no_path = ft_strtrim(line + 3, "\n ");
@@ -31,7 +31,7 @@ static int	check_scene_line(t_scene_info *scene, char *line)
 	return (0);
 }
 
-static int	set_info(t_scene_info *scene, char **raw_content)
+static int	set_info(t_scene *scene, char **raw_content)
 {
 	int	set;
 
@@ -51,7 +51,7 @@ static int	set_info(t_scene_info *scene, char **raw_content)
 	return (0);
 }
 
-static int	set_map(t_scene_info *scene, char **raw_content)
+static int	set_map(t_scene *scene, char **raw_content)
 {
 	int	i;
 
@@ -60,7 +60,7 @@ static int	set_map(t_scene_info *scene, char **raw_content)
 	if (*raw_content == NULL || *raw_content[0] == '\0')
 		return (print_error("Error\nNo map found\n", 1));
 	i = 0;
-	while (is_map_line(raw_content[i]))
+	while (raw_content[i] && is_map_line(raw_content[i]))
 		i++;
 	if (raw_content[i] != NULL)
 		return (print_error("Error\nInvalid map\n", 1));
@@ -71,11 +71,13 @@ static int	set_map(t_scene_info *scene, char **raw_content)
 	return (0);
 }
 
-int	set_scene(t_scene_info *scene, char **raw_content)
+int	set_scene(t_scene *scene, char **raw_content)
 {
 	if (set_info(scene, raw_content))
 		return (1);
 	if (set_map(scene, raw_content))
+		return (1);
+	if (validate_map(scene->map))
 		return (1);
 	return (0);
 }
