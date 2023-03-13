@@ -14,6 +14,7 @@ add_executable(${This} ${Sources})
 target_link_libraries(${This} PUBLIC
     GTest::gtest_main # Biblioteca padrão do framework GoogleTest
     UnitTesting # Essa é a biblioteca que criamos no primeiro CMakeLists.txt
+    libft
 )
 
 # Adicionamos o teste de nome "InputTests" utilizando o executável que criamos na linha 11
