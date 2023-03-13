@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 21:26:12 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/09 13:02:57 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/12 22:59:39 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 typedef struct s_list
 {
 	void			*content;
-	int 			size;
+	int				size;
 	struct s_list	*next;
 }					t_list;
 

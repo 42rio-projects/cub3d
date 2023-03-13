@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 10:27:10 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/09 12:18:31 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/12 22:58:44 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_matrix(char **matrix)
 {
-	char **temp;
+	char	**temp;
 
 	temp = matrix;
 	while (*temp)
@@ -26,11 +26,13 @@ void	print_matrix(char **matrix)
 
 void	free_matrix(char **matrix)
 {
-	int i;
+	int	i;
 
-	i = 0;
-	while(matrix[i])
-		free(matrix[i++]);
+	if (matrix == NULL)
+		return ;
+	i = -1;
+	while (matrix[++i])
+		free(matrix[i]);
 	free(matrix);
 }
 

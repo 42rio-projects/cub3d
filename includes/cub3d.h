@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/11 12:49:13 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/12 22:59:19 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,27 +85,31 @@ typedef struct s_scene_info
 	char	*floor_color;
 	char	*ceiling_color;
 	char	**map;
-	char	**raw_content;
 }			t_scene_info;
 
 /* _______________________Functions_________________________ */
 
 // error handling
-int			print_error(char *error_str, int return_value);
+int		print_error(char *error_str, int return_value);
 
 // argument checking
-int			check_argc(int argc);
-int			check_extention(char *filename, char *ext);
+int		check_argc(int argc);
+int		check_extention(char *filename, char *ext);
 
-void		init_data(t_data *info);
-t_data		square_img(int width, int height, int color, void *mlx);
-int			key_event(int keycode, t_data *info);
-int			close_win(t_data *info);
-void		my_mlx_pixel_put(t_data *info, int x, int y, int color);
-void		render_background(t_data *info);
+// mlx functions
+void	init_data(t_data *info);
+t_data	square_img(int width, int height, int color, void *mlx);
+int		key_event(int keycode, t_data *info);
+int		close_win(t_data *info);
+void	my_mlx_pixel_put(t_data *info, int x, int y, int color);
+void	render_background(t_data *info);
 
-//scene functions
-int		get_scene_content(t_scene_info *scene, char *scene_filename);
+// scene functions
+void	free_scene(t_scene_info *scene);
+int		get_scene(t_scene_info *scene, char *filename);
+int		is_map_line(char *line);
+char	*read_file(int fd);
+int		set_scene(t_scene_info *scene, char **raw_content);
 
 //utils functions
 void	free_matrix(char **matrix);
