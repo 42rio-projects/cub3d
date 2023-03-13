@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/12 22:59:19 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/13 10:19:56 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	render_background(t_data *info);
 
 // scene functions
 void	free_scene(t_scene_info *scene);
-int		get_scene(t_scene_info *scene, char *filename);
+int		build_scene(t_scene_info *scene, char *filename);
 int		is_map_line(char *line);
 char	*read_file(int fd);
 int		set_scene(t_scene_info *scene, char **raw_content);

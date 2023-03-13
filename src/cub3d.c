@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/12 22:53:58 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/13 10:20:09 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		return (print_error(ARG_ERROR, 1));
 	if (!check_extention(argv[1], EXT))
 		return (print_error(EXT_ERROR, 1));
-	get_scene(&scene, argv[1]);
+	build_scene(&scene, argv[1]);
 	// init_data(&mlx_info);
 	// background = square_img(WIDTH, HEIGHT, RED, mlx_info.init);
 	// mlx_put_image_to_window(mlx_info.init, mlx_info.win, background.img, 0, 0);

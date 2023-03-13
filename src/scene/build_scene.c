@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_scene.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/12 22:52:48 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/13 10:18:57 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	**get_raw_content(char *filename)
 	return (raw_content);
 }
 
-int	get_scene(t_scene_info *scene, char *filename)
+int	build_scene(t_scene_info *scene, char *filename)
 {
 	char	**raw_content;
 
