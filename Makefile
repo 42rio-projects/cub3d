@@ -10,7 +10,7 @@ CC = cc
 
 SRC =	cub3d.c \
 		$(addprefix mlx/, create_image.c hooks.c mlx_utils.c) \
-		$(addprefix scene/, build_scene.c free_scene.c is_map_line.c read_file.c set_scene.c validate_map.c) \
+		$(addprefix scene/, build_scene.c free_scene.c is_map_line.c read_file.c set_scene.c) \
 		$(addprefix utils/, check_arguments.c error_handling.c free_matrix.c test.c) \
 
 SRCS = $(addprefix src/, $(SRC))

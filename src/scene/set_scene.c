@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:19:42 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/13 16:21:03 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/13 17:18:50 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,6 @@ int	set_scene(t_scene *scene, char **raw_content)
 	if (set_info(scene, raw_content))
 		return (1);
 	if (set_map(scene, raw_content))
-		return (1);
-	if (validate_map(scene->map))
 		return (1);
 	return (0);
 }

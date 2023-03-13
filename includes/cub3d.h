@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/13 16:17:12 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/13 17:18:58 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int		is_map_line(char *line);
 char	*read_file(int fd);
 int		set_scene(t_scene *scene, char **raw_content);
 int		validate_colors(char *colors);
-int		validate_map(char **map);
 
 //utils functions
 void	free_matrix(char **matrix);
