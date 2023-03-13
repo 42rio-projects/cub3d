@@ -32,6 +32,11 @@ set(Sources
 # No seguinte comando criaremos uma biblioteca (lembre da Libft!) de nome UnitTesting
 # Essa biblioteca será criada com os arquivos .h e .c listados nas variáveis Headers e Sources
 
+add_library(libft STATIC IMPORTED)
+set_target_properties(libft PROPERTIES IMPORTED_LOCATION
+  ${CMAKE_SOURCE_DIR}/../includes/libft/libft.a
+)
+
 add_library(${This} ${Sources} ${Headers})
 
 # Aqui adicionaremos os subdiretórios nos quais iremos inserir os testes especificos de cada funcionalidade
