@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build_scene.c                                      :+:      :+:    :+:   */
+/*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/13 16:03:00 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/13 18:20:19 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,22 @@ static char	**get_raw_content(char *filename)
 	return (raw_content);
 }
 
+static int	set_scene(t_scene *scene, char **raw_content)
+{
+	if (set_info(scene, raw_content))
+		return (1);
+	if (set_colors(scene))
+		return (1);
+	if (set_map(scene, raw_content))
+		return (1);
+	return (0);
+}
+
 int	build_scene(t_scene *scene, char *filename)
 {
 	char	**raw_content;
 
 	ft_memset(scene, 0, sizeof(t_scene));
-	scene->ceiling_rgb = -1;
-	scene->floor_rgb = -1;
 	raw_content = get_raw_content(filename);
 	if (raw_content == NULL)
 		return (1);

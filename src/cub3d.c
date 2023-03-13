@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/13 11:16:39 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/13 18:14:14 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 int	main(int argc, char **argv)
 {
-	// t_data	mlx_info;
-	// t_data	background;
-	t_scene scene;
+	t_scene	scene;
+	t_data	mlx_info;
+	t_data	background;
+
 	if (check_argc(argc))
 		return (print_error(ARG_ERROR, 1));
 	if (check_extention(argv[1], EXT))
 		return (print_error(EXT_ERROR, 1));
-	build_scene(&scene, argv[1]);
-	// init_data(&mlx_info);
-	// background = square_img(WIDTH, HEIGHT, RED, mlx_info.init);
-	// mlx_put_image_to_window(mlx_info.init, mlx_info.win, background.img, 0, 0);
-	// mlx_key_hook(mlx_info.win, key_event, &mlx_info);
-	// mlx_hook(mlx_info.win, 17, 0, close_win, &mlx_info);
-	// mlx_loop(mlx_info.init);
+	if (build_scene(&scene, argv[1]))
+		return (1);
+	init_data(&mlx_info);
+	background = square_img(WIDTH, HEIGHT, RED, mlx_info.init);
+	mlx_put_image_to_window(mlx_info.init, mlx_info.win, background.img, 0, 0);
+	mlx_key_hook(mlx_info.win, key_event, &mlx_info);
+	mlx_hook(mlx_info.win, 17, 0, close_win, &mlx_info);
+	mlx_loop(mlx_info.init);
 	return (0);
 }
 

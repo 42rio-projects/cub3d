@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/13 17:18:58 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/13 18:27:40 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ typedef struct s_scene
 	char	*so_path;
 	char	*we_path;
 	char	*ea_path;
-	int floor_rgb;
-	int ceiling_rgb;
+	char	*floor_content;
+	char	*ceiling_content;
+	int		floor_rgb;
+	int		ceiling_rgb;
 	char	**map;
 }			t_scene;
 
@@ -106,11 +108,12 @@ void	render_background(t_data *info);
 
 // scene functions
 void	free_scene(t_scene *scene);
-int		build_scene(t_scene *scene, char *filename);
 int		is_map_line(char *line);
 char	*read_file(int fd);
-int		set_scene(t_scene *scene, char **raw_content);
-int		validate_colors(char *colors);
+int		build_scene(t_scene *scene, char *filename);
+int		set_info(t_scene *scene, char **raw_content);
+int		set_colors(t_scene *scene);
+int		set_map(t_scene *scene, char **raw_content);
 
 //utils functions
 void	free_matrix(char **matrix);
