@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_scene.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:19:42 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/12 22:40:49 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/13 00:02:18 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ static int	set_map(t_scene_info *scene, char **raw_content)
 {
 	int	i;
 
-	while (!is_map_line(*raw_content))
+	while (*raw_content && !is_map_line(*raw_content))
 		raw_content++;
-	if (*raw_content == NULL)
+	if (*raw_content == NULL || *raw_content[0] == '\0')
 		return (print_error("Error\nNo map found\n", 1));
 	i = 0;
 	while (is_map_line(raw_content[i]))

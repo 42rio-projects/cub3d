@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_map_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 21:30:57 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/12 22:57:45 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/12 23:38:16 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_map_line(char *line)
 {
-	if (line == NULL)
+	if (line == NULL || *line == '\n')
 		return (0);
 	while (*line)
 	{
