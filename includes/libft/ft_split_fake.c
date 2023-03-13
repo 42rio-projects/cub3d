@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_fake.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:35:39 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/11 13:13:10 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/13 11:05:20 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	count_splits(char *s, char c);
 static int	sub_len(char *s, char c);
 static void	ft_free(char **final, int offset);
 
-char	**ft_split(char const *s, char c)
+char	**ft_split_fake(char const *s, char c)
 {
 	char	**final;
 	int		splits;

@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/04 17:39:00 by mpinna-l         ###   ########.fr       */
+/*   Updated: 2023/03/13 18:14:14 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,23 @@
 
 int	main(int argc, char **argv)
 {
-	t_data	info;
+	t_scene	scene;
+	t_data	mlx_info;
 	t_data	background;
 
 	if (check_argc(argc))
 		return (print_error(ARG_ERROR, 1));
-	if (!check_extention(argv[1], EXT))
+	if (check_extention(argv[1], EXT))
 		return (print_error(EXT_ERROR, 1));
-	init_data(&info);
-	background = square_img(WIDTH, HEIGHT, RED, info.init);
-	mlx_put_image_to_window(info.init, info.win, background.img, 0, 0);
-	mlx_key_hook(info.win, key_event, &info);
-	mlx_hook(info.win, 17, 0, close_win, &info);
-	mlx_loop(info.init);
+	if (build_scene(&scene, argv[1]))
+		return (1);
+	init_data(&mlx_info);
+	background = square_img(WIDTH, HEIGHT, RED, mlx_info.init);
+	mlx_put_image_to_window(mlx_info.init, mlx_info.win, background.img, 0, 0);
+	mlx_key_hook(mlx_info.win, key_event, &mlx_info);
+	mlx_hook(mlx_info.win, 17, 0, close_win, &mlx_info);
+	mlx_loop(mlx_info.init);
+	return (0);
 }
 
 void	init_data(t_data *info)

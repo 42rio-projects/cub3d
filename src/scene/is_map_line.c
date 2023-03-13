@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   is_map_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 14:44:40 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/09 13:32:54 by vsergio          ###   ########.fr       */
+/*   Created: 2023/03/12 21:30:57 by gguedes           #+#    #+#             */
+/*   Updated: 2023/03/13 11:04:06 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-t_list	*ft_lstnew(void *content)
+int	is_map_line(char *line)
 {
-	t_list	*lst;
-
-	lst = (t_list *)malloc(sizeof(t_list));
-	if (!lst)
-		return (NULL);
-	lst->content = content;
-	lst->size = 0;
-	lst->next = NULL;
-	return (lst);
+	if (*line == '\n')
+		return (0);
+	while (*line)
+	{
+		if (ft_strchr("01NSEW \n", *line) == NULL)
+			return (0);
+		line++;
+	}
+	return (1);
 }

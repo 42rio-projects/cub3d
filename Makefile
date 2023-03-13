@@ -8,7 +8,11 @@ FLAGS = -Wall -Wextra -Werror -g
 
 CC = cc
 
-SRC = check_arguments.c create_image.c  cub3d.c hooks.c  mlx_utils.c error_handling.c
+SRC =	cub3d.c \
+		$(addprefix mlx/, create_image.c hooks.c mlx_utils.c) \
+		$(addprefix scene/, scene.c set_colors.c set_info.c set_map.c free_scene.c is_map_line.c read_file.c) \
+		$(addprefix utils/, check_arguments.c error_handling.c free_matrix.c test.c) \
+
 SRCS = $(addprefix src/, $(SRC))
 
 OBJS = $(SRCS:.c=.o)
@@ -36,7 +40,7 @@ LIBFT = ./includes/libft/libft.a
 # Compile Rules 
 
 %.o: %.c
-			@${CC} -c ${FLAGS} ${INCLUDES} ${MLX_O} $< -o $@
+			@$(CC) -c $(FLAGS) $(INCLUDES) $(MLX_O) $< -o $@
 
 all:		$(NAME)
 
@@ -45,27 +49,29 @@ $(NAME):	$(OBJS) $(LIBFT) $(MLX)
 			@echo "\033[32m 💯 | cub3d created."
 
 $(MLX):
-			make -C ./${MLX_DIR}
+			@make -s -C ./$(MLX_DIR)
 
 $(LIBFT):
-			make -C includes/libft
+			@make -s -C includes/libft
+			@make -s -C includes/libft bonus
 
-${BUILD}:
+$(BUILD):
 			cd unitTests && cmake -S . -B build
 
-test: ${BUILD}
+test: $(BUILD)
 			cd unitTests && cmake --build build
 			cd unitTests/build && ctest --output-on-failure
 
 clean:
-			@make -C ./includes/libft clean
-			@make -C ./$(MLX_DIR) clean
-			@${RM} ${NAME}.dSYM $(OBJS)
+			@make -s -C ./includes/libft clean
+			@make -s -C ./$(MLX_DIR) clean
+			@$(RM) $(NAME).dSYM $(OBJS)
 			@echo "\033[33m 🧹  | cub3d cleaned."
 
-fclean: 	clean
-			@make -C ./includes/libft fclean
-			@$(RM) $(NAME)
+fclean:
+			@make -s -C ./includes/libft fclean
+			@make -s -C ./$(MLX_DIR) clean
+			@$(RM) $(NAME).dSYM $(OBJS) $(NAME)
 			@$(RM) ./$(BUILD)
 			@echo "\033[33m 🌪️  | cub3d all cleaned."
 

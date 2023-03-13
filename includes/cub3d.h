@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/04 17:38:32 by mpinna-l         ###   ########.fr       */
+/*   Updated: 2023/03/13 18:27:40 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,48 @@ typedef struct s_data
 	int		endian;
 }			t_data;
 
+typedef struct s_scene
+{
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
+	char	*floor_content;
+	char	*ceiling_content;
+	int		floor_rgb;
+	int		ceiling_rgb;
+	char	**map;
+}			t_scene;
+
 /* _______________________Functions_________________________ */
 
 // error handling
-int			print_error(char *error_str, int return_value);
+int		print_error(char *error_str, int return_value);
 
 // argument checking
-int			check_argc(int argc);
-int			check_extention(char *filename, char *ext);
+int		check_argc(int argc);
+int		check_extention(char *filename, char *ext);
 
-void		init_data(t_data *info);
-t_data		square_img(int width, int height, int color, void *mlx);
-int			key_event(int keycode, t_data *info);
-int			close_win(t_data *info);
-void		my_mlx_pixel_put(t_data *info, int x, int y, int color);
-void		render_background(t_data *info);
+// mlx functions
+void	init_data(t_data *info);
+t_data	square_img(int width, int height, int color, void *mlx);
+int		key_event(int keycode, t_data *info);
+int		close_win(t_data *info);
+void	my_mlx_pixel_put(t_data *info, int x, int y, int color);
+void	render_background(t_data *info);
+
+// scene functions
+void	free_scene(t_scene *scene);
+int		is_map_line(char *line);
+char	*read_file(int fd);
+int		build_scene(t_scene *scene, char *filename);
+int		set_info(t_scene *scene, char **raw_content);
+int		set_colors(t_scene *scene);
+int		set_map(t_scene *scene, char **raw_content);
+
+//utils functions
+void	free_matrix(char **matrix);
+void	print_scene(t_scene *scene);
+void	print_matrix(char **matrix);
 
 #endif

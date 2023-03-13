@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arguments.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:05 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/12 22:53:57 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/13 18:35:31 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,14 @@ int	check_argc(int argc)
 
 int	check_extention(char *filename, char *ext)
 {
-	if (!filename || !ext || !ft_strrchr(filename, '.'))
-		return (0);
-	if (!ft_strncmp(ft_strrchr(filename, '.'), ext, ft_strlen(ext) + 1))
+	char	*ptr;
+
+	if (filename == NULL || ext == NULL)
 		return (1);
-	return (0);
+	ptr = ft_strrchr(filename, '.');
+	if (ptr == NULL)
+		return (1);
+	if (!ft_strncmp(ptr, ext, -1))
+		return (0);
+	return (1);
 }

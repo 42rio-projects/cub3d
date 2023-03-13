@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpinna-l <mpinna-l@student.42.rio>         +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/04 17:12:47 by mpinna-l          #+#    #+#             */
-/*   Updated: 2023/03/04 17:13:00 by mpinna-l         ###   ########.fr       */
+/*   Created: 2023/03/09 10:27:10 by vsergio           #+#    #+#             */
+/*   Updated: 2023/03/13 11:12:29 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	print_error(char *error_str, int return_value)
+void	free_matrix(char **matrix)
 {
-	ft_putstr_fd(error_str, 2);
-	return (return_value);
+	int	i;
+
+	if (matrix == NULL)
+		return ;
+	i = -1;
+	while (matrix[++i])
+		free(matrix[i]);
+	free(matrix);
 }
+

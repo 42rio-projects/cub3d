@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 14:44:40 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/09 13:32:54 by vsergio          ###   ########.fr       */
+/*   Created: 2023/03/04 17:12:47 by mpinna-l          #+#    #+#             */
+/*   Updated: 2023/03/13 11:30:36 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-t_list	*ft_lstnew(void *content)
+int	print_error(char *error_str, int return_value)
 {
-	t_list	*lst;
-
-	lst = (t_list *)malloc(sizeof(t_list));
-	if (!lst)
-		return (NULL);
-	lst->content = content;
-	lst->size = 0;
-	lst->next = NULL;
-	return (lst);
+	ft_putstr_fd(error_str, STDERR_FILENO);
+	return (return_value);
 }
