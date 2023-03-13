@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/13 18:27:40 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/13 20:07:38 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int		build_scene(t_scene *scene, char *filename);
 int		set_info(t_scene *scene, char **raw_content);
 int		set_colors(t_scene *scene);
 int		set_map(t_scene *scene, char **raw_content);
+int		validate_map(char **map);
 
 //utils functions
 void	free_matrix(char **matrix);

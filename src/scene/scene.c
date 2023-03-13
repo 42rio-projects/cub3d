@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/13 18:20:19 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/13 20:11:23 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static char	**get_raw_content(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
-		print_error("Error\nCould not open file\n", 1);
+		ft_putstr_fd("Error\n", 2);
+		perror(filename);
 		return (NULL);
 	}
 	full_file = read_file(fd);
