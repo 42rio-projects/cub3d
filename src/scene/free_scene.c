@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:38:51 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/13 11:19:10 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/13 16:03:10 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,5 @@ void	free_scene(t_scene *scene)
 	free(scene->so_path);
 	free(scene->we_path);
 	free(scene->ea_path);
-	free(scene->floor_color);
-	free(scene->ceiling_color);
 	free_matrix(scene->map);
 }

@@ -3,14 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   set_scene.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:19:42 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/13 12:30:05 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/13 16:21:03 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int invalid_colors(char *colors)
+{
+	int commas;
+
+	commas = 0;
+	if (*colors == ',')
+		return (1);
+	while(*colors)
+	{
+		if (*colors == ',')
+		{
+			commas++;
+			colors++;
+		}
+		if (!ft_isdigit(*colors))
+			return (1);
+		colors++;
+	}
+	if (commas != 2)
+		return (1);
+	return (0);
+}
+
+static int convert_rgb_to_int(char *colors)
+{
+	char *temp;
+	int rgb;
+
+	colors = ft_strtrim(colors, "\n ");
+	temp = colors;
+	rgb = 0;
+	if (invalid_colors(colors))
+		return (print_error("Invalid colors!\n", 1));
+	rgb = ft_atoi(colors) << 16;
+	while(*colors && ft_isdigit(*colors))
+		colors++;
+	rgb |= ft_atoi(++colors) << 8;
+	while(*colors && ft_isdigit(*colors))
+		colors++;
+	rgb |= ft_atoi(++colors);
+	free(temp);
+	return (rgb);
+}
 
 static int	check_scene_line(t_scene *scene, char *line)
 {
@@ -22,10 +66,10 @@ static int	check_scene_line(t_scene *scene, char *line)
 		scene->we_path = ft_strtrim(line + 3, "\n ");
 	else if (!ft_strncmp(line, "EA ", 3) && scene->ea_path == NULL)
 		scene->ea_path = ft_strtrim(line + 3, "\n ");
-	else if (!ft_strncmp(line, "F ", 2) && scene->floor_color == NULL)
-		scene->floor_color = ft_strtrim(line + 2, "\n ");
-	else if (!ft_strncmp(line, "C ", 2) && scene->ceiling_color == NULL)
-		scene->ceiling_color = ft_strtrim(line + 2, "\n ");
+	else if (!ft_strncmp(line, "F ", 2) && scene->floor_rgb == -1)
+		scene->floor_rgb = convert_rgb_to_int(line + 2);
+	else if (!ft_strncmp(line, "C ", 2) && scene->ceiling_rgb == -1)
+		scene->ceiling_rgb = convert_rgb_to_int(line + 2);
 	else
 		return (1);
 	return (0);

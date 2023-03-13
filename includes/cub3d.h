@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/13 12:01:25 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/13 16:17:12 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ typedef struct s_scene
 	char	*so_path;
 	char	*we_path;
 	char	*ea_path;
-	char	*floor_color;
-	char	*ceiling_color;
+	int floor_rgb;
+	int ceiling_rgb;
 	char	**map;
 }			t_scene;
 
@@ -105,11 +105,12 @@ void	my_mlx_pixel_put(t_data *info, int x, int y, int color);
 void	render_background(t_data *info);
 
 // scene functions
-int		build_scene(t_scene *scene, char *filename);
 void	free_scene(t_scene *scene);
+int		build_scene(t_scene *scene, char *filename);
 int		is_map_line(char *line);
 char	*read_file(int fd);
 int		set_scene(t_scene *scene, char **raw_content);
+int		validate_colors(char *colors);
 int		validate_map(char **map);
 
 //utils functions
