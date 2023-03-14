@@ -4,10 +4,10 @@ NAME		=	cub3D
 
 BUILD		=	unitTests/build
 
-SRC			=	$(addprefix main/, cub3d.c) \
+SRC			=	$(addprefix main/, cub3d.c quit_program.c) \
 				$(addprefix mlx/, create_image.c hooks.c mlx_utils.c) \
 				$(addprefix scene/, scene.c set_colors.c set_info.c set_map.c free_scene.c is_map_line.c read_file.c validate_map.c) \
-				$(addprefix utils/, check_arguments.c error_handling.c free_matrix.c test.c) \
+				$(addprefix utils/, check_arguments.c error_handling.c free_matrix.c print.c) \
 
 SRCS		=	$(addprefix src/, $(SRC))
 

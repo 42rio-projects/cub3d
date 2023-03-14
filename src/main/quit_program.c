@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_scene.c                                       :+:      :+:    :+:   */
+/*   quit_program.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 19:38:51 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/14 17:43:51 by gguedes          ###   ########.fr       */
+/*   Created: 2023/03/14 17:21:00 by gguedes           #+#    #+#             */
+/*   Updated: 2023/03/14 18:10:57 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_scene(t_scene *scene)
+// may need more frees
+
+void	quit_program(t_data *info)
 {
-	free(scene->no_path);
-	free(scene->so_path);
-	free(scene->we_path);
-	free(scene->ea_path);
-	free(scene->floor_content);
-	free(scene->ceiling_content);
-	free_matrix(scene->map);
+	mlx_destroy_window(info->init, info->win);
+	free_scene(&info->scene);
+	exit(0);
 }
