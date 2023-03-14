@@ -6,40 +6,40 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/13 20:07:38 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/14 14:47:36 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+// Minilib X funtions
 # if defined(__linux__)
 #  include "../mlx_linux/mlx.h"
 # else
 #  include "../mlx/mlx.h"
 # endif
-// Minilib X funtions
 
-# include "libft/libft.h"
 // Set of utility
+# include "libft/libft.h"
 
-# include <stdlib.h>
 // exit, malloc, free
+# include <stdlib.h>
 
-# include <stdio.h>
 // printf
+# include <stdio.h>
 
-# include <unistd.h>
 // write, read, close
+# include <unistd.h>
 
-# include <fcntl.h>
 // open
+# include <fcntl.h>
 
-# include <errno.h>
 // strerror, perror
+# include <errno.h>
 
-# include <math.h>
 // all functions from this lib
+# include <math.h>
 
 /* _______________________Color Section___________________ */
 
@@ -54,9 +54,8 @@
 
 /* ___________________String Defines_______________________ */
 
-# define ARG_ERROR "Error\nWrong number of arguments!\nUsage: ./cub3d <map.cub>\n"
-# define EXT ".cub"
-# define EXT_ERROR "Error\nWrong file extension! It needs to be a .cub\n"
+# define ARG_ERROR "Wrong number of arguments!\nUsage: ./cub3d <map.cub>\n"
+# define EXT_ERROR "Wrong file extension! It needs to be a .cub\n"
 
 /* _______________________Window___________________________ */
 
@@ -91,13 +90,6 @@ typedef struct s_scene
 
 /* _______________________Functions_________________________ */
 
-// error handling
-int		print_error(char *error_str, int return_value);
-
-// argument checking
-int		check_argc(int argc);
-int		check_extention(char *filename, char *ext);
-
 // mlx functions
 void	init_data(t_data *info);
 t_data	square_img(int width, int height, int color, void *mlx);
@@ -118,6 +110,9 @@ int		validate_map(char **map);
 
 //utils functions
 void	free_matrix(char **matrix);
+int		check_argc(int argc);
+int		check_extention(char *filename, char *ext);
+int		print_error(char *error_str, int return_value);
 void	print_scene(t_scene *scene);
 void	print_matrix(char **matrix);
 

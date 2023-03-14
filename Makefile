@@ -1,41 +1,41 @@
 # Variables declarations
 
-NAME = cub3D
+NAME		=	cub3D
 
-BUILD = unitTests/build
+BUILD		=	unitTests/build
 
-FLAGS = -Wall -Wextra -Werror -g
+SRC			=	$(addprefix main/, cub3d.c) \
+				$(addprefix mlx/, create_image.c hooks.c mlx_utils.c) \
+				$(addprefix scene/, scene.c set_colors.c set_info.c set_map.c free_scene.c is_map_line.c read_file.c validate_map.c) \
+				$(addprefix utils/, check_arguments.c error_handling.c free_matrix.c test.c) \
 
-CC = cc
+SRCS		=	$(addprefix src/, $(SRC))
 
-SRC =	cub3d.c \
-		$(addprefix mlx/, create_image.c hooks.c mlx_utils.c) \
-		$(addprefix scene/, scene.c set_colors.c set_info.c set_map.c free_scene.c is_map_line.c read_file.c validate_map.c) \
-		$(addprefix utils/, check_arguments.c error_handling.c free_matrix.c test.c) \
+OBJS		=	$(SRCS:.c=.o)
 
-SRCS = $(addprefix src/, $(SRC))
+CC			=	cc
 
-OBJS = $(SRCS:.c=.o)
+FLAGS		=	-Wall -Wextra -Werror -g
 
-RM = rm -rf
+RM			=	rm -rf
 
-INCLUDES = -I./includes
+INCLUDES	=	-I./includes
+
+LIBFT		=	./includes/libft/libft.a
 
 # Change MLX to match OS 
 
 ifeq ($(shell uname), Linux)
-LIBS	= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz includes/libft/libft.a
-MLX_O	= -I/usr/include -lmlx_Linux -O3
-MLX_DIR	= mlx_linux
+	LIBS	=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz $(LIBFT)
+	MLX_O	=	-I/usr/include -lmlx_Linux -O3
+	MLX_DIR	=	mlx_linux
 else
-LIBS	= -Lmlx -lmlx -framework OpenGL -framework AppKit includes/libft/libft.a
-MLX_O	= -Imlx
-MLX_DIR		= mlx
+	LIBS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit $(LIBFT)
+	MLX_O	=	-Imlx
+	MLX_DIR	=	mlx
 endif
 
 MLX = ./$(MLX_DIR)/libmlx.a
-
-LIBFT = ./includes/libft/libft.a
 
 # Compile Rules 
 
@@ -58,7 +58,7 @@ $(LIBFT):
 $(BUILD):
 			cd unitTests && cmake -S . -B build
 
-test: $(BUILD)
+test:		$(BUILD)
 			cd unitTests && cmake --build build
 			cd unitTests/build && ctest --output-on-failure
 

@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:19:49 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/13 20:10:23 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/14 14:43:50 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	set_map(t_scene *scene, char **raw_content)
 	while (*raw_content && !is_map_line(*raw_content))
 		raw_content++;
 	if (*raw_content == NULL || *raw_content[0] == '\0')
-		return (print_error("Error\nNo map found\n", 1));
+		return (print_error("No map found\n", 1));
 	i = 0;
 	while (raw_content[i] && is_map_line(raw_content[i]))
 		i++;
 	if (raw_content[i] != NULL)
-		return (print_error("Error\nInvalid map line\n", 1));
+		return (print_error("Invalid map line\n", 1));
 	scene->map = malloc(sizeof(char *) * (i + 1));
 	scene->map[i] = NULL;
 	while (--i >= 0)

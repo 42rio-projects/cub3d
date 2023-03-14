@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_info.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:19:42 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/13 18:20:47 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/14 14:44:00 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ int	set_info(t_scene *scene, char **raw_content)
 		if (*raw_content[0] != '\n')
 		{
 			if (check_scene_line(scene, *raw_content))
-				return (print_error("Error\nInvalid paths or color!\n", 1));
+				return (print_error("Invalid paths or color!\n", 1));
 			set++;
 		}
 		raw_content++;
 	}
 	if (set != 6)
-		return (print_error("Error\nMissing paths or color information!\n", 1));
+		return (print_error("Missing paths or color information!\n", 1));
 	return (0);
 }
