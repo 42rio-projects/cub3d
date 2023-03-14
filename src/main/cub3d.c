@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/13 18:14:14 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/14 14:46:47 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 
 	if (check_argc(argc))
 		return (print_error(ARG_ERROR, 1));
-	if (check_extention(argv[1], EXT))
+	if (check_extention(argv[1], ".cub"))
 		return (print_error(EXT_ERROR, 1));
 	if (build_scene(&scene, argv[1]))
 		return (1);
