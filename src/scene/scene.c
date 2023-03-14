@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/13 20:11:23 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/14 17:48:38 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ int	build_scene(t_scene *scene, char *filename)
 		return (1);
 	if (set_scene(scene, raw_content))
 	{
+		free_matrix(raw_content);
 		free_scene(scene);
 		return (1);
 	}
+	free_matrix(raw_content);
 	return (0);
 }

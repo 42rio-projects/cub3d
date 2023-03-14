@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/14 14:47:36 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/14 17:40:02 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,6 @@
 
 /* ________________________Structs_________________________ */
 
-typedef struct s_data
-{
-	void	*init;
-	void	*win;
-	void	*img;
-	void	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}			t_data;
-
 typedef struct s_scene
 {
 	char	*no_path;
@@ -88,7 +77,22 @@ typedef struct s_scene
 	char	**map;
 }			t_scene;
 
+typedef struct s_data
+{
+	void	*init;
+	void	*win;
+	void	*img;
+	void	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	t_scene	scene;
+}			t_data;
+
 /* _______________________Functions_________________________ */
+
+// main
+void	quit_program(t_data *info);
 
 // mlx functions
 void	init_data(t_data *info);
