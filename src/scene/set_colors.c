@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:15:06 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/13 18:21:26 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:23:11 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,21 @@ static int	get_rgb_value(char *colors)
 	int				rgb;
 
 	rgb = 0;
-	to_int = ft_atoi(colors);
+	to_int = ft_atoi_push(colors);
 	if (to_int < 0 || to_int > 255 || to_int == 2147483650)
-		return (print_error("Colors must have value between 0 and 255!\n", -1));
+		return (-1);
 	rgb = to_int << 16;
 	while (*colors && ft_isdigit(*colors))
 		colors++;
-	to_int = ft_atoi(++colors);
+	to_int = ft_atoi_push(++colors);
 	if (to_int < 0 || to_int > 255 || to_int == 2147483650)
-		return (print_error("Colors must have value between 0 and 255!\n", -1));
+		return (-1);
 	rgb |= to_int << 8;
 	while (*colors && ft_isdigit(*colors))
 		colors++;
-	to_int = ft_atoi(++colors);
+	to_int = ft_atoi_push(++colors);
 	if (to_int < 0 || to_int > 255 || to_int == 2147483650)
-		return (print_error("Colors must have value between 0 and 255!\n", -1));
+		return (-1);
 	rgb |= to_int;
 	return (rgb);
 }
@@ -68,6 +68,6 @@ int	set_colors(t_scene *scene)
 	scene->floor_rgb = get_rgb_value(scene->floor_content);
 	scene->ceiling_rgb = get_rgb_value(scene->ceiling_content);
 	if (scene->floor_rgb == -1 || scene->ceiling_rgb == -1)
-		return (1);
+		return (print_error("Colors must have value between 0 and 255!\n", 1));
 	return (0);
 }

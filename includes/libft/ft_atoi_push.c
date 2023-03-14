@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_push.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 08:59:49 by vsergio           #+#    #+#             */
-/*   Updated: 2022/09/14 16:37:15 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:18:42 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
-
-int	check_atoi_numbers(char *string);
 
 long int	ft_atoi_push(char *str)
 
@@ -30,8 +27,6 @@ long int	ft_atoi_push(char *str)
 			sign *= -1;
 		str++;
 	}
-	if (!check_atoi_numbers(str))
-		return (2147483650);
 	while (*str >= '0' && *str <= '9')
 	{
 		res = res * 10 + *str - '0';
@@ -40,21 +35,4 @@ long int	ft_atoi_push(char *str)
 		str++;
 	}
 	return (sign * res);
-}
-
-int	check_atoi_numbers(char *string)
-{
-	char	*temp;
-
-	temp = string;
-	if (*temp == 0)
-		return (0);
-	while (*temp)
-	{
-		if (*temp >= '0' && *temp <= '9')
-			temp++;
-		else
-			return (0);
-	}
-	return (1);
 }

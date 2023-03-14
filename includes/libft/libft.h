@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 21:26:12 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/14 14:27:48 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:15:57 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_list		*ft_lstnew(void *content);
 void		ft_lstadd_front(t_list **lst, t_list *new);
 int			ft_lstsize(t_list *lst);
 t_list		*ft_lstlast(t_list *lst);
+long int	ft_atoi_push(char *str);
 char		**ft_split_fake(char const *s, char c);
 t_list_gnl	*ft_lstlast_gnl(t_list_gnl *lst);
 void		ft_lstadd_back(t_list **lst, t_list *new);
