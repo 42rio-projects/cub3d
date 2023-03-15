@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:15:06 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/14 22:13:19 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/14 22:40:56 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ static int	invalid_colors(char *colors)
 	while (*colors)
 	{
 		if (*colors == ',')
-		{
 			commas++;
-			colors++;
-		}
-		if (!ft_isdigit(*colors))
+		else if (!ft_isdigit(*colors))
 			return (1);
 		colors++;
 	}
