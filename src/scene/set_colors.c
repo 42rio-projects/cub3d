@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_colors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:15:06 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/14 16:23:11 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/03/14 22:13:19 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static int	invalid_colors(char *colors)
 
 static int	get_rgb_value(char *colors)
 {
-	unsigned long	to_int;
-	int				rgb;
+	long	to_int;
+	int		rgb;
 
 	rgb = 0;
 	to_int = ft_atoi_push(colors);

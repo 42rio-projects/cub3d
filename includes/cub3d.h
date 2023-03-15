@@ -6,19 +6,12 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/14 17:40:02 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/14 22:29:29 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-
-// Minilib X funtions
-# if defined(__linux__)
-#  include "../mlx_linux/mlx.h"
-# else
-#  include "../mlx/mlx.h"
-# endif
 
 // Set of utility
 # include "libft/libft.h"
@@ -93,14 +86,6 @@ typedef struct s_data
 
 // main
 void	quit_program(t_data *info);
-
-// mlx functions
-void	init_data(t_data *info);
-t_data	square_img(int width, int height, int color, void *mlx);
-int		key_event(int keycode, t_data *info);
-int		close_win(t_data *info);
-void	my_mlx_pixel_put(t_data *info, int x, int y, int color);
-void	render_background(t_data *info);
 
 // scene functions
 void	free_scene(t_scene *scene);

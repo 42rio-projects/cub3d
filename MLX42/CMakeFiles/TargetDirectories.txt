@@ -1,0 +1,3 @@
+/home/ukinaa/cub3d/MLX42/CMakeFiles/mlx42.dir
+/home/ukinaa/cub3d/MLX42/CMakeFiles/edit_cache.dir
+/home/ukinaa/cub3d/MLX42/CMakeFiles/rebuild_cache.dir

@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:21:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/14 18:10:57 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/14 22:13:13 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 void	quit_program(t_data *info)
 {
-	mlx_destroy_window(info->init, info->win);
 	free_scene(&info->scene);
 	exit(0);
 }
