@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:19:49 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/14 14:43:50 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/03/20 16:11:11 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	set_map(t_scene *scene, char **raw_content)
 	scene->map = malloc(sizeof(char *) * (i + 1));
 	scene->map[i] = NULL;
 	while (--i >= 0)
-		scene->map[i] = ft_strdup(raw_content[i]);
+		scene->map[i] = ft_strtrim(raw_content[i], "\n");
 	if (validate_map(scene->map))
 		return (1);
 	return (0);
