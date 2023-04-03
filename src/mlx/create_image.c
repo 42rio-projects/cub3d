@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:41:06 by vsergio           #+#    #+#             */
-/*   Updated: 2023/02/15 11:28:53 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/03 13:12:03 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	render_background(t_data *info)
 		}
 		x++;
 	}
-	mlx_put_image_to_window(info->init, info->win, info->img, 0, 0);
+	mlx_put_image_to_window(info->mlx_ptr, info->win, info->img, 0, 0);
 }

@@ -3,24 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   is_map_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 21:30:57 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/13 11:04:06 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/03 13:16:00 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_map_line(char *line)
+bool is_map_line(char const* line)
 {
-	if (*line == '\n')
-		return (0);
-	while (*line)
-	{
-		if (ft_strchr("01NSEW \n", *line) == NULL)
-			return (0);
+	while (*line && ft_strchr(" 01NSWE", *line))
 		line++;
-	}
-	return (1);
+	if (*line == '\0' || *line == '\n')
+		return true;
+	return false;
 }

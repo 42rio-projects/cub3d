@@ -1,9 +1,9 @@
 /*
-** mlx_init.c for MiniLibX in 
-** 
+** mlx_init.c for MiniLibX in
+**
 ** Made by Charlie Root
 ** Login   <ol@epitech.net>
-** 
+**
 ** Started on  Mon Jul 31 16:52:42 2000 Charlie Root
 ** Last update Fri Jan 28 17:05:09 2005 Olivier Crouzet
 */
@@ -16,7 +16,7 @@
 void	*mlx_init()
 {
 	t_xvar	*xvar;
-	
+
 	if (!(xvar = malloc(sizeof(*xvar))))
 		return ((void*)0);
 	if ((xvar->display = XOpenDisplay("")) == 0)
@@ -69,8 +69,8 @@ int		mlx_int_deal_shm(t_xvar *xvar)
 		xvar->pshm_format = -1;
 	gethostname(buff,32);
 	dpy = getenv(ENV_DISPLAY);
-	if (dpy && strlen(dpy) && *dpy!=':' && strncmp(dpy,buff,strlen(buff)) &&
-			strncmp(dpy,LOCALHOST,strlen(LOCALHOST)) )
+	if (dpy && strlen(dpy) && *dpy!=':' && ft_strncmp(dpy,buff,strlen(buff)) &&
+			ft_strncmp(dpy,LOCALHOST,strlen(LOCALHOST)) )
 	{
 		xvar->pshm_format = -1;
 		xvar->use_xshm = 0;
