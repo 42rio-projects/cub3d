@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
 /*   Updated: 2023/04/03 18:16:35 by vsergio          ###   ########.fr       */
@@ -12,30 +12,25 @@
 
 #include "cub3d.h"
 
-static char** get_file_content(char const* file)
+static char	**get_file_content(char const *file)
 {
-	char *file_content;
-	int fd;
-	char** split_content;
+	int		fd;
+	char	*file_content;
+	char	**split_content;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1) {
-		throw_error(NULL);
-		perror(file);
-		return NULL;
-	}
+	if (fd == -1)
+		return (throw_error(NULL), perror(file), NULL);
 	file_content = read_file(fd);
 	close(fd);
-	if (validate_content(file_content)) {
-		free(file_content);
-		return NULL;
-	}
+	if (validate_content(file_content))
+		return (free(file_content), NULL);
 	split_content = ft_split(file_content, '\n');
 	free(file_content);
-	return split_content;
+	return (split_content);
 }
 
-void	set_null_scene(t_scene* scene)
+static void	set_null_scene(t_scene *scene)
 {
 	scene->map_grid = NULL;
 	ft_memset(&scene->no_texture, 0, sizeof(t_texture));
@@ -44,25 +39,19 @@ void	set_null_scene(t_scene* scene)
 	ft_memset(&scene->ea_texture, 0, sizeof(t_texture));
 }
 
-bool data_init(t_data *data, char const *file)
+bool	data_init(t_data *data, char const *file)
 {
-	char** file_content;
+	char	**file_content;
 
 	file_content = get_file_content(file);
 	if (file_content == NULL)
 		return (1);
 	data->mlx_ptr = mlx_init();
 	set_null_scene(&data->scene);
-	if (elements_init(data, file_content)) {
-		free_matrix(file_content);
-		free_scene(&data->scene);
-		return (1);
-	}
-  if (map_init(&data->scene, file_content)) {
-		free_matrix(file_content);
-		free_scene(&data->scene);
-		return (1);
-	}
+	if (elements_init(data, file_content))
+    return (free_matrix(file_content), free_scene(&data->scene), 1);
+  if (map_init(&data->scene, file_content))
+    return (free_matrix(file_content), free_scene(&data->scene), 1);
 	// data->player = player_init(data->map);
 	// if (data->player == NULL) {
 	// 	free_matrix(file_content);
