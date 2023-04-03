@@ -1,7 +1,7 @@
 NO ./textures/xpm/blue.xpm
 SO ./textures/xpm/brick.xpm
 WE ./textures/xpm/grey.xpm
-EA ./textures/xpm/wood.xpm
+EA ./textures/xpm/wood.xp
 
 F 25,230,10
 C 25,110,4

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 18:19:49 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/20 16:11:11 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/03 16:47:33 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	set_map(t_scene *scene, char **raw_content)
 	while (*raw_content && !is_map_line(*raw_content))
 		raw_content++;
 	if (*raw_content == NULL || *raw_content[0] == '\0')
-		return (print_error("No map found\n", 1));
+		return (throw_error("No map found\n"));
 	i = 0;
 	while (raw_content[i] && is_map_line(raw_content[i]))
 		i++;
 	if (raw_content[i] != NULL)
-		return (print_error("Invalid map line\n", 1));
+		return (throw_error("Invalid map line\n"));
 	scene->map = malloc(sizeof(char *) * (i + 1));
 	scene->map[i] = NULL;
 	while (--i >= 0)

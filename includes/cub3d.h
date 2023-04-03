@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/03 15:38:09 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/03 16:53:07 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,31 +103,26 @@ typedef struct s_data
 
 /* _______________________Functions_________________________ */
 
-// main
-void	quit_program(t_data *info);
-
-// mlx functions
-void	init_data(t_data *info);
+// hook functions
 int		key_event(int keycode, t_data *info);
-int		close_win(t_data *info);
 void	my_mlx_pixel_put(t_data *info, int x, int y, int color);
-void	render_background(t_data *info);
 
 // scene functions
-void	free_scene(t_scene *scene);
 bool	is_map_line(char const* line);
 char	*read_file(int fd);
-int	set_scene(t_data *data, char *filename);
-bool	texture_and_color_init(t_data* data, char** file_content);
 bool	validate_colors(char *colors);
 int		set_map(t_scene *scene, char **raw_content);
 int		validate_map(char **map);
 
+//init functions
+bool	data_init(t_data *data, char const *file);
+bool	elements_init(t_data* data, char** file_content);
+
 //utils functions
 void	free_matrix(char **matrix);
-int		check_argc(int argc);
-int		check_extention(char *filename, char *ext);
-int		print_error(char *error_str, int return_value);
+bool	check_extension(char const* file, char const* extension);
+int		throw_error(char *error_str);
+void	free_scene(t_scene* scene);
 
 //validate functions
 bool validate_content(char const* file_content);
