@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vitor <vitor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/14 17:40:02 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/03 11:59:51 by vitor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # else
 #  include "../mlx/mlx.h"
 # endif
+
+//bool
+# include <stdbool.h>
 
 // Set of utility
 # include "libft/libft.h"
@@ -119,5 +122,8 @@ int		check_extention(char *filename, char *ext);
 int		print_error(char *error_str, int return_value);
 void	print_scene(t_scene *scene);
 void	print_matrix(char **matrix);
+
+//validate functions
+bool validate_content(char const* file_content);
 
 #endif

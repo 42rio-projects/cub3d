@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/03/14 18:09:44 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/03 12:03:12 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,4 @@ void	init_data(t_data *info)
 	info->img = mlx_new_image(info->init, WIDTH, HEIGHT);
 	info->addr = mlx_get_data_addr(info->img, &info->bpp, &info->line_len,
 			&info->endian);
-}
-
-t_data	square_img(int width, int height, int color, void *mlx)
-{
-	t_data	sqr;
-	int		x;
-	int		y;
-
-	x = -1;
-	sqr.img = mlx_new_image(mlx, width, height);
-	sqr.addr = mlx_get_data_addr(sqr.img, &sqr.bpp, &sqr.line_len, &sqr.endian);
-	while (++x < width)
-	{
-		y = -1;
-		while (++y < height)
-			my_mlx_pixel_put(&sqr, x, y, color);
-	}	
-	return (sqr);
 }
