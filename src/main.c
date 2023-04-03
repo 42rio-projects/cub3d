@@ -6,35 +6,27 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/03 13:20:13 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/03 16:44:35 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+int	key_pressed(int keycode, t_data *data);
+int	key_released(int keycode, t_data *data);
 
-int	main(int argc, char **argv)
+int32_t main(int32_t argc, char **argv)
 {
-	t_data	data;
+	t_data data;
 
-	if (check_argc(argc))
-		return (print_error(ARG_ERROR, 1));
-	if (check_extention(argv[1], ".cub"))
-		return (print_error(EXT_ERROR, 1));
-	if (set_scene(&data, argv[1]))
+	if (argc != 2)
+		return (throw_error("Usage: ./cub3d <scene_file>\n"));
+	if (check_extension(argv[1], ".cub"))
+		return (throw_error("Invalid file extension\n"));
+	if (data_init(&data, argv[1]) == 1)
 		return (1);
-	init_data(&data);
-	mlx_put_image_to_window(data.mlx_ptr, data.win, data.img, 0, 0);
-	mlx_key_hook(data.win, key_event, &data);
-	mlx_hook(data.win, 17, 0, close_win, &data);
+	// mlx_hook(data.win, 2, 0, &key_pressed, &data);
+	// mlx_hook(data.win, 3, 0, &key_released, &data);
+	// mlx_loop_hook(data.mlx_ptr, hook, &data);
 	mlx_loop(data.mlx_ptr);
 	return (0);
-}
-
-void	init_data(t_data *info)
-{
-	info->mlx_ptr = mlx_init();
-	info->win = mlx_new_window(info->mlx_ptr, WIDTH, HEIGHT, "cub3d");
-	info->img = mlx_new_image(info->mlx_ptr, WIDTH, HEIGHT);
-	info->addr = mlx_get_data_addr(info->img, &info->bpp, &info->line_len,
-			&info->endian);
 }
