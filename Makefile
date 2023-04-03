@@ -1,6 +1,6 @@
 # Variables declarations
 
-NAME		=	cub3D
+NAME		=	cub3d
 
 SRC			=	main.c \
 				$(addprefix mlx/, hooks.c mlx_utils.c) \

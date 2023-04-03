@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 16:48:42 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/03 16:50:02 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/03 17:44:44 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_scene(t_scene* scene)
+void	free_scene(t_scene *scene)
 {
 	free_matrix(scene->map);
 	free(scene->no_texture.text);
