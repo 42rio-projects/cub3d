@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   set_scene.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vitor <vitor@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/03 11:57:45 by vitor            ###   ########.fr       */
+/*   Updated: 2023/04/03 15:38:56 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,27 @@ static char** get_file_content(char const* file)
 	return split_content;
 }
 
-static int	set_scene(t_scene *scene, char **raw_content)
+static int	validate_scene(t_data *data, char **file_content)
 {
-	if (set_info(scene, raw_content))
+	if (texture_and_color_init(data, file_content))
 		return (1);
-	if (set_colors(scene))
-		return (1);
-	if (set_map(scene, raw_content))
+	if (set_map(&data->scene, file_content))
 		return (1);
 	return (0);
 }
 
-int	build_scene(t_scene *scene, char *filename)
+int	set_scene(t_data *data, char *filename)
 {
-	char	**raw_content;
+	char	**file_content;
 
-	ft_memset(scene, 0, sizeof(t_scene));
-	raw_content = get_file_content(filename);
-	if (raw_content == NULL)
+	file_content = get_file_content(filename);
+	if (file_content == NULL)
 		return (1);
-	if (set_scene(scene, raw_content))
+	if (validate_scene(data, file_content))
 	{
-		free_matrix(raw_content);
-		free_scene(scene);
+		free_matrix(file_content);
 		return (1);
 	}
-	free_matrix(raw_content);
+	free_matrix(file_content);
 	return (0);
 }
