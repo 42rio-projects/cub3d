@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 12:35:52 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/03 16:54:44 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/03 18:16:50 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ bool elements_init(t_data* data, char** file_content)
 		if (is_map_line(file_content[i]))
 			break ;
 		if (set_elements(data, file_content[i]))
-			return (free_scene(&data->scene), 1);
+			return (1);
 	}
 	if (!scene->no_texture.text || !scene->so_texture.text || !scene->we_texture.text || !scene->ea_texture.text
 	|| scene->floor_color == -1 || scene->ceil_color == -1)
-		return (free_scene(&data->scene), throw_error("Missing scene information\n"));
+		return (throw_error("Missing scene information\n"));
 	return (0);
 }

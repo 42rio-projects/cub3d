@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/03 16:47:03 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/03 18:16:35 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char** get_file_content(char const* file)
 
 void	set_null_scene(t_scene* scene)
 {
-	scene->map = NULL;
+	scene->map_grid = NULL;
 	ft_memset(&scene->no_texture, 0, sizeof(t_texture));
 	ft_memset(&scene->so_texture, 0, sizeof(t_texture));
 	ft_memset(&scene->we_texture, 0, sizeof(t_texture));
@@ -55,15 +55,14 @@ bool data_init(t_data *data, char const *file)
 	set_null_scene(&data->scene);
 	if (elements_init(data, file_content)) {
 		free_matrix(file_content);
+		free_scene(&data->scene);
 		return (1);
 	}
-	// data->map = map_init((char const**)file_content);
-	// if (data->map == NULL) {
-	// 	free_matrix(file_content);
-	// 	free(data);
-	// 	return 1;
-	// }
-
+  if (map_init(&data->scene, file_content)) {
+		free_matrix(file_content);
+		free_scene(&data->scene);
+		return (1);
+	}
 	// data->player = player_init(data->map);
 	// if (data->player == NULL) {
 	// 	free_matrix(file_content);

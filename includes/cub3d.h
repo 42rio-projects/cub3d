@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/03 16:53:07 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/03 18:14:02 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,11 @@ typedef struct s_scene
 	t_texture	so_texture;
 	t_texture	we_texture;
 	t_texture	ea_texture;
-	long	floor_color;
-	long	ceil_color;
-	char			**map;
+	long			floor_color;
+	long			ceil_color;
+	uint32_t	map_width;
+	uint32_t	map_height;
+	char			**map_grid;
 }						t_scene;
 
 typedef struct s_data
@@ -110,13 +112,11 @@ void	my_mlx_pixel_put(t_data *info, int x, int y, int color);
 // scene functions
 bool	is_map_line(char const* line);
 char	*read_file(int fd);
-bool	validate_colors(char *colors);
-int		set_map(t_scene *scene, char **raw_content);
-int		validate_map(char **map);
 
 //init functions
 bool	data_init(t_data *data, char const *file);
 bool	elements_init(t_data* data, char** file_content);
+bool	map_init(t_scene* scene, char** file_content);
 
 //utils functions
 void	free_matrix(char **matrix);
@@ -125,6 +125,8 @@ int		throw_error(char *error_str);
 void	free_scene(t_scene* scene);
 
 //validate functions
-bool validate_content(char const* file_content);
+bool	validate_content(char const* file_content);
+bool	validate_grid(char** grid);
+bool	validate_colors(char *colors);
 
 #endif
