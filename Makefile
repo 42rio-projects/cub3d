@@ -2,8 +2,6 @@
 
 NAME		=	cub3D
 
-BUILD		=	unitTests/build
-
 SRC			=	$(addprefix main/, cub3d.c quit_program.c) \
 				$(addprefix mlx/, create_image.c hooks.c mlx_utils.c) \
 				$(addprefix scene/, scene.c set_colors.c set_info.c set_map.c free_scene.c is_map_line.c read_file.c validate_map.c) \
@@ -54,13 +52,6 @@ $(MLX):
 $(LIBFT):
 			@make -s -C includes/libft
 			@make -s -C includes/libft bonus
-
-$(BUILD):
-			cd unitTests && cmake -S . -B build
-
-test:		$(BUILD)
-			cd unitTests && cmake --build build
-			cd unitTests/build && ctest --output-on-failure
 
 clean:
 			@make -s -C ./includes/libft clean
