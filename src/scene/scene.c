@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vitor <vitor@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/03/14 17:48:38 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/03 11:57:45 by vitor            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char	**get_raw_content(char *filename)
+static char** get_file_content(char const* file)
 {
-	int		fd;
-	char	*full_file;
-	char	**raw_content;
-
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr_fd("Error\n", 2);
-		perror(filename);
-		return (NULL);
+	int fd = open(file, O_RDONLY);
+	if (fd == -1) {
+		ft_putstr_fd("cub3d: ", STDERR_FILENO);
+		perror(file);
+		return NULL;
 	}
-	full_file = read_file(fd);
-	raw_content = ft_split_fake(full_file, '\n');
-	free(full_file);
+	char *file_content = read_file(fd);
 	close(fd);
-	return (raw_content);
+
+	if (validate_content(file_content)) {
+		free(file_content);
+		return NULL;
+	}
+	char** split_content = ft_split(file_content, '\n');
+	free(file_content);
+	return split_content;
 }
 
 static int	set_scene(t_scene *scene, char **raw_content)
@@ -48,7 +48,7 @@ int	build_scene(t_scene *scene, char *filename)
 	char	**raw_content;
 
 	ft_memset(scene, 0, sizeof(t_scene));
-	raw_content = get_raw_content(filename);
+	raw_content = get_file_content(filename);
 	if (raw_content == NULL)
 		return (1);
 	if (set_scene(scene, raw_content))

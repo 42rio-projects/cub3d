@@ -4,10 +4,11 @@ NAME		=	cub3D
 
 BUILD		=	unitTests/build
 
-SRC			=	$(addprefix main/, cub3d.c quit_program.c) \
+SRC			=	main.c \
 				$(addprefix mlx/, create_image.c hooks.c mlx_utils.c) \
 				$(addprefix scene/, scene.c set_colors.c set_info.c set_map.c free_scene.c is_map_line.c read_file.c validate_map.c) \
-				$(addprefix utils/, check_arguments.c error_handling.c free_matrix.c print.c) \
+				$(addprefix utils/, quit_program.c check_arguments.c error_handling.c free_matrix.c print.c) \
+				$(addprefix validations/, validate_content.c) \
 
 SRCS		=	$(addprefix src/, $(SRC))
 
@@ -23,7 +24,7 @@ INCLUDES	=	-I./includes
 
 LIBFT		=	./includes/libft/libft.a
 
-# Change MLX to match OS 
+# Change MLX to match OS
 
 ifeq ($(shell uname), Linux)
 	LIBS	=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz $(LIBFT)
@@ -37,14 +38,14 @@ endif
 
 MLX = ./$(MLX_DIR)/libmlx.a
 
-# Compile Rules 
+# Compile Rules
 
 %.o: %.c
 			@$(CC) -c $(FLAGS) $(INCLUDES) $(MLX_O) $< -o $@
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(LIBFT) $(MLX)	
+$(NAME):	$(OBJS) $(LIBFT) $(MLX)
 			$(CC) $(FLAGS) $(OBJS) $(LIBS) -o $(NAME)
 			@echo "\033[32m 💯 | cub3d created."
 
