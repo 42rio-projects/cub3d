@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/04 17:44:27 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/04 18:41:08 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ bool	data_init(t_data *data, char const *file)
 		return (free_matrix(file_content), free_scene(&data->scene), 1);
 	if (player_init(&data->player, &data->scene))
     return (free_matrix(file_content), free_scene(&data->scene), 1);
-	images_init(data);
+	// images_init(data);
 	free_matrix(file_content);
 	return (0);
 }

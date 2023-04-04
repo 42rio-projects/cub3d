@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pixel.c                                        :+:      :+:    :+:   */
+/*   is_wall_at.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 16:19:44 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/04 18:27:15 by vsergio          ###   ########.fr       */
+/*   Created: 2023/04/04 16:56:07 by vsergio           #+#    #+#             */
+/*   Updated: 2023/04/04 17:03:32 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_pixel(t_image *image, int x, int y, uint32_t color)
+bool is_wall_at(t_scene* scene, int x, int y)
 {
-	char	*dst;
-
-	if (x < 0 || y < 0 || x >= WINDOW_WIDTH || y >= WINDOW_HEIGHT)
-		return ;
-	dst = image->addr + (y * image->size_len + x * (image->bpp / 8));
-	*(unsigned int *)dst = color;
+	if (x < 0 || y < 0 || x >= (int)scene->map_width || y >= (int)scene->map_height)
+		return true;
+	if(scene->map_grid[y][x] == '1')
+		return true;
+	return false;
 }

@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pixel.c                                        :+:      :+:    :+:   */
+/*   rays_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 16:19:44 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/04 18:27:15 by vsergio          ###   ########.fr       */
+/*   Created: 2023/04/04 18:12:29 by vsergio           #+#    #+#             */
+/*   Updated: 2023/04/04 18:12:40 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_pixel(t_image *image, int x, int y, uint32_t color)
+void rays_init(t_player* player, t_ray* ray, double camera_x)
 {
-	char	*dst;
-
-	if (x < 0 || y < 0 || x >= WINDOW_WIDTH || y >= WINDOW_HEIGHT)
-		return ;
-	dst = image->addr + (y * image->size_len + x * (image->bpp / 8));
-	*(unsigned int *)dst = color;
+	ray->camera_x = camera_x;
+	ray->dir_x = player->dir_x + player->plane_x * camera_x;
+	ray->dir_y = player->dir_y + player->plane_y * camera_x;
 }

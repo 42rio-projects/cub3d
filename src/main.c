@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/04 16:21:31 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/04 18:38:46 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	main(int argc, char **argv)
 	// mlx_hook(data.win, 2, 0, &key_pressed, &data);
 	// mlx_hook(data.win, 3, 0, &key_released, &data);
 	// mlx_loop_hook(data.mlx_ptr, hook, &data);
-	mlx_loop(data.mlx_ptr);
+	// mlx_loop(data.mlx_ptr);
 	return (0);
 }

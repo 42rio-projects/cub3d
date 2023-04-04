@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pixel.c                                        :+:      :+:    :+:   */
+/*   draw_background.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 16:19:44 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/04 18:27:15 by vsergio          ###   ########.fr       */
+/*   Created: 2023/04/04 17:56:30 by vsergio           #+#    #+#             */
+/*   Updated: 2023/04/04 17:59:59 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_pixel(t_image *image, int x, int y, uint32_t color)
+void draw_background(t_image* image, uint32_t floor_color, uint32_t ceil_color)
 {
-	char	*dst;
+	uint32_t ceil_end;
+  uint32_t y;
+  uint32_t x;
 
-	if (x < 0 || y < 0 || x >= WINDOW_WIDTH || y >= WINDOW_HEIGHT)
-		return ;
-	dst = image->addr + (y * image->size_len + x * (image->bpp / 8));
-	*(unsigned int *)dst = color;
+  ceil_end = WINDOW_HEIGHT / 2;
+  y = -1;
+  while(++y < ceil_end)
+  {
+    x = -1;
+    while(++x < WINDOW_WIDTH)
+    	put_pixel(image, x, y, floor_color);
+  }
+  y = ceil_end;
+  while(y < WINDOW_HEIGHT)
+  {
+    x = -1;
+    while(++x < WINDOW_WIDTH)
+    	put_pixel(image, x, y, floor_color);
+  }
 }
