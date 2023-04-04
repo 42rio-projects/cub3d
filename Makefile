@@ -2,14 +2,13 @@
 
 NAME		=	cub3d
 
-SRC			=	main.c \
-				$(addprefix mlx/, hooks.c mlx_utils.c) \
-				$(addprefix scene/, read_file.c) \
-				$(addprefix utils/, free_scene.c throw_error.c is_map_line.c check_extension.c free_matrix.c) \
-				$(addprefix validations/, validate_grid.c validate_colors.c validate_content.c) \
-				$(addprefix init/, player_init.c map_init.c data_init.c elements_init.c) \
-
-SRCS		=	$(addprefix src/, $(SRC))
+SRCS		=	$(addprefix src/, main.c \
+				$(addprefix hooks/, hook.c key_pressed.c key_release.c) \
+				$(addprefix init/, data_init.c elements_init.c map_init.c player_init.c) \
+				$(addprefix render/, put_pixel.c) \
+				$(addprefix utils/, check_extension.c free_matrix.c free_scene.c is_map_line.c read_file.c throw_error.c) \
+				$(addprefix validations/, validate_colors.c validate_content.c validate_grid.c) \
+				)
 
 OBJS		=	$(SRCS:.c=.o)
 
@@ -19,55 +18,56 @@ FLAGS		=	-Wall -Wextra -Werror -g
 
 RM			=	rm -rf
 
-INCLUDES	=	-I./includes
+LIBFT_DIR	=	./include/libft
 
-LIBFT		=	./includes/libft/libft.a
+LIBFT		=	$(LIBFT_DIR)/libft.a
+
+LIBFT_FLAGS	=	-L$(LIBFT_DIR) -lft
 
 # Change MLX to match OS
 
 ifeq ($(shell uname), Linux)
-	LIBS	=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz $(LIBFT)
-	MLX_O	=	-I/usr/include -lmlx_Linux -O3
-	MLX_DIR	=	mlx_linux
+	MLX_DIR		=	./mlx_linux
+	MLX_FLAGS	=	-L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz
 else
-	LIBS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit $(LIBFT)
-	MLX_O	=	-Imlx
-	MLX_DIR	=	mlx
+	MLX_DIR		=	./mlx
+	MLX_FLAGS	=	-L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 endif
 
-MLX = ./$(MLX_DIR)/libmlx.a
+MLX			=	$(MLX_DIR)/libmlx.a
+
+INCLUDE		=	-I./include -I$(LIBFT_DIR) -I$(MLX_DIR)
 
 # Compile Rules
 
-%.o: %.c
-			@$(CC) -c $(FLAGS) $(INCLUDES) $(MLX_O) $< -o $@
+%.o: %.c ./include/cub3d.h
+	@$(CC) $(INCLUDE) -c $< -o $@
 
-all:		$(NAME)
+all: $(NAME)
 
-$(NAME):	$(OBJS) $(LIBFT) $(MLX)
-			$(CC) $(FLAGS) $(OBJS) $(LIBS) -o $(NAME)
-			@echo "\033[32m 💯 | cub3d created."
+$(NAME): $(OBJS) $(LIBFT) $(MLX)
+	$(CC) $(INCLUDE) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(NAME)
+	@echo "\033[32m 💯 | cub3d created."
 
 $(MLX):
-			@make -s -C ./$(MLX_DIR)
+	@make -s -C $(MLX_DIR)
 
 $(LIBFT):
-			@make -s -C includes/libft
-			@make -s -C includes/libft bonus
+	@make -s -C $(LIBFT_DIR)
+	@make -s -C $(LIBFT_DIR) bonus
 
 clean:
-			@make -s -C ./includes/libft clean
-			@make -s -C ./$(MLX_DIR) clean
-			@$(RM) $(NAME).dSYM $(OBJS)
-			@echo "\033[33m 🧹  | cub3d cleaned."
+	@make -s -C $(LIBFT_DIR) clean
+	@make -s -C $(MLX_DIR) clean
+	@$(RM) $(NAME).dSYM $(OBJS)
+	@echo "\033[33m 🧹  | cub3d cleaned."
 
 fclean:
-			@make -s -C ./includes/libft fclean
-			@make -s -C ./$(MLX_DIR) clean
-			@$(RM) $(NAME).dSYM $(OBJS) $(NAME)
-			@$(RM) ./$(BUILD)
-			@echo "\033[33m 🌪️  | cub3d all cleaned."
+	@make -s -C $(LIBFT_DIR) fclean
+	@make -s -C $(MLX_DIR) clean
+	@$(RM) $(NAME).dSYM $(OBJS) $(NAME)
+	@echo "\033[33m 🌪️  | cub3d all cleaned."
 
-re:			fclean all
+re: fclean all
 
-.PHONY:		all clean fclean re test
+.PHONY:	all clean fclean re test
