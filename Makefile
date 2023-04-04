@@ -7,7 +7,7 @@ SRC			=	main.c \
 				$(addprefix scene/, read_file.c) \
 				$(addprefix utils/, free_scene.c throw_error.c is_map_line.c check_extension.c free_matrix.c) \
 				$(addprefix validations/, validate_grid.c validate_colors.c validate_content.c) \
-				$(addprefix init/, map_init.c data_init.c elements_init.c) \
+				$(addprefix init/, player_init.c map_init.c data_init.c elements_init.c) \
 
 SRCS		=	$(addprefix src/, $(SRC))
 

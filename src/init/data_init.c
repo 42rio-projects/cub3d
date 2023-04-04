@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/03 18:16:35 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/04 17:30:23 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,8 @@ bool	data_init(t_data *data, char const *file)
     return (free_matrix(file_content), free_scene(&data->scene), 1);
   if (map_init(&data->scene, file_content))
     return (free_matrix(file_content), free_scene(&data->scene), 1);
-	// data->player = player_init(data->map);
-	// if (data->player == NULL) {
-	// 	free_matrix(file_content);
-	// 	free_matrix(data->map->grid);
-	// 	free(data->map);
-	// 	free(data);
-	// 	return 1;
-	// }
+	if (player_init(&data->player, &data->scene))
+    return (free_matrix(file_content), free_scene(&data->scene), 1);
 
 	// //ponteiro da janela
 	// data->mlx.win = mlx_new_window(data->mlx.ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
