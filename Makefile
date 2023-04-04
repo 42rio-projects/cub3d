@@ -5,7 +5,7 @@ NAME		=	cub3d
 SRC			=	main.c \
 				$(addprefix mlx/, hooks.c mlx_utils.c) \
 				$(addprefix scene/, read_file.c) \
-				$(addprefix utils/, free_scene.c throw_error.c quit_program.c is_map_line.c check_extension.c free_matrix.c) \
+				$(addprefix utils/, free_scene.c throw_error.c is_map_line.c check_extension.c free_matrix.c) \
 				$(addprefix validations/, validate_grid.c validate_colors.c validate_content.c) \
 				$(addprefix init/, map_init.c data_init.c elements_init.c) \
 
