@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/04 16:34:32 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/04 17:25:20 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 
 /* __________Defines__________ */
 
-# define WIDTH 700
-# define HEIGHT 700
+# define WINDOW_WIDTH 700
+# define WINDOW_HEIGHT 700
 
 /* __________Structs__________ */
 
@@ -42,7 +42,30 @@ typedef struct s_texture
 	int		bpp;
 	int		size_len;
 	int		endian;
-}	t_texture;
+}				t_texture;
+
+typedef struct s_ray {
+	double	wall_hit_x;
+	double	wall_hit_y;
+	double	camera_x;
+	double	dir_x;
+	double	dir_y;
+	double	distance;
+	bool		wall_hit_horizontal;
+} t_ray;
+
+typedef struct t_player {
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	int			turnDirection;
+	int			walkDirection;
+	char		current;
+	t_ray		rays;
+} 				t_player;
 
 typedef struct s_scene
 {
@@ -67,6 +90,7 @@ typedef struct s_data
 	int		line_len;
 	int		endian;
 	t_scene	scene;
+	t_player player;
 }	t_data;
 
 /* __________Functions__________ */
@@ -80,6 +104,7 @@ int		key_release(int keycode, t_data *data);
 bool	data_init(t_data *data, char const *file);
 bool	elements_init(t_data *data, char **file_content);
 bool	map_init(t_scene *scene, char **file_content);
+bool	player_init(t_player *player, t_scene *scene);
 
 // render
 void	put_pixel(t_data *data, int x, int y, uint32_t color);
