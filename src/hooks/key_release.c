@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_utils.c                                        :+:      :+:    :+:   */
+/*   key_release.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 10:44:27 by vsergio           #+#    #+#             */
-/*   Updated: 2023/02/15 11:28:38 by vsergio          ###   ########.fr       */
+/*   Created: 2023/04/04 16:17:38 by gguedes           #+#    #+#             */
+/*   Updated: 2023/04/04 16:18:29 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	my_mlx_pixel_put(t_data *info, int x, int y, int color)
+int	key_release(int keycode, t_data *data)
 {
-	char	*dst;
-
-	dst = info->addr + (y * info->line_len + x * (info->bpp / 8));
-	*(unsigned int *)dst = color;
+	(void)keycode;
+	(void)data;
+	return (0);
 }

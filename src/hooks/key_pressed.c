@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   key_pressed.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 23:23:17 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/03 16:23:38 by vsergio          ###   ########.fr       */
+/*   Created: 2023/04/04 16:17:03 by gguedes           #+#    #+#             */
+/*   Updated: 2023/04/04 16:18:43 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	key_event(int keycode, t_data *info)
+int	key_pressed(int keycode, t_data *data)
 {
-	(void)info;
-	//TODO: Must free and exit program when press Escape
-	if (keycode == 53)
-		return (1);
+	(void)keycode;
+	(void)data;
 	return (0);
 }
