@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   images_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 15:40:37 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/04 17:56:08 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/05 13:03:05 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	images_init(t_data *data)
 {
-	data->mlx_ptr = mlx_init();
 	data->win = mlx_new_window(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
 	data->background_image.img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	data->background_image.addr = mlx_get_data_addr(data->background_image.img, &data->background_image.bpp, &data->background_image.size_len, &data->background_image.endian);

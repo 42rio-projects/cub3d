@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_background.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:56:30 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/04 17:59:59 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/05 13:02:09 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void draw_background(t_image* image, uint32_t floor_color, uint32_t ceil_color)
   {
     x = -1;
     while(++x < WINDOW_WIDTH)
-    	put_pixel(image, x, y, floor_color);
+    	put_pixel(image, x, y, ceil_color);
   }
-  y = ceil_end;
   while(y < WINDOW_HEIGHT)
   {
     x = -1;
     while(++x < WINDOW_WIDTH)
     	put_pixel(image, x, y, floor_color);
+    y++;
   }
 }

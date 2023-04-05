@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:02:48 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/04 18:36:21 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/05 13:02:43 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void draw_minimap(t_data *data, t_player* player, t_scene* scene)
 	}
 
 	// draw player
-	// render_tile(image, round(player->pos_x * MINIMAP_SCALE) - 2,
-	// round(player->pos_y * MINIMAP_SCALE) - 2, PLAYER_COLOR);
+	render_tile(image, round(player->pos_x * MINIMAP_SCALE) - 2,
+	round(player->pos_y * MINIMAP_SCALE) - 2, PLAYER_COLOR);
 
 	// draw rays
 	t_ray* rays = player->rays;
@@ -94,7 +94,7 @@ static void draw_walls(t_image* image, t_data* data)
 }
 
 void draw_image(t_image* image, t_data* data) {
-  raycast(&data->player, &data->scene);
+  	raycast(&data->player, &data->scene);
 	draw_walls(image, data);
 	draw_minimap(data, &data->player, &data->scene);
 }
