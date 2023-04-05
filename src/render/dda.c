@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:20:31 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/04 18:30:58 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/05 19:17:25 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void dda(t_data *data, int x0, int y0, int x1, int y1)
     i = -1;
     while(++i <= steps)
     {
-		    put_pixel(&data->main_image, x, y, RAY_COLOR);
+		    put_pixel(&data->image, x, y, RAY_COLOR);
         x += x_inc;
         y += y_inc;
     }

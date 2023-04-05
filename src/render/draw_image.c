@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:02:48 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/05 13:02:43 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/05 19:17:42 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void draw_minimap(t_data *data, t_player* player, t_scene* scene)
 {
   t_image*  image;
 
-  image = &data->main_image;
+  image = &data->image;
 	// draw the grid
 	uint32_t color;
 	for (uint32_t pos_y = 0; scene->map_grid[pos_y]; pos_y++) {
@@ -84,11 +84,17 @@ static void draw_walls(t_image* image, t_data* data)
 
 		double step = 1.0 * texture->height / line_height;
 		double texture_pos = (draw_start - WINDOW_HEIGHT / 2 + line_height / 2) * step;
+		for (int y = 0; y < draw_start; y++) {
+			put_pixel(image, WINDOW_WIDTH - x, y, data->scene.ceil_color);
+		}
 		for (int y = draw_start; y < draw_end; y++) {
 			int texture_y = (int)texture_pos & (texture->height - 1);
 			texture_pos += step;
 			uint32_t color = texture->addr[(texture->height * texture_y + texture_x)];
 			put_pixel(image, WINDOW_WIDTH - x, y, color);
+		}
+		for (int y = draw_end; y < WINDOW_HEIGHT; y++) {
+			put_pixel(image, WINDOW_WIDTH - x, y, data->scene.floor_color);
 		}
 	}
 }

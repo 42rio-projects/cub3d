@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 12:35:52 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/03 18:16:50 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/05 19:12:21 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ static bool	str_to_uint_color(long *color, char *str)
 	if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255
 		|| rgb[0] < 0 || rgb[1] < 0 || rgb[2] < 0)
 		return (throw_error("Invalid color value (0 to 255)\n"));
-	*color = rgb[0] << 24;
-	*color |= rgb[1] << 16;
-	*color |= rgb[2] << 8;
-	*color |= 255;
+	*color = rgb[0] << 16;
+	*color |= rgb[1] << 8;
+	*color |= rgb[2];
 	return (0);
 }
 
