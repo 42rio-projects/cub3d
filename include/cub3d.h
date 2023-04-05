@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/04 18:37:04 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/05 14:29:01 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@
 # define WINDOW_HEIGHT 700
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
-# define MINIMAP_WALL_COLOR 255
-# define MINIMAP_FLOOR_COLOR -1
+# define MINIMAP_WALL_COLOR 0x000000
+# define MINIMAP_FLOOR_COLOR 0xffffff
 # define MINIMAP_EMPTY_COLOR 0
+# define PLAYER_COLOR 0x0000ff
+# define RAY_COLOR 0xff0000
 # define MINIMAP_SCALE 6
-# define PLAYER_COLOR 65535
-# define RAY_COLOR -16776961
+
 /* __________Structs__________ */
 
 typedef struct s_texture
