@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:17:03 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/05 21:29:22 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 12:50:10 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	key_pressed(int keycode, t_data *data)
 	if (keycode == ESC)
 		data->close_game = 1;
 	else if (keycode == W)
-		player->walkDirection++;
+		player->walk_direction++;
 	else if (keycode == A)
-		player->turnDirection--;
+		player->turn_direction--;
 	else if (keycode == S)
-		player->walkDirection--;
+		player->walk_direction--;
 	else if (keycode == D)
-		player->turnDirection++;
+		player->turn_direction++;
 	return (0);
 }

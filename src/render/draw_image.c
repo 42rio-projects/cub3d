@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:02:48 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 14:30:39 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:08:51 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static void draw_minimap(t_data *data, t_player* player, t_scene* scene)
 
 static void draw_walls(t_image* image, t_data* data)
 {
-	t_player* player = &data->player;
-	t_ray* rays = player->rays;
-	t_texture* texture;
+	t_player *player = &data->player;
+	t_ray *rays = data->rays;
+	t_texture *texture;
 
 	for (uint32_t x = 0; x < WINDOW_WIDTH; x++) {
 		int line_height = (int)(WINDOW_HEIGHT / rays[x].distance);
@@ -100,7 +100,11 @@ static void draw_walls(t_image* image, t_data* data)
 }
 
 void draw_image(t_image* image, t_data* data) {
+<<<<<<< HEAD
+  	raycast(&data->player, &data->scene, data->rays);
+=======
   raycast(&data->player, &data->scene);
+>>>>>>> 2672f4af79a34e58dcc63df1db2cd98395bef963
 	draw_walls(image, data);
 	draw_minimap(data, &data->player, &data->scene);
 }

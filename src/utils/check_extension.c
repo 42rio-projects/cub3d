@@ -6,13 +6,13 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:05 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/03 17:44:10 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 12:47:31 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	check_extension(char const *file, char const *extension)
+bool	check_extension(const char *file, const char *extension)
 {
 	size_t	extension_len;
 	int		file_len;

@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:17:38 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/05 21:27:06 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 12:50:24 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	key_released(int keycode, t_data *data)
 
 	player = &data->player;
 	if (keycode == W)
-		player->walkDirection--;
+		player->walk_direction--;
 	else if (keycode == A)
-		player->turnDirection++;
+		player->turn_direction++;
 	else if (keycode == S)
-		player->walkDirection++;
+		player->walk_direction++;
 	else if (keycode == D)
-		player->turnDirection--;
+		player->turn_direction--;
 	return (0);
 }

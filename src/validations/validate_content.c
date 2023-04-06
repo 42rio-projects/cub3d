@@ -6,13 +6,13 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 17:34:34 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/03 17:45:02 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 12:52:34 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	validate_content(char const *file_content)
+static const char	*find_map_line(const char *file_content)
 {
 	while (*file_content)
 	{
@@ -24,8 +24,16 @@ bool	validate_content(char const *file_content)
 			break ;
 		file_content = ft_strchr(file_content, '\n');
 		if (file_content == NULL)
-			return (throw_error("Scene has no map\n"));
+			return (NULL);
 	}
+	return (file_content);
+}
+
+bool	validate_content(const char *file_content)
+{
+	file_content = find_map_line(file_content);
+	if (file_content == NULL)
+		return (throw_error("Scene has no map\n"));
 	while (*file_content)
 	{
 		file_content++;
