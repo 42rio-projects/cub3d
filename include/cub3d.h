@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 15:37:17 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:38:16 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 
 # define WINDOW_WIDTH 720
 # define WINDOW_HEIGHT 720
-# define WALL_STRIP_WIDTH 1
 # define MINIMAP_WALL_COLOR 0x000000
 # define MINIMAP_FLOOR_COLOR 0xffffff
 # define MINIMAP_EMPTY_COLOR 0
