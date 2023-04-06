@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 15:07:50 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:37:17 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void	draw_image(t_image *image, t_data *data);
 void	put_pixel(t_image *image, int x, int y, uint32_t color);
 void	render_tile(t_image *image,
 			uint32_t x_start, uint32_t y_start, uint32_t color);
-void	render_line(t_image* image,
+void	render_line(t_image *image,
 			int x_start, int y_start, int x_end, int y_end, uint32_t color);
 
 // utils
