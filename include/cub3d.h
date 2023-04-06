@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 15:38:16 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 18:26:56 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ typedef struct s_ray
 {
 	double	wall_hit_x;
 	double	wall_hit_y;
-	double	camera_x;
 	double	dir_x;
 	double	dir_y;
 	double	distance;
@@ -128,7 +127,6 @@ typedef struct s_data
 	t_image		image;
 	t_scene		scene;
 	t_player	player;
-	t_ray		rays[WINDOW_WIDTH];
 }	t_data;
 
 /* __________Functions__________ */
@@ -147,14 +145,11 @@ bool	player_init(t_player *player, t_scene *scene);
 
 //rays
 void	cast(t_player *player, t_scene *scene, t_ray *ray);
-void	raycast(t_player *player, t_scene *scene, t_ray *rays);
-void	rays_init(t_player *player, t_ray *ray, double camera_x);
+void	raycast(t_data *data, t_player *player, t_scene *scene);
 
 // render
-void	dda(t_data *data, int x0, int y0, int x1, int y1);
-void	draw_background(t_image *image,
-			uint32_t floor_color, uint32_t ceil_color);
-void	draw_image(t_image *image, t_data *data);
+void	draw_image(t_data *data);
+void	draw_wall_strip(t_data *data, t_player *player, t_ray *ray, uint32_t x);
 void	put_pixel(t_image *image, int x, int y, uint32_t color);
 void	render_tile(t_image *image,
 			uint32_t x_start, uint32_t y_start, uint32_t color);
