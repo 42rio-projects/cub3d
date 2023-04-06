@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 15:38:16 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 17:31:50 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,14 @@ typedef struct s_ray
 	double	camera_x;
 	double	dir_x;
 	double	dir_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
 	double	distance;
-	bool	wall_hit_horizontal;
+	int		x_step;
+	int		y_step;
+	char	hit_direction;
 }	t_ray;
 
 typedef struct s_player
@@ -148,7 +154,6 @@ bool	player_init(t_player *player, t_scene *scene);
 //rays
 void	cast(t_player *player, t_scene *scene, t_ray *ray);
 void	raycast(t_player *player, t_scene *scene, t_ray *rays);
-void	rays_init(t_player *player, t_ray *ray, double camera_x);
 
 // render
 void	dda(t_data *data, int x0, int y0, int x1, int y1);

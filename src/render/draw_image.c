@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:02:48 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 15:35:29 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 17:16:06 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,25 @@ static void draw_walls(t_image* image, t_data* data)
 			draw_end = WINDOW_HEIGHT;
 
 		double wall_x;
-		if (rays[x].wall_hit_horizontal)
+		if (rays[x].hit_direction == 'N' || rays[x].hit_direction == 'S')
 			wall_x = player->pos_x + rays[x].distance * rays[x].dir_x;
 		else
 			wall_x = player->pos_y + rays[x].distance * rays[x].dir_y;
 		wall_x -= (int)wall_x;
 
-		if (rays[x].wall_hit_horizontal && rays[x].dir_y < 0)
+		if (rays[x].hit_direction == 'N')
       texture = &data->scene.no_texture;
-		else if (!rays[x].wall_hit_horizontal && rays[x].dir_x > 0)
+		else if (rays[x].hit_direction == 'E')
       texture = &data->scene.ea_texture;
-		else if (!rays[x].wall_hit_horizontal && rays[x].dir_x < 0)
+		else if (rays[x].hit_direction == 'W')
       texture = &data->scene.we_texture;
     else
       texture = &data->scene.so_texture;
 
 		int texture_x = (int)(wall_x * (double)texture->width);
-		if (!rays[x].wall_hit_horizontal && rays[x].dir_x > 0)
+		if (rays[x].hit_direction == 'N')
 			texture_x = texture->width - texture_x - 1;
-		if (rays[x].wall_hit_horizontal && rays[x].dir_y < 0)
+		if (rays[x].hit_direction == 'W')
 			texture_x = texture->width - texture_x - 1;
 
 		double step = 1.0 * texture->height / line_height;

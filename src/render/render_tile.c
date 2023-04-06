@@ -6,13 +6,14 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 15:49:41 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/04 16:08:53 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 17:33:13 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	render_tile(t_image *image, uint32_t x_start, uint32_t y_start, uint32_t color)
+void	render_tile(t_image *image,
+		uint32_t x_start, uint32_t y_start, uint32_t color)
 {
 	uint32_t	x_end;
 	uint32_t	y_end;
