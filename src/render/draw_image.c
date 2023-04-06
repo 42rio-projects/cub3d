@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:02:48 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/05 19:17:42 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 00:38:35 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void draw_minimap(t_data *data, t_player* player, t_scene* scene)
 	round(player->pos_y * MINIMAP_SCALE) - 2, PLAYER_COLOR);
 
 	// draw rays
-	t_ray* rays = player->rays;
-	for (uint32_t x = 0; x < NUM_RAYS; x++) {
+	t_ray* rays = data->rays;
+	for (uint32_t x = 0; x < WINDOW_WIDTH; x++) {
 		dda(data, round(player->pos_x * MINIMAP_SCALE),
 		round(player->pos_y * MINIMAP_SCALE),
 		round(rays[x].wall_hit_x * MINIMAP_SCALE),
@@ -47,9 +47,9 @@ static void draw_minimap(t_data *data, t_player* player, t_scene* scene)
 
 static void draw_walls(t_image* image, t_data* data)
 {
-	t_player* player = &data->player;
-	t_ray* rays = player->rays;
-	t_texture* texture;
+	t_player *player = &data->player;
+	t_ray *rays = data->rays;
+	t_texture *texture;
 
 	for (uint32_t x = 0; x < WINDOW_WIDTH; x++) {
 		int line_height = (int)(WINDOW_HEIGHT / rays[x].distance);
@@ -100,7 +100,7 @@ static void draw_walls(t_image* image, t_data* data)
 }
 
 void draw_image(t_image* image, t_data* data) {
-  	raycast(&data->player, &data->scene);
+  	raycast(&data->player, &data->scene, data->rays);
 	draw_walls(image, data);
 	draw_minimap(data, &data->player, &data->scene);
 }

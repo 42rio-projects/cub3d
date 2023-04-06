@@ -6,13 +6,13 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/05 21:30:23 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 12:47:20 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char	**get_file_content(char const *file)
+static char	**get_file_content(const char *file)
 {
 	int		fd;
 	char	*file_content;
@@ -30,16 +30,20 @@ static char	**get_file_content(char const *file)
 	return (split_content);
 }
 
-static void	set_null_scene(t_scene *scene)
+static void	set_default_scene(t_scene *scene)
 {
+	ft_bzero(&scene->no_texture, sizeof(t_texture));
+	ft_bzero(&scene->so_texture, sizeof(t_texture));
+	ft_bzero(&scene->we_texture, sizeof(t_texture));
+	ft_bzero(&scene->ea_texture, sizeof(t_texture));
+	scene->ceil_color = -1;
+	scene->floor_color = -1;
+	scene->map_width = 0;
+	scene->map_height = 0;
 	scene->map_grid = NULL;
-	ft_memset(&scene->no_texture, 0, sizeof(t_texture));
-	ft_memset(&scene->so_texture, 0, sizeof(t_texture));
-	ft_memset(&scene->we_texture, 0, sizeof(t_texture));
-	ft_memset(&scene->ea_texture, 0, sizeof(t_texture));
 }
 
-bool	data_init(t_data *data, char const *file)
+bool	data_init(t_data *data, const char *file)
 {
 	char	**file_content;
 
@@ -48,13 +52,13 @@ bool	data_init(t_data *data, char const *file)
 		return (1);
 	data->mlx_ptr = mlx_init();
 	data->close_game = 0;
-	set_null_scene(&data->scene);
+	set_default_scene(&data->scene);
 	if (elements_init(data, file_content))
 		return (free_matrix(file_content), free_scene(&data->scene), 1);
 	if (map_init(&data->scene, file_content))
 		return (free_matrix(file_content), free_scene(&data->scene), 1);
 	if (player_init(&data->player, &data->scene))
-    return (free_matrix(file_content), free_scene(&data->scene), 1);
+		return (free_matrix(file_content), free_scene(&data->scene), 1);
 	images_init(data);
 	free_matrix(file_content);
 	return (0);

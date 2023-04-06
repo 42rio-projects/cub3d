@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 12:35:52 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/05 19:12:21 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 12:34:08 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ bool	elements_init(t_data *data, char **file_content)
 	t_scene		*scene;
 
 	scene = &data->scene;
-	scene->floor_color = -1;
-	scene->ceil_color = -1;
 	i = -1;
 	while (file_content[++i])
 	{

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:55:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/04 17:08:39 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/06 00:35:17 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 	
-void cast(t_player* player, t_scene *scene, t_ray* ray)
+void	cast(t_player *player, t_scene *scene, t_ray *ray)
 {
 	// [map] position on the map
 	int map_x;
