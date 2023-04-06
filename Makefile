@@ -3,7 +3,7 @@
 NAME		=	cub3d
 
 SRCS		=	$(addprefix src/, main.c \
-				$(addprefix hooks/, hook.c key_pressed.c key_release.c) \
+				$(addprefix hooks/, hook.c key_pressed.c key_released.c) \
 				$(addprefix init/, data_init.c elements_init.c images_init.c map_init.c player_init.c) \
 				$(addprefix rays/, cast.c raycast.c rays_init.c) \
 				$(addprefix render/, dda.c draw_background.c draw_image.c put_pixel.c render_tile.c) \
@@ -47,7 +47,7 @@ INCLUDE		=	-I./include -I$(LIBFT_DIR) -I$(MLX_DIR)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
-	$(CC) $(INCLUDE) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(INCLUDE) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(NAME)
 	@echo "\033[32m 💯 | cub3d created."
 
 $(MLX):

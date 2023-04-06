@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/05 12:57:08 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/05 21:30:23 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ bool	data_init(t_data *data, char const *file)
 	if (file_content == NULL)
 		return (1);
 	data->mlx_ptr = mlx_init();
+	data->close_game = 0;
 	set_null_scene(&data->scene);
 	if (elements_init(data, file_content))
 		return (free_matrix(file_content), free_scene(&data->scene), 1);

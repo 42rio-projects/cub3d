@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/05 19:14:51 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/05 21:30:08 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 
 /* __________Defines__________ */
 
-# define WINDOW_WIDTH 700
-# define WINDOW_HEIGHT 700
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 # define MINIMAP_WALL_COLOR 0x000000
@@ -39,6 +39,30 @@
 # define PLAYER_COLOR 0x0000ff
 # define RAY_COLOR 0xff0000
 # define MINIMAP_SCALE 6
+# define MOVE_SPEED 0.04
+# define ROTATION_SPEED 0.04
+
+# ifdef __linux__
+
+# define ESC 65307
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define L_ARROW 65361
+# define R_ARROW 65363
+
+# else
+
+# define ESC 65307
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define L_ARROW 65361
+# define R_ARROW 65363
+
+# endif // __linux__
 
 /* __________Structs__________ */
 
@@ -102,6 +126,7 @@ typedef struct s_data
 {
 	void			*mlx_ptr;
 	void			*win;
+	int				close_game;
 	void			*img;
 	void			*addr;
 	int				bpp;
@@ -117,7 +142,7 @@ typedef struct s_data
 // hooks
 int		hook(void *param);
 int		key_pressed(int keycode, t_data *data);
-int		key_release(int keycode, t_data *data);
+int		key_released(int keycode, t_data *data);
 
 // init
 bool	data_init(t_data *data, char const *file);
@@ -152,4 +177,4 @@ bool	validate_colors(char *colors);
 bool	validate_content(char const *file_content);
 bool	validate_grid(char **grid);
 
-#endif
+#endif // CUB3D_H
