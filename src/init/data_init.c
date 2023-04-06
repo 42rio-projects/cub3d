@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/06 15:08:10 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:34:45 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	data_init(t_data *data, const char *file)
 		return (free_matrix(file_content), free_scene(&data->scene), 1);
 	if (player_init(&data->player, &data->scene))
 		return (free_matrix(file_content), free_scene(&data->scene), 1);
-	images_init(data);
+	image_init(data);
 	free_matrix(file_content);
 	return (0);
 }

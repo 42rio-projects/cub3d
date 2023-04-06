@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 15:07:50 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:38:16 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 
 # define WINDOW_WIDTH 720
 # define WINDOW_HEIGHT 720
-# define WALL_STRIP_WIDTH 1
 # define MINIMAP_WALL_COLOR 0x000000
 # define MINIMAP_FLOOR_COLOR 0xffffff
 # define MINIMAP_EMPTY_COLOR 0
@@ -159,7 +158,7 @@ void	draw_image(t_image *image, t_data *data);
 void	put_pixel(t_image *image, int x, int y, uint32_t color);
 void	render_tile(t_image *image,
 			uint32_t x_start, uint32_t y_start, uint32_t color);
-void	render_line(t_image* image,
+void	render_line(t_image *image,
 			int x_start, int y_start, int x_end, int y_end, uint32_t color);
 
 // utils
