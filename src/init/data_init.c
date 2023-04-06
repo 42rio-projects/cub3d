@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/04 17:44:27 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/05 12:57:08 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ bool	data_init(t_data *data, char const *file)
 	file_content = get_file_content(file);
 	if (file_content == NULL)
 		return (1);
+	data->mlx_ptr = mlx_init();
 	set_null_scene(&data->scene);
 	if (elements_init(data, file_content))
 		return (free_matrix(file_content), free_scene(&data->scene), 1);

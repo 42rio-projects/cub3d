@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pixel.c                                        :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 16:19:44 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/04 18:27:15 by vsergio          ###   ########.fr       */
+/*   Created: 2023/04/04 16:50:25 by vsergio           #+#    #+#             */
+/*   Updated: 2023/04/04 18:14:40 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_pixel(t_image *image, int x, int y, uint32_t color)
+void raycast(t_player *player, t_scene *scene)
 {
-	char	*dst;
-
-	if (x < 0 || y < 0 || x >= WINDOW_WIDTH || y >= WINDOW_HEIGHT)
-		return ;
-	dst = image->addr + (y * image->size_len + x * (image->bpp / 8));
-	*(unsigned int *)dst = color;
+  uint32_t i;
+  i = -1;
+  while(++i < NUM_RAYS)
+  {
+		rays_init(player, player->rays + i, 2 * i / (double)NUM_RAYS - 1);
+		cast(player, scene, player->rays + i);
+  }
 }

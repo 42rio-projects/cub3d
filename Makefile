@@ -4,9 +4,10 @@ NAME		=	cub3d
 
 SRCS		=	$(addprefix src/, main.c \
 				$(addprefix hooks/, hook.c key_pressed.c key_release.c) \
-				$(addprefix init/, data_init.c elements_init.c map_init.c player_init.c) \
-				$(addprefix render/, put_pixel.c) \
-				$(addprefix utils/, check_extension.c free_matrix.c free_scene.c is_map_line.c read_file.c throw_error.c) \
+				$(addprefix init/, data_init.c elements_init.c images_init.c map_init.c player_init.c) \
+				$(addprefix rays/, cast.c raycast.c rays_init.c) \
+				$(addprefix render/, dda.c draw_background.c draw_image.c put_pixel.c render_tile.c) \
+				$(addprefix utils/, check_extension.c free_matrix.c free_scene.c is_map_line.c is_wall_at.c read_file.c throw_error.c) \
 				$(addprefix validations/, validate_colors.c validate_content.c validate_grid.c) \
 				)
 
