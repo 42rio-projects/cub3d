@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 12:52:01 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:07:50 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@
 
 # else
 
-#  define ESC 65307
-#  define W 119
-#  define A 97
-#  define S 115
-#  define D 100
-#  define L_ARROW 65361
-#  define R_ARROW 65363
+#  define ESC 53
+#  define W 13
+#  define A 0
+#  define S 1
+#  define D 2
+#  define L_ARROW 123
+#  define R_ARROW 124
 
 # endif // __linux__
 
@@ -142,7 +142,7 @@ int		key_released(int keycode, t_data *data);
 // init
 bool	data_init(t_data *data, const char *file);
 bool	elements_init(t_data *data, char **file_content);
-void	images_init(t_data *data);
+void	image_init(t_data *data);
 bool	map_init(t_scene *scene, char **file_content);
 bool	player_init(t_player *player, t_scene *scene);
 
@@ -159,6 +159,8 @@ void	draw_image(t_image *image, t_data *data);
 void	put_pixel(t_image *image, int x, int y, uint32_t color);
 void	render_tile(t_image *image,
 			uint32_t x_start, uint32_t y_start, uint32_t color);
+void	render_line(t_image* image,
+			int x_start, int y_start, int x_end, int y_end, uint32_t color);
 
 // utils
 bool	check_extension(const char *file, const char *extension);

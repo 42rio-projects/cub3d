@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   images_init.c                                      :+:      :+:    :+:   */
+/*   image_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 15:40:37 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/06 12:41:50 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:08:32 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	images_init(t_data *data)
+void	image_init(t_data *data)
 {
 	data->win = mlx_new_window(data->mlx_ptr,
 			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
