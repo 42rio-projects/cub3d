@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:02:48 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/05 19:17:42 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 14:30:39 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ static void draw_minimap(t_data *data, t_player* player, t_scene* scene)
 	round(player->pos_y * MINIMAP_SCALE) - 2, PLAYER_COLOR);
 
 	// draw rays
-	t_ray* rays = player->rays;
+	t_ray* ray = player->rays;
 	for (uint32_t x = 0; x < NUM_RAYS; x++) {
-		dda(data, round(player->pos_x * MINIMAP_SCALE),
+		render_line(image, round(player->pos_x * MINIMAP_SCALE),
 		round(player->pos_y * MINIMAP_SCALE),
-		round(rays[x].wall_hit_x * MINIMAP_SCALE),
-		round(rays[x].wall_hit_y * MINIMAP_SCALE));
+		round(ray[x].wall_hit_x * MINIMAP_SCALE),
+		round(ray[x].wall_hit_y * MINIMAP_SCALE), RAY_COLOR);
 	}
 }
 
@@ -100,7 +100,7 @@ static void draw_walls(t_image* image, t_data* data)
 }
 
 void draw_image(t_image* image, t_data* data) {
-  	raycast(&data->player, &data->scene);
+  raycast(&data->player, &data->scene);
 	draw_walls(image, data);
 	draw_minimap(data, &data->player, &data->scene);
 }
