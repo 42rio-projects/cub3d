@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:02:48 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 15:08:51 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:16:00 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void draw_minimap(t_data *data, t_player* player, t_scene* scene)
 	round(player->pos_y * MINIMAP_SCALE) - 2, PLAYER_COLOR);
 
 	// draw rays
-	t_ray* ray = player->rays;
-	for (uint32_t x = 0; x < NUM_RAYS; x++) {
+	t_ray* ray = data->rays;
+	for (uint32_t x = 0; x < WINDOW_WIDTH; x++) {
 		render_line(image, round(player->pos_x * MINIMAP_SCALE),
 		round(player->pos_y * MINIMAP_SCALE),
 		round(ray[x].wall_hit_x * MINIMAP_SCALE),
@@ -100,11 +100,7 @@ static void draw_walls(t_image* image, t_data* data)
 }
 
 void draw_image(t_image* image, t_data* data) {
-<<<<<<< HEAD
   	raycast(&data->player, &data->scene, data->rays);
-=======
-  raycast(&data->player, &data->scene);
->>>>>>> 2672f4af79a34e58dcc63df1db2cd98395bef963
 	draw_walls(image, data);
 	draw_minimap(data, &data->player, &data->scene);
 }
