@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_background.c                                  :+:      :+:    :+:   */
+/*   key_released.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 17:56:30 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/05 13:02:09 by gguedes          ###   ########.fr       */
+/*   Created: 2023/04/04 16:17:38 by gguedes           #+#    #+#             */
+/*   Updated: 2023/04/05 21:27:06 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void draw_background(t_image* image, uint32_t floor_color, uint32_t ceil_color)
+int	key_released(int keycode, t_data *data)
 {
-	uint32_t ceil_end;
-  uint32_t y;
-  uint32_t x;
+	t_player	*player;
 
-  ceil_end = WINDOW_HEIGHT / 2;
-  y = -1;
-  while(++y < ceil_end)
-  {
-    x = -1;
-    while(++x < WINDOW_WIDTH)
-    	put_pixel(image, x, y, ceil_color);
-  }
-  while(y < WINDOW_HEIGHT)
-  {
-    x = -1;
-    while(++x < WINDOW_WIDTH)
-    	put_pixel(image, x, y, floor_color);
-    y++;
-  }
+	player = &data->player;
+	if (keycode == W)
+		player->walkDirection--;
+	else if (keycode == A)
+		player->turnDirection++;
+	else if (keycode == S)
+		player->walkDirection++;
+	else if (keycode == D)
+		player->turnDirection--;
+	return (0);
 }

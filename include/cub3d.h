@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/05 19:14:51 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 14:31:23 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 
 /* __________Defines__________ */
 
-# define WINDOW_WIDTH 700
-# define WINDOW_HEIGHT 700
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 # define MINIMAP_WALL_COLOR 0x000000
@@ -39,6 +39,16 @@
 # define PLAYER_COLOR 0x0000ff
 # define RAY_COLOR 0xff0000
 # define MINIMAP_SCALE 6
+# define MOVE_SPEED 0.04
+# define ROTATION_SPEED 0.04
+
+# define ESC 53
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define L_ARROW 123
+# define R_ARROW 124
 
 /* __________Structs__________ */
 
@@ -102,11 +112,7 @@ typedef struct s_data
 {
 	void			*mlx_ptr;
 	void			*win;
-	void			*img;
-	void			*addr;
-	int				bpp;
-	int				line_len;
-	int				endian;
+	int				close_game;
 	t_image 	image;
 	t_scene		scene;
 	t_player	player;
@@ -117,12 +123,12 @@ typedef struct s_data
 // hooks
 int		hook(void *param);
 int		key_pressed(int keycode, t_data *data);
-int		key_release(int keycode, t_data *data);
+int		key_released(int keycode, t_data *data);
 
 // init
 bool	data_init(t_data *data, char const *file);
 bool	elements_init(t_data *data, char **file_content);
-void	images_init(t_data *data);
+void	image_init(t_data *data);
 bool	map_init(t_scene *scene, char **file_content);
 bool	player_init(t_player *player, t_scene *scene);
 
@@ -132,18 +138,17 @@ void raycast(t_player *player, t_scene *scene);
 void rays_init(t_player* player, t_ray* ray, double camera_x);
 
 // render
-void	dda(t_data *data, int x0, int y0, int x1, int y1);
-void	draw_background(t_image* image, uint32_t floor_color, uint32_t ceil_color);
 void	draw_image(t_image* image, t_data* data);
 void	put_pixel(t_image *image, int x, int y, uint32_t color);
 void	render_tile(t_image *image, uint32_t x_start, uint32_t y_start, uint32_t color);
+void	render_line(t_image* image, int x_start, int y_start, int x_end, int y_end, uint32_t color);
 
 // utils
 bool	check_extension(char const *file, char const *extension);
 void	free_matrix(char **matrix);
 void	free_scene(t_scene *scene);
 bool	is_map_line(char const *line);
-bool is_wall_at(t_scene* scene, int x, int y);
+bool	is_wall_at(t_scene* scene, int x, int y);
 char	*read_file(int fd);
 int		throw_error(char *error_str);
 
@@ -152,4 +157,4 @@ bool	validate_colors(char *colors);
 bool	validate_content(char const *file_content);
 bool	validate_grid(char **grid);
 
-#endif
+#endif // CUB3D_H

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/05 12:57:08 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 14:31:28 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ bool	data_init(t_data *data, char const *file)
 	if (file_content == NULL)
 		return (1);
 	data->mlx_ptr = mlx_init();
+	data->close_game = 0;
 	set_null_scene(&data->scene);
 	if (elements_init(data, file_content))
 		return (free_matrix(file_content), free_scene(&data->scene), 1);
@@ -54,7 +55,7 @@ bool	data_init(t_data *data, char const *file)
 		return (free_matrix(file_content), free_scene(&data->scene), 1);
 	if (player_init(&data->player, &data->scene))
     return (free_matrix(file_content), free_scene(&data->scene), 1);
-	images_init(data);
+	image_init(data);
 	free_matrix(file_content);
 	return (0);
 }
