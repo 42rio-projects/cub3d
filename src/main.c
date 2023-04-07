@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/07 16:30:16 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/07 16:31:14 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ int	main(int argc, char **argv)
 	if (data_init(&data, argv[1]))
 		return (1);
 	hooks_init(&data);
-	printf("end program\n");
 	return (0);
 }
