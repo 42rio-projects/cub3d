@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 23:23:17 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 12:57:54 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/06 17:53:29 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	hook(void *param)
 	}
 	update_player(&data->player, &data->scene);
 	mlx_clear_window(data->mlx_ptr, data->win);
-	draw_image(&data->image, data);
+	draw_image(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win, data->image.img, 0, 0);
 	return (0);
 }

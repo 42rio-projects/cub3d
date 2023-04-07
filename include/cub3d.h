@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 17:31:50 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/07 01:30:30 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,27 @@ typedef struct s_texture
 	int		endian;
 }	t_texture;
 
+typedef struct s_image
+{
+	void	*img;
+	void	*addr;
+	int		bpp;
+	int		size_len;
+	int		endian;
+}	t_image;
+
+typedef struct s_draw_info
+{
+	int			line_height;
+	int			wall_start;
+	int			wall_end;
+	double		wall_x;
+	int			texture_x;
+	double		texture_pos;
+	double		step;
+	t_texture	*texture;
+}	t_draw_info;
+
 typedef struct s_scene
 {
 	t_texture	no_texture;
@@ -92,16 +113,15 @@ typedef struct s_ray
 {
 	double	wall_hit_x;
 	double	wall_hit_y;
-	double	camera_x;
+	double	distance;
 	double	dir_x;
 	double	dir_y;
 	double	delta_dist_x;
 	double	delta_dist_y;
 	double	side_dist_x;
 	double	side_dist_y;
-	double	distance;
-	int		x_step;
-	int		y_step;
+	int		step_x;
+	int		step_y;
 	char	hit_direction;
 }	t_ray;
 
@@ -117,15 +137,6 @@ typedef struct s_player
 	int		walk_direction;
 }	t_player;
 
-typedef struct s_image
-{
-	void	*img;
-	void	*addr;
-	int		bpp;
-	int		size_len;
-	int		endian;
-}	t_image;
-
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -134,7 +145,6 @@ typedef struct s_data
 	t_image		image;
 	t_scene		scene;
 	t_player	player;
-	t_ray		rays[WINDOW_WIDTH];
 }	t_data;
 
 /* __________Functions__________ */
@@ -153,18 +163,16 @@ bool	player_init(t_player *player, t_scene *scene);
 
 //rays
 void	cast(t_player *player, t_scene *scene, t_ray *ray);
-void	raycast(t_player *player, t_scene *scene, t_ray *rays);
+void	raycast(t_data *data, t_player *player, t_scene *scene);
 
 // render
-void	dda(t_data *data, int x0, int y0, int x1, int y1);
-void	draw_background(t_image *image,
-			uint32_t floor_color, uint32_t ceil_color);
-void	draw_image(t_image *image, t_data *data);
+void	draw_ceil_and_floor(t_data *data, t_draw_info *info, int x);
+void	draw_image(t_data *data);
+void	draw_texture(t_data *data, t_draw_info *info, int x);
+void	draw_wall_strip(t_data *data, t_player *player, t_ray *ray, uint32_t x);
 void	put_pixel(t_image *image, int x, int y, uint32_t color);
 void	render_tile(t_image *image,
 			uint32_t x_start, uint32_t y_start, uint32_t color);
-void	render_line(t_image *image,
-			int x_start, int y_start, int x_end, int y_end, uint32_t color);
 
 // utils
 bool	check_extension(const char *file, const char *extension);

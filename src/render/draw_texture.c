@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
+/*   draw_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 16:50:25 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/07 01:11:16 by gguedes          ###   ########.fr       */
+/*   Created: 2023/04/07 01:18:16 by gguedes           #+#    #+#             */
+/*   Updated: 2023/04/07 01:34:09 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	raycast(t_data *data, t_player *player, t_scene *scene)
+void	draw_texture(t_data *data, t_draw_info *info, int x)
 {
-	t_ray		ray;
-	double		camera_x;
-	uint32_t	i;
+	int			texture_y;
+	uint32_t	y;
+	uint32_t	color;
+	t_texture	*texture;
 
-	i = -1;
-	while (++i < WINDOW_WIDTH)
+	texture = info->texture;
+	y = info->wall_start - 1;
+	while (++y < info->wall_end)
 	{
-		camera_x = 2 * i / (double)WINDOW_WIDTH - 1;
-		ray.dir_x = player->dir_x + player->plane_x * camera_x;
-		ray.dir_y = player->dir_y + player->plane_y * camera_x;
-		cast(player, scene, &ray);
-		draw_wall_strip(data, player, &ray, i);
+		texture_y = (int)info->texture_pos & (texture->height - 1);
+		info->texture_pos += info->step;
+		color = texture->addr[(texture->height * texture_y + info->texture_x)];
+		put_pixel(&data->image, WINDOW_WIDTH - x, y, color);
 	}
 }
