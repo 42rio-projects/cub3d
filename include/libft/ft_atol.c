@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 08:59:49 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/03 12:51:35 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/07 10:10:22 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 long int	ft_atol(const char *str)
 {
 	long int	res;
-	int	i;
-	int	sign;
+	int			i;
+	int			sign;
 
 	i = 0;
 	res = 0;
