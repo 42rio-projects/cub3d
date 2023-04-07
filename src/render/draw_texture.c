@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_tile.c                                      :+:      :+:    :+:   */
+/*   draw_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 15:49:41 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/06 17:33:13 by gguedes          ###   ########.fr       */
+/*   Created: 2023/04/07 01:18:16 by gguedes           #+#    #+#             */
+/*   Updated: 2023/04/07 01:34:09 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	render_tile(t_image *image,
-		uint32_t x_start, uint32_t y_start, uint32_t color)
+void	draw_texture(t_data *data, t_draw_info *info, int x)
 {
-	uint32_t	x_end;
-	uint32_t	y_end;
-	uint32_t	x;
+	int			texture_y;
+	uint32_t	y;
+	uint32_t	color;
+	t_texture	*texture;
 
-	x_end = x_start + MINIMAP_SCALE;
-	y_end = y_start + MINIMAP_SCALE;
-	while (y_start < y_end)
+	texture = info->texture;
+	y = info->wall_start - 1;
+	while (++y < info->wall_end)
 	{
-		x = x_start;
-		while (x < x_end)
-		{
-			put_pixel(image, x, y_start, color);
-			x++;
-		}
-		y_start++;
+		texture_y = (int)info->texture_pos & (texture->height - 1);
+		info->texture_pos += info->step;
+		color = texture->addr[(texture->height * texture_y + info->texture_x)];
+		put_pixel(&data->image, WINDOW_WIDTH - x, y, color);
 	}
 }

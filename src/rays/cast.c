@@ -6,78 +6,90 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:55:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 00:35:17 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/07 01:27:56 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-	
-void	cast(t_player *player, t_scene *scene, t_ray *ray)
+
+static void	set_calc_variables(t_ray *ray, double pos_x, double pos_y)
 {
-	// [map] position on the map
-	int map_x;
-  int map_y;
-	// [delta] length of the ray from one x_side or y_side to next x_side or y_side
-  double delta_dist_x;
-	double delta_dist_y;
-	// [side] length of ray from player position to next x_side and y_side
-	double side_dist_x;
-  double side_dist_y;
-	// [step] what direction to step in
-	int step_x;
-  int step_y;
-	// [hit] dda algorithm
-	bool hit;
-
-  map_x = (int)player->pos_x;
-  map_y = (int)player->pos_y;
-
-  delta_dist_x = (ray->dir_x == 0) ? 2147483647 : fabs(1 / ray->dir_x);
-  delta_dist_y = (ray->dir_y == 0) ? 2147483647 : fabs(1 / ray->dir_y);
-
-	// set varibles based on ray direction
-	if (ray->dir_x < 0) {
-		step_x = -1;
-		side_dist_x = (player->pos_x - map_x) * delta_dist_x;
+	ray->delta_dist_x = fabs(1 / ray->dir_x);
+	ray->delta_dist_y = fabs(1 / ray->dir_y);
+	if (ray->dir_x < 0)
+	{
+		ray->step_x = -1;
+		ray->side_dist_x = (pos_x - (int)pos_x) * ray->delta_dist_x;
 	}
-	else {
-		step_x = 1;
-		side_dist_x = (map_x + 1.0 - player->pos_x) * delta_dist_x;
-	}
-
-	if (ray->dir_y < 0) {
-		step_y = -1;
-		side_dist_y = (player->pos_y - map_y) * delta_dist_y;
-	}
-	else {
-		step_y = 1;
-		side_dist_y = (map_y + 1.0 - player->pos_y) * delta_dist_y;
-	}
-
-  hit = false;
-	while (hit == false) 
-  {
-		if (side_dist_x < side_dist_y) 
-    {
-			side_dist_x += delta_dist_x;
-			map_x += step_x;
-			ray->wall_hit_horizontal = false;
-		}
-		else 
-    {
-			side_dist_y += delta_dist_y;
-			map_y += step_y;
-			ray->wall_hit_horizontal = true;
-		}
-		if (is_wall_at(scene, map_x, map_y))
-			hit = true;
-	}
-
-	// set the distance and the x/y where the wall was hit
-	if(ray->wall_hit_horizontal == false)
-		ray->distance = (side_dist_x - delta_dist_x);
 	else
-		ray->distance = (side_dist_y - delta_dist_y);
+	{
+		ray->step_x = 1;
+		ray->side_dist_x = ((int)pos_x + 1.0 - pos_x) * ray->delta_dist_x;
+	}
+	if (ray->dir_y < 0)
+	{
+		ray->step_y = -1;
+		ray->side_dist_y = (pos_y - (int)pos_y) * ray->delta_dist_y;
+	}
+	else
+	{
+		ray->step_y = 1;
+		ray->side_dist_y = ((int)pos_y + 1.0 - pos_y) * ray->delta_dist_y;
+	}
+}
+
+static void	set_hit_variables(t_player *player, t_ray *ray, bool horizontal_hit)
+{
+	if (horizontal_hit == false)
+	{
+		ray->distance = (ray->side_dist_x - ray->delta_dist_x);
+		if (ray->dir_x < 0)
+			ray->hit_direction = 'W';
+		else
+			ray->hit_direction = 'E';
+	}
+	else
+	{
+		ray->distance = (ray->side_dist_y - ray->delta_dist_y);
+		if (ray->dir_y < 0)
+			ray->hit_direction = 'N';
+		else
+			ray->hit_direction = 'S';
+	}
 	ray->wall_hit_x = player->pos_x + (ray->distance * ray->dir_x);
 	ray->wall_hit_y = player->pos_y + (ray->distance * ray->dir_y);
+}
+
+static void	closest_interception(t_player *player, t_scene *scene, t_ray *ray)
+{
+	int		map_x;
+	int		map_y;
+	bool	horizontal_hit;
+
+	map_x = (int)player->pos_x;
+	map_y = (int)player->pos_y;
+	while (1)
+	{
+		if (ray->side_dist_x < ray->side_dist_y)
+		{
+			ray->side_dist_x += ray->delta_dist_x;
+			map_x += ray->step_x;
+			horizontal_hit = false;
+		}
+		else
+		{
+			ray->side_dist_y += ray->delta_dist_y;
+			map_y += ray->step_y;
+			horizontal_hit = true;
+		}
+		if (is_wall_at(scene, map_x, map_y))
+			break ;
+	}
+	set_hit_variables(player, ray, horizontal_hit);
+}
+
+void	cast(t_player *player, t_scene *scene, t_ray *ray)
+{
+	set_calc_variables(ray, player->pos_x, player->pos_y);
+	closest_interception(player, scene, ray);
 }

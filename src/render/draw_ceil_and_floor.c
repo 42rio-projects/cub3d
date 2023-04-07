@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rays_init.c                                        :+:      :+:    :+:   */
+/*   draw_ceil_and_floor.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 18:12:29 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 00:35:34 by gguedes          ###   ########.fr       */
+/*   Created: 2023/04/07 01:18:37 by gguedes           #+#    #+#             */
+/*   Updated: 2023/04/07 01:19:46 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	rays_init(t_player *player, t_ray *ray, double camera_x)
+void	draw_ceil_and_floor(t_data *data, t_draw_info *info, int x)
 {
-	ray->camera_x = camera_x;
-	ray->dir_x = player->dir_x + player->plane_x * camera_x;
-	ray->dir_y = player->dir_y + player->plane_y * camera_x;
+	uint32_t	y;
+
+	y = -1;
+	while (++y < info->wall_start)
+		put_pixel(&data->image, WINDOW_WIDTH - x, y, data->scene.ceil_color);
+	y = info->wall_end - 1;
+	while (++y < WINDOW_HEIGHT)
+		put_pixel(&data->image, WINDOW_WIDTH - x, y, data->scene.floor_color);
 }
