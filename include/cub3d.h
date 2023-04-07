@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/07 16:34:17 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/07 18:31:24 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 
 /* __________Includes__________ */
 
-# include "libft.h"
+# include "../libft/libft.h"
 # include "mlx.h"
 
 # include <stdbool.h>
 # include <stdint.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <errno.h>

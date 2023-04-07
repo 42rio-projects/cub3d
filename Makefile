@@ -19,7 +19,7 @@ FLAGS		=	-Wall -Wextra -Werror -g
 
 RM			=	rm -rf
 
-LIBFT_DIR	=	./include/libft
+LIBFT_DIR	=	./libft
 
 LIBFT		=	$(LIBFT_DIR)/libft.a
 
@@ -55,7 +55,6 @@ $(MLX):
 
 $(LIBFT):
 	@make -s -C $(LIBFT_DIR)
-	@make -s -C $(LIBFT_DIR) bonus
 
 clean:
 	@make -s -C $(LIBFT_DIR) clean
