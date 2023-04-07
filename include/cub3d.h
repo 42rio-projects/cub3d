@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/07 15:49:15 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/07 16:21:13 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win;
-	int			close_game;
 	t_image		image;
 	t_scene		scene;
 	t_player	player;
