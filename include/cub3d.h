@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/07 01:30:30 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/07 15:49:15 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ typedef struct s_draw_info
 	int			line_height;
 	int			wall_start;
 	int			wall_end;
-	double		wall_x;
 	int			texture_x;
+	double		wall_x;
 	double		texture_pos;
 	double		step;
 	t_texture	*texture;
@@ -169,7 +169,7 @@ void	raycast(t_data *data, t_player *player, t_scene *scene);
 void	draw_ceil_and_floor(t_data *data, t_draw_info *info, int x);
 void	draw_image(t_data *data);
 void	draw_texture(t_data *data, t_draw_info *info, int x);
-void	draw_wall_strip(t_data *data, t_player *player, t_ray *ray, uint32_t x);
+void	draw_vertical_line(t_data *data, t_player *player, t_ray *ray, uint32_t x);
 void	put_pixel(t_image *image, int x, int y, uint32_t color);
 void	render_tile(t_image *image,
 			uint32_t x_start, uint32_t y_start, uint32_t color);

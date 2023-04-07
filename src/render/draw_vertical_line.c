@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_strip.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:43:25 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/07 01:35:27 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/07 15:45:49 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	set_texture_position(t_data *data,
 			+ info->line_height / 2) * info->step;
 }
 
-void	draw_wall_strip(t_data *data, t_player *player, t_ray *ray, uint32_t x)
+void	draw_vertical_line(t_data *data, t_player *player, t_ray *ray, uint32_t x)
 {
 	t_draw_info	info;
 
