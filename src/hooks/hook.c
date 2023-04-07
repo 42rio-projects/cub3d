@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 23:23:17 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 17:53:29 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/07 16:21:30 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,6 @@ int	hook(void *param)
 	t_data	*data;
 
 	data = param;
-	if (data->close_game)
-	{
-		mlx_destroy_window(data->mlx_ptr, data->win);
-		return (1);
-	}
 	update_player(&data->player, &data->scene);
 	mlx_clear_window(data->mlx_ptr, data->win);
 	draw_image(data);
