@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_textureure
-EA ./path_to_the_east_textureure
+NO ./textures/xpm/blue.xpm
+SO ./textures/xpm/brick.xpm
+WE ./textures/xpm/grey.xpm
+EA ./textures/xpm/wood.xpm
 
 F 255,255,255
 C 225,255,255
