@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 12:40:48 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:00 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/07 16:33:20 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	set_player_position(char **map_grid, t_player *player)
 			if (ft_strchr("NSWE", map_grid[y][x]))
 			{
 				if (player->pos_x != 0 || player->pos_y != 0)
-					return (throw_error("You must have only 1 player in the map!\n"));
+					return (throw_error("The map must have only 1 player!\n"));
 				player->pos_x = x + 0.5;
 				player->pos_y = y + 0.5;
 			}

@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/07 16:21:13 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/07 16:34:17 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,8 @@ void	raycast(t_data *data, t_player *player, t_scene *scene);
 void	draw_ceil_and_floor(t_data *data, t_draw_info *info, int x);
 void	draw_image(t_data *data);
 void	draw_texture(t_data *data, t_draw_info *info, int x);
-void	draw_vertical_line(t_data *data, t_player *player, t_ray *ray, uint32_t x);
+void	draw_vertical_line(t_data *data, t_player *player,
+			t_ray *ray, uint32_t x);
 void	put_pixel(t_image *image, int x, int y, uint32_t color);
 void	render_tile(t_image *image,
 			uint32_t x_start, uint32_t y_start, uint32_t color);
