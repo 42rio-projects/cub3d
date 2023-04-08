@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_pixel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:19:44 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/04 18:27:15 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/08 14:54:50 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	put_pixel(t_image *image, int x, int y, uint32_t color)
 {
 	char	*dst;
 
-	if (x < 0 || y < 0 || x >= WINDOW_WIDTH || y >= WINDOW_HEIGHT)
-		return ;
 	dst = image->addr + (y * image->size_len + x * (image->bpp / 8));
 	*(unsigned int *)dst = color;
 }

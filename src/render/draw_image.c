@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:02:48 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/07 15:55:40 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/08 15:35:12 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static void	draw_minimap(t_data *data, t_player *player, t_scene *scene)
 			if (scene->map_grid[y][x] == '1')
 				color = MINIMAP_WALL_COLOR;
 			else if (scene->map_grid[y][x] == ' ')
-				color = MINIMAP_EMPTY_COLOR;
+				continue ;
 			else
 				color = MINIMAP_FLOOR_COLOR;
 			render_tile(image, x * MINIMAP_SCALE, y * MINIMAP_SCALE, color);
 		}
 	}
-	render_tile(image, round(player->pos_x * MINIMAP_SCALE) - 2,
-		round(player->pos_y * MINIMAP_SCALE) - 2, PLAYER_COLOR);
+	render_tile(image, round(player->pos_x * MINIMAP_SCALE - MINIMAP_SCALE / 2),
+		round(player->pos_y * MINIMAP_SCALE - MINIMAP_SCALE / 2), PLAYER_COLOR);
 }
 
 void	draw_image(t_data *data)

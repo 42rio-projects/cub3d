@@ -15,7 +15,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 CC			=	cc
 
-FLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror
 
 RM			=	rm -rf
 
@@ -42,12 +42,12 @@ INCLUDE		=	-I./include -I$(LIBFT_DIR) -I$(MLX_DIR)
 # Compile Rules
 
 %.o: %.c ./include/cub3d.h
-	@$(CC) $(INCLUDE) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
-	@$(CC) $(INCLUDE) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(NAME)
 	@echo "\033[32m 💯 | cub3d created."
 
 $(MLX):

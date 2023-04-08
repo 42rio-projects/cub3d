@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/07 18:31:24 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/08 15:32:50 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@
 
 /* __________Defines__________ */
 
-# define WINDOW_WIDTH 720
-# define WINDOW_HEIGHT 720
+# define WINDOW_WIDTH 854
+# define WINDOW_HEIGHT 480
 # define MINIMAP_WALL_COLOR 0x000000
 # define MINIMAP_FLOOR_COLOR 0xffffff
 # define MINIMAP_EMPTY_COLOR 0
 # define PLAYER_COLOR 0x0000ff
 # define RAY_COLOR 0xff0000
 # define MINIMAP_SCALE 6
-# define MOVE_SPEED 0.04
-# define ROTATION_SPEED 0.04
+# define MOVE_SPEED 0.02
+# define ROTATION_SPEED 0.02
 
 # ifdef __linux__
 
@@ -84,9 +84,9 @@ typedef struct s_image
 
 typedef struct s_draw_info
 {
-	int			line_height;
-	int			wall_start;
-	int			wall_end;
+	uint32_t	line_height;
+	uint32_t	wall_start;
+	uint32_t	wall_end;
 	int			texture_x;
 	double		wall_x;
 	double		texture_pos;

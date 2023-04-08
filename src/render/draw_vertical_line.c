@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_vertical_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:43:25 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/07 16:34:36 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/08 15:22:51 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 static void	set_wall_position(t_ray *ray, t_draw_info *info)
 {
 	info->line_height = (int)(WINDOW_HEIGHT / ray->distance);
-	info->wall_start = (WINDOW_HEIGHT / 2) - (info->line_height / 2);
-	if (info->wall_start < 0)
+	if (info->line_height >= WINDOW_HEIGHT)
+	{
 		info->wall_start = 0;
-	info->wall_end = info->wall_start + info->line_height;
-	if (info->wall_end > WINDOW_HEIGHT)
 		info->wall_end = WINDOW_HEIGHT;
+	}
+	else
+	{
+		info->wall_start = (WINDOW_HEIGHT / 2) - (info->line_height / 2);
+		info->wall_end = info->wall_start + info->line_height;
+	}
 }
 
 static void	set_texture_position(t_data *data,
