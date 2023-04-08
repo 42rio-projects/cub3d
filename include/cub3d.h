@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/08 15:32:50 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/08 20:19:55 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ typedef struct s_data
 int		hook(void *param);
 int		key_pressed(int keycode, t_data *data);
 int		key_released(int keycode, t_data *data);
+int		mouse_hook(void *param);
 
 // init
 bool	data_init(t_data *data, const char *file);
