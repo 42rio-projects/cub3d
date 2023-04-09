@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/09 02:30:21 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/09 02:34:07 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,6 @@
 
 /* __________Structs__________ */
 
-typedef struct s_pair
-{
-	double	distance;
-	int		order;
-}	t_pair;
-
 typedef struct s_texture
 {
 	void	*text;
@@ -84,7 +78,6 @@ typedef struct s_sprite
 {
 	double		x;
 	double		y;
-	int			type;
 	int			order;
 	double		distance;
 	double		camera_x;
@@ -134,7 +127,6 @@ typedef struct s_scene
 	uint32_t	map_width;
 	uint32_t	map_height;
 	char		**map_grid;
-	t_sprite	sprites[NUM_SPRITES];
 }	t_scene;
 
 typedef struct s_ray
