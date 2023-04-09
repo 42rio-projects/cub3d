@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:43:25 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/08 15:22:51 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/09 14:59:59 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,20 @@ static void	set_wall_position(t_ray *ray, t_draw_info *info)
 	}
 }
 
+static void	get_texture(t_data *data, t_ray *ray, t_draw_info *info)
+{
+	if (ray->wall_type == '2')
+		info->texture = &data->scene.d_texture;
+	else if (ray->hit_direction == 'N')
+		info->texture = &data->scene.no_texture;
+	else if (ray->hit_direction == 'E')
+		info->texture = &data->scene.ea_texture;
+	else if (ray->hit_direction == 'W')
+		info->texture = &data->scene.we_texture;
+	else
+		info->texture = &data->scene.so_texture;
+}
+
 static void	set_texture_position(t_data *data,
 		t_player *player, t_ray *ray, t_draw_info *info)
 {
@@ -35,16 +49,9 @@ static void	set_texture_position(t_data *data,
 	else
 		info->wall_x = player->pos_y + ray->distance * ray->dir_y;
 	info->wall_x -= (int)info->wall_x;
-	if (ray->hit_direction == 'N')
-		info->texture = &data->scene.no_texture;
-	else if (ray->hit_direction == 'E')
-		info->texture = &data->scene.ea_texture;
-	else if (ray->hit_direction == 'W')
-		info->texture = &data->scene.we_texture;
-	else
-		info->texture = &data->scene.so_texture;
+	get_texture(data, ray, info);
 	info->texture_x = (int)(info->wall_x * (double)info->texture->width);
-	if (ray->hit_direction == 'N')
+	if (ray->hit_direction == 'S')
 		info->texture_x = info->texture->width - info->texture_x - 1;
 	if (ray->hit_direction == 'W')
 		info->texture_x = info->texture->width - info->texture_x - 1;

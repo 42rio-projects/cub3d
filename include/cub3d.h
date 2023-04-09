@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/08 23:07:30 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/09 14:54:28 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_draw_info
 
 typedef struct s_scene
 {
+	t_texture	d_texture;
 	t_texture	no_texture;
 	t_texture	so_texture;
 	t_texture	we_texture;
@@ -123,6 +124,7 @@ typedef struct s_ray
 	int		step_x;
 	int		step_y;
 	char	hit_direction;
+	char	wall_type;
 }	t_ray;
 
 typedef struct s_player

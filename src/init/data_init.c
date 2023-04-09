@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/07 16:21:50 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/09 14:54:39 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static char	**get_file_content(const char *file)
 
 static void	set_default_scene(t_scene *scene)
 {
+	ft_bzero(&scene->d_texture, sizeof(t_texture));
 	ft_bzero(&scene->no_texture, sizeof(t_texture));
 	ft_bzero(&scene->so_texture, sizeof(t_texture));
 	ft_bzero(&scene->we_texture, sizeof(t_texture));

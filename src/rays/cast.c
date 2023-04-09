@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:55:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/07 01:27:56 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/09 14:15:50 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static void	closest_interception(t_player *player, t_scene *scene, t_ray *ray)
 		if (is_wall_at(scene, map_x, map_y))
 			break ;
 	}
+	ray->wall_type = scene->map_grid[map_y][map_x];
 	set_hit_variables(player, ray, horizontal_hit);
 }
 
