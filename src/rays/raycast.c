@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:50:25 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/09 00:34:25 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/09 00:42:43 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,31 +75,29 @@ void  set_sprites_pos(t_sprite* sprites)
 void	sprite_casting(t_data *data)
 {
   t_player *player;
-  t_texture *sprite;
-  t_sprite* test_sprites;
-
-
+  t_texture *texture;
+  t_sprite*	sprites;
   player = &data->player;
-  sprite = &data->scene.sprite;
+  texture = &data->scene.sprite;
+  sprites = data->sprites;
 
   set_sprites_pos(data->sprites);
-  test_sprites = data->sprites;
-  load_texture(data, sprite, "./textures/xpm/barrel.xpm", "visao\n");
+  load_texture(data, texture, "./textures/xpm/barrel.xpm", "visao\n");
 
 	//SPRITE CASTING
 	//sort sprites from far to close
 	for(int i = 0; i < NUM_SPRITES; i++)
 	{
 		sprite_order[i] = i;
-		sprite_distance[i] = ((player->pos_x - test_sprites[i].x) * (player->pos_x - test_sprites[i].x) + (player->pos_y - test_sprites[i].y) * (player->pos_y - test_sprites[i].y)); //sqrt not taken, unneeded
+		sprite_distance[i] = ((player->pos_x - sprites[i].x) * (player->pos_x - sprites[i].x) + (player->pos_y - sprites[i].y) * (player->pos_y - sprites[i].y)); //sqrt not taken, unneeded
 	}
 	sortSprites(sprite_order, sprite_distance, NUM_SPRITES);
 	//after sorting the sprites, do the projection and draw them
 	for(int i = 0; i < NUM_SPRITES; i++)
 	{
 		//translate sprite position to relative to camera
-		double spriteX = test_sprites[sprite_order[i]].x - player->pos_x;
-		double spriteY = test_sprites[sprite_order[i]].y - player->pos_y;
+		double spriteX = sprites[sprite_order[i]].x - player->pos_x;
+		double spriteY = sprites[sprite_order[i]].y - player->pos_y;
 
 		//transform sprite with the inverse camera matrix
 		// [ planeX   dirX ] -1                                       [ dirY      -dirX ]
@@ -133,7 +131,7 @@ void	sprite_casting(t_data *data)
 		//loop through every vertical stripe of the sprite on screen
 		for(int stripe = drawStartX; stripe < drawEndX; stripe++)
 		{
-			int texX = (int)((256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * sprite->width / spriteWidth) / 256);
+			int texX = (int)((256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * texture->width / spriteWidth) / 256);
 			//the conditions in the if are:
 			//1) it's in front of camera plane so you don't see things behind you
 			//2) it's on the screen (left)
@@ -143,10 +141,10 @@ void	sprite_casting(t_data *data)
 			for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
 			{
 				int d = (y) * 256 - WINDOW_HEIGHT * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
-				int texY = ((d * data->scene.so_texture.height) / spriteHeight) / 256;
-				int color = sprite->addr[sprite->width * texY + texX]; //get current color from the texture
-        if (color != 0)
-          put_pixel(&data->image, WINDOW_WIDTH - stripe, y, color); //paint pixel if it isn't black, black is the invisible color
+				int texY = ((d * texture->height) / spriteHeight) / 256;
+				int color = texture->addr[texture->width * texY + texX]; //get current color from the texture
+        		if (color != 0)
+          			put_pixel(&data->image, WINDOW_WIDTH - stripe, y, color); //paint pixel if it isn't black, black is the invisible color
 			}
 		}
 	}
