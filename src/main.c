@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:01 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/08 21:23:13 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/08 21:58:40 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void	hooks_init(t_data *data)
 {
 	mlx_do_key_autorepeatoff(data->mlx_ptr);
-	mlx_hook(data->win, 2, 1, key_pressed, data);
-	mlx_hook(data->win, 3, 2, key_released, data);
-	mlx_hook(data->win, 6, 0, mouse_hook, data);
+	mlx_hook(data->win, 2, 1L<<0, key_pressed, data);
+	mlx_hook(data->win, 3, 1L<<1, key_released, data);
+	mlx_hook(data->win, 6, 1L<<6, mouse_hook, data);
 	mlx_loop_hook(data->mlx_ptr, hook, data);
 	mlx_loop(data->mlx_ptr);
 }
