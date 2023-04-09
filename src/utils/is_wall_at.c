@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:56:07 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/06 12:54:19 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/08 22:47:44 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	is_wall_at(t_scene *scene, int x, int y)
 	if (x < 0 || y < 0 || x >= (int)scene->map_width
 		|| y >= (int)scene->map_height)
 		return (true);
-	if (scene->map_grid[y][x] == '1')
+	if (scene->map_grid[y][x] == '1' || scene->map_grid[y][x] == '2')
 		return (true);
 	return (false);
 }
