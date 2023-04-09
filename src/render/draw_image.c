@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:02:48 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/08 15:35:12 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/08 22:49:26 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	draw_minimap(t_data *data, t_player *player, t_scene *scene)
 		x = -1;
 		while (scene->map_grid[y][++x])
 		{
-			if (scene->map_grid[y][x] == '1')
+			if (scene->map_grid[y][x] == '1' || scene->map_grid[y][x] == '2')
 				color = MINIMAP_WALL_COLOR;
 			else if (scene->map_grid[y][x] == ' ')
 				continue ;

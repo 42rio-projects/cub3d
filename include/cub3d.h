@@ -6,7 +6,7 @@
 /*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/08 15:32:50 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/08 22:40:38 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 #  define A 97
 #  define S 115
 #  define D 100
+#  define E 101
 #  define L_ARROW 65361
 #  define R_ARROW 65363
 
@@ -55,6 +56,7 @@
 #  define A 0
 #  define S 1
 #  define D 2
+#  define E 101
 #  define L_ARROW 123
 #  define R_ARROW 124
 
