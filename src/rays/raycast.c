@@ -6,14 +6,12 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:50:25 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/09 00:42:43 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/09 00:48:37 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-	int		sprite_order[NUM_SPRITES];
-	double	sprite_distance[NUM_SPRITES];
 bool	load_texture(t_data *data, t_texture *texture,
 	char *path, char *error_str);
 
@@ -38,23 +36,23 @@ void	sort_order(t_pair *orders, int amount)
 	}
 }
 
-void	sortSprites(int *order, double *dist, int amount)
+void	sortSprites(t_sprite* sprites, int amount)
 {
-	t_pair	*sprites;
+	t_pair	*temp;
 
-	sprites = (t_pair*)malloc(sizeof(t_pair) * amount);
+	temp = (t_pair*)malloc(sizeof(t_pair) * amount);
 	for (int i = 0; i < amount; i++)
 	{
-		sprites[i].distance = dist[i];
-		sprites[i].order = order[i];
+		temp[i].distance = sprites[i].distance;
+		temp[i].order = sprites[i].order;
 	}
-	sort_order(sprites, amount);
+	sort_order(temp, amount);
 	for (int i = 0; i < amount; i++)
 	{
-		dist[i] = sprites[amount - i - 1].distance;
-		order[i] = sprites[amount - i - 1].order;
+		sprites[i].distance = temp[amount - i - 1].distance;
+		sprites[i].order = temp[amount - i - 1].order;
 	}
-	free(sprites);
+	free(temp);
 }
 
 void  set_sprites_pos(t_sprite* sprites)
@@ -88,16 +86,16 @@ void	sprite_casting(t_data *data)
 	//sort sprites from far to close
 	for(int i = 0; i < NUM_SPRITES; i++)
 	{
-		sprite_order[i] = i;
-		sprite_distance[i] = ((player->pos_x - sprites[i].x) * (player->pos_x - sprites[i].x) + (player->pos_y - sprites[i].y) * (player->pos_y - sprites[i].y)); //sqrt not taken, unneeded
+		sprites[i].order = i;
+		sprites[i].distance = ((player->pos_x - sprites[i].x) * (player->pos_x - sprites[i].x) + (player->pos_y - sprites[i].y) * (player->pos_y - sprites[i].y)); //sqrt not taken, unneeded
 	}
-	sortSprites(sprite_order, sprite_distance, NUM_SPRITES);
+	sortSprites(sprites, NUM_SPRITES);
 	//after sorting the sprites, do the projection and draw them
 	for(int i = 0; i < NUM_SPRITES; i++)
 	{
 		//translate sprite position to relative to camera
-		double spriteX = sprites[sprite_order[i]].x - player->pos_x;
-		double spriteY = sprites[sprite_order[i]].y - player->pos_y;
+		double spriteX = sprites[sprites[i].order].x - player->pos_x;
+		double spriteY = sprites[sprites[i].order].y - player->pos_y;
 
 		//transform sprite with the inverse camera matrix
 		// [ planeX   dirX ] -1                                       [ dirY      -dirX ]

@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/09 00:33:11 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/09 00:44:08 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ typedef struct s_sprite
 	double		x;
 	double		y;
 	int			texture;
-	// int			order;
-	// double		distance;
+	int			order;
+	double		distance;
 	// t_texture	texture;
 }	t_sprite;
 
