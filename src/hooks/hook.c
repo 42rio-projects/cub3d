@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 23:23:17 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/07 16:21:30 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/08 20:43:19 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,8 @@ static void	update_player(t_player *player, t_scene *scene)
 		player->pos_y = new_y;
 }
 
-int	hook(void *param)
+int	hook(t_data *data)
 {
-	t_data	*data;
-
-	data = param;
 	update_player(&data->player, &data->scene);
 	mlx_clear_window(data->mlx_ptr, data->win);
 	draw_image(data);
