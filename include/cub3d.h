@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/08 15:32:50 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/09 00:33:11 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define MINIMAP_SCALE 6
 # define MOVE_SPEED 0.02
 # define ROTATION_SPEED 0.02
+# define NUM_SPRITES 3
 
 # ifdef __linux__
 
@@ -62,6 +63,12 @@
 
 /* __________Structs__________ */
 
+typedef struct s_pair
+{
+	double	distance;
+	int		order;
+}	t_pair;
+
 typedef struct s_texture
 {
 	void	*text;
@@ -72,6 +79,16 @@ typedef struct s_texture
 	int		size_len;
 	int		endian;
 }	t_texture;
+
+typedef struct s_sprite
+{
+	double		x;
+	double		y;
+	int			texture;
+	// int			order;
+	// double		distance;
+	// t_texture	texture;
+}	t_sprite;
 
 typedef struct s_image
 {
@@ -105,6 +122,8 @@ typedef struct s_scene
 	uint32_t	map_width;
 	uint32_t	map_height;
 	char		**map_grid;
+	t_sprite	sprites[NUM_SPRITES];
+	t_texture	sprite;
 }	t_scene;
 
 typedef struct s_ray
@@ -142,6 +161,8 @@ typedef struct s_data
 	t_image		image;
 	t_scene		scene;
 	t_player	player;
+	t_sprite	sprites[NUM_SPRITES];
+	double		z_buffer[WINDOW_WIDTH];
 }	t_data;
 
 /* __________Functions__________ */
