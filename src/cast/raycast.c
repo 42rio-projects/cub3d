@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast.c                                             :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:55:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/07 01:27:56 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/09 02:19:11 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	closest_interception(t_player *player, t_scene *scene, t_ray *ray)
 	set_hit_variables(player, ray, horizontal_hit);
 }
 
-void	cast(t_player *player, t_scene *scene, t_ray *ray)
+void	raycast(t_player *player, t_scene *scene, t_ray *ray)
 {
 	set_calc_variables(ray, player->pos_x, player->pos_y);
 	closest_interception(player, scene, ray);

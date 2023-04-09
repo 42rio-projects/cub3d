@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/09 00:44:08 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/09 02:30:21 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,22 @@ typedef struct s_sprite
 {
 	double		x;
 	double		y;
-	int			texture;
+	int			type;
 	int			order;
 	double		distance;
-	// t_texture	texture;
+	double		camera_x;
+	double		camera_y;
+	double		transform_x;
+	double		transform_y;
+	int			screen_x;
+	int			draw_start_y;
+	int			draw_end_y;
+	int			draw_start_x;
+	int			draw_end_x;
+	double		inv_det;
+	int			height;
+	int			width;
+	t_texture	texture;
 }	t_sprite;
 
 typedef struct s_image
@@ -123,7 +135,6 @@ typedef struct s_scene
 	uint32_t	map_height;
 	char		**map_grid;
 	t_sprite	sprites[NUM_SPRITES];
-	t_texture	sprite;
 }	t_scene;
 
 typedef struct s_ray
@@ -178,10 +189,13 @@ bool	elements_init(t_data *data, char **file_content);
 void	image_init(t_data *data);
 bool	map_init(t_scene *scene, char **file_content);
 bool	player_init(t_player *player, t_scene *scene);
+void	sprites_init(t_data *data);
 
-//rays
-void	cast(t_player *player, t_scene *scene, t_ray *ray);
-void	raycast(t_data *data, t_player *player, t_scene *scene);
+//cast
+void	raycast(t_player *player, t_scene *scene, t_ray *ray);
+void	spritecast(t_sprite *sprite, t_player *player, t_data *data);
+void	draw_ceil_wall_floor(t_data *data, t_player *player, t_scene *scene);
+void	draw_sprite(t_data *data, t_sprite *sprites);
 
 // render
 void	draw_ceil_and_floor(t_data *data, t_draw_info *info, int x);
@@ -201,6 +215,8 @@ bool	is_map_line(const char *line);
 bool	is_wall_at(t_scene *scene, int x, int y);
 char	*read_file(int fd);
 int		throw_error(char *error_str);
+bool	load_texture(t_data *data, t_texture *texture,
+			char *path, char *error_str);
 
 // validations
 bool	validate_colors(char *colors);
