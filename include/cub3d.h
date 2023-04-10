@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 01:41:56 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:13:40 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ typedef struct s_data
 	t_scene		scene;
 	t_player	player;
 	t_sprite	sprites[NUM_SPRITES];
-	double		z_buffer[WINDOW_WIDTH];
+	double		wall_distances[WINDOW_WIDTH];
 }	t_data;
 
 /* __________Functions__________ */

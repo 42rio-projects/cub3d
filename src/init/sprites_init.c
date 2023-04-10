@@ -6,13 +6,12 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 02:12:27 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 01:25:38 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:23:52 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//sort sprites from furthest to the closest distance
 static void	sort_sprites(t_sprite *sprites)
 {
 	t_sprite	tmp;
@@ -38,28 +37,50 @@ static void	sort_sprites(t_sprite *sprites)
 	}
 }
 
-void	sprites_init(t_data *data)
+static void	set_order_and_distance(t_sprite *sprites, t_player *player)
 {
-	t_sprite	*sprites;
-	t_player	*player;
-	int			i;
+	int	i;
 
-	sprites = data->sprites;
-	player = &data->player;
-	sprites[0].x = 3.5;
-	sprites[0].y = 3.5;
-	load_texture(data, &sprites[0].textures, "./textures/xpm/fire.xpm", "visao\n");
-	sprites[1].x = 4.5;
-	sprites[1].y = 4.5;
-	load_texture(data, &sprites[1].textures, "./textures/xpm/fire.xpm", "visao\n");
-	sprites[2].x = 2.5;
-	sprites[2].y = 2.5;
-	load_texture(data, &sprites[2].textures, "./textures/xpm/fire.xpm", "visao\n");
 	i = -1;
 	while (++i < NUM_SPRITES)
 	{
 		sprites[i].order = i;
-		sprites[i].distance = ((player->pos_x - sprites[i].x) * (player->pos_x - sprites[i].x) + (player->pos_y - sprites[i].y) * (player->pos_y - sprites[i].y)); //sqrt not taken, unneeded
+		sprites[i].distance = ((player->pos_x - sprites[i].x)
+				* (player->pos_x - sprites[i].x)
+				+ (player->pos_y - sprites[i].y)
+				* (player->pos_y - sprites[i].y));
 	}
+}
+
+static void	set_textures(t_data *data, t_sprite *sprites)
+{
+	load_texture(data, &sprites[0].textures,
+		"./textures/xpm/fire.xpm", "visao\n");
+	load_texture(data, &sprites[1].textures,
+		"./textures/xpm/fire.xpm", "visao\n");
+	load_texture(data, &sprites[2].textures,
+		"./textures/xpm/fire.xpm", "visao\n");
+}
+
+static void	set_coordinates(t_sprite *sprites)
+{
+	sprites[0].x = 3.5;
+	sprites[0].y = 3.5;
+	sprites[1].x = 4.5;
+	sprites[1].y = 4.5;
+	sprites[2].x = 2.5;
+	sprites[2].y = 2.5;
+}
+
+void	sprites_init(t_data *data)
+{
+	t_sprite	*sprites;
+	t_player	*player;
+
+	sprites = data->sprites;
+	player = &data->player;
+	set_coordinates(sprites);
+	set_textures(data, sprites);
+	set_order_and_distances(sprites, player);
 	sort_sprites(sprites);
 }
