@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 02:12:27 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 14:23:52 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:25:09 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	sort_sprites(t_sprite *sprites)
 	}
 }
 
-static void	set_order_and_distance(t_sprite *sprites, t_player *player)
+static void	set_orders_and_distances(t_sprite *sprites, t_player *player)
 {
 	int	i;
 
@@ -81,6 +81,6 @@ void	sprites_init(t_data *data)
 	player = &data->player;
 	set_coordinates(sprites);
 	set_textures(data, sprites);
-	set_order_and_distances(sprites, player);
+	set_orders_and_distances(sprites, player);
 	sort_sprites(sprites);
 }
