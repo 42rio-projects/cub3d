@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_vertical_line.c                               :+:      :+:    :+:   */
+/*   set_info.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:43:25 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/08 15:22:51 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/10 01:38:43 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,9 @@ static void	set_texture_position(t_data *data,
 			+ info->line_height / 2) * info->step;
 }
 
-void	draw_vertical_line(t_data *data, t_player *player,
-							t_ray *ray, uint32_t x)
+void	set_draw_info(t_data *data, t_player *player,
+							t_ray *ray, t_draw_info *info)
 {
-	t_draw_info	info;
-
-	set_wall_position(ray, &info);
-	set_texture_position(data, player, ray, &info);
-	draw_ceil_and_floor(data, &info, x);
-	draw_texture(data, &info, x);
+	set_wall_position(ray, info);
+	set_texture_position(data, player, ray, info);
 }

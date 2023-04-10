@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/09 21:45:14 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/10 01:41:56 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ typedef struct s_sprite
 	int			height;
 	int			width;
 	int			texture_x;
-	t_texture	texture[3];
+	uint32_t	frames;
+	t_texture	textures;
 }	t_sprite;
 
 typedef struct s_image
@@ -186,19 +187,17 @@ void	sprites_init(t_data *data);
 
 //cast
 void	raycast(t_player *player, t_scene *scene, t_ray *ray);
-void	spritecast(t_sprite *sprite, t_player *player, t_data *data);
-void	draw_ceil_wall_floor(t_data *data, t_player *player, t_scene *scene);
-void	draw_sprite(t_data *data, t_sprite *sprites);
+void	spritecast(t_sprite *sprite, t_player *player);
 
 // render
-void	draw_ceil_and_floor(t_data *data, t_draw_info *info, int x);
+void	draw_ceil_wall_floor(t_data *data, t_player *player, t_scene *scene);
 void	draw_image(t_data *data);
-void	draw_texture(t_data *data, t_draw_info *info, int x);
-void	draw_vertical_line(t_data *data, t_player *player,
-			t_ray *ray, uint32_t x);
+void	draw_sprite(t_data *data, t_sprite *sprites);
 void	put_pixel(t_image *image, int x, int y, uint32_t color);
 void	render_tile(t_image *image,
 			uint32_t x_start, uint32_t y_start, uint32_t color);
+void	set_draw_info(t_data *data, t_player *player,
+			t_ray *ray, t_draw_info *info);
 
 // utils
 bool	check_extension(const char *file, const char *extension);
