@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/09 02:34:07 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/09 21:45:14 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ typedef struct s_sprite
 	double		inv_det;
 	int			height;
 	int			width;
-	t_texture	texture;
+	int			texture_x;
+	t_texture	texture[3];
 }	t_sprite;
 
 typedef struct s_image
