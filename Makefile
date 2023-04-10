@@ -3,7 +3,7 @@
 NAME		=	cub3d
 
 SRCS		=	$(addprefix src/, main.c \
-				$(addprefix hooks/, hook.c key_pressed.c key_released.c) \
+				$(addprefix hooks/, hook.c key_pressed.c key_released.c mouse_hook.c) \
 				$(addprefix init/, data_init.c elements_init.c image_init.c map_init.c player_init.c sprites_init.c) \
 				$(addprefix cast/,  raycast.c spritecast.c) \
 				$(addprefix render/, draw_ceil_wall_floor.c draw_image.c draw_sprite.c put_pixel.c render_tile.c set_draw_info.c) \

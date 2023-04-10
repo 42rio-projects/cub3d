@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 02:12:09 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 14:16:11 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:54:48 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,28 @@ static bool	stripe_is_visible(t_sprite *sprite, double *wall_distances)
 	return (false);
 }
 
-static void	draw_entire_sprite(t_data *data, t_sprite *sprite, bool invert)
+static void	draw_all_stripes(t_data *data, t_sprite *sprite, bool invert)
 {
-	while (sprite->draw_start_x < sprite->draw_end_x)
+	int	stripe;
+
+	stripe = sprite->draw_start_x - 1;
+	while (++stripe < sprite->draw_end_x)
 	{
 		if (invert == true)
 		{
 			sprite->texture_x = (int)(256 * ((sprite->draw_end_x
-							- sprite->draw_start_x) - (-(sprite->width) / 2
+							- stripe) - (-(sprite->width) / 2
 							+ (sprite->draw_end_x - sprite->screen_x)))
 					* sprite->textures.width / sprite->width) / 256;
 		}
 		else
 		{
-			sprite->texture_x = (int)(256 * (sprite->draw_start_x
+			sprite->texture_x = (int)(256 * (stripe
 						- (-sprite->width / 2 + sprite->screen_x))
 					* sprite->textures.width / sprite->width) / 256;
 		}
 		if (stripe_is_visible(sprite, data->wall_distances))
-			draw_stripe(sprite, &data->image, sprite->draw_start_x);
-		sprite->draw_start_x++;
+			draw_stripe(sprite, &data->image, stripe);
 	}
 }
 
@@ -73,12 +75,12 @@ void	draw_sprite(t_data *data, t_sprite *sprites)
 		spritecast(&sprites[sprites[i].order], &data->player);
 		if (sprites[sprites[i].order].frames < 40)
 		{
-			draw_entire_sprite(data, &sprites[sprites[i].order], false);
+			draw_all_stripes(data, &sprites[sprites[i].order], false);
 			sprites[sprites[i].order].frames++;
 		}
 		else
 		{
-			draw_entire_sprite(data, &sprites[sprites[i].order], true);
+			draw_all_stripes(data, &sprites[sprites[i].order], true);
 			sprites[sprites[i].order].frames++;
 			if (sprites[sprites[i].order].frames > 80)
 				sprites[sprites[i].order].frames = 0;

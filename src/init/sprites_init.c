@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 02:12:27 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 14:25:09 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:38:43 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ static void	set_textures(t_data *data, t_sprite *sprites)
 
 static void	set_coordinates(t_sprite *sprites)
 {
-	sprites[0].x = 3.5;
-	sprites[0].y = 3.5;
-	sprites[1].x = 4.5;
-	sprites[1].y = 4.5;
-	sprites[2].x = 2.5;
+	sprites[0].x = 14.5;
+	sprites[0].y = 2.5;
+	sprites[1].x = 15.5;
+	sprites[1].y = 2.5;
+	sprites[2].x = 16.5;
 	sprites[2].y = 2.5;
 }
 
