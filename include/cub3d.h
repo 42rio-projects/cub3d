@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 14:29:20 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/10 15:53:11 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ void	raycast(t_player *player, t_scene *scene, t_ray *ray);
 void	spritecast(t_sprite *sprite, t_player *player);
 
 // render
+void	draw_animation(t_data *data, t_sprite *sprites);
 void	draw_ceil_wall_floor(t_data *data, t_player *player, t_scene *scene);
 void	draw_image(t_data *data);
 void	draw_sprite(t_data *data, t_sprite *sprites);
