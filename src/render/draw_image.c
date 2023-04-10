@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:02:48 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/08 22:49:26 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:30:50 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	draw_minimap(t_data *data, t_player *player, t_scene *scene)
 
 void	draw_image(t_data *data)
 {
-	raycast(data, &data->player, &data->scene);
+	draw_ceil_wall_floor(data, &data->player, &data->scene);
+	draw_sprite(data, data->sprites);
 	draw_minimap(data, &data->player, &data->scene);
 }

@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   elements_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 12:35:52 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/09 15:02:18 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:29:31 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static bool	load_texture(t_data *data, t_texture *texture,
-	char *path, char *error_str)
-{
-	texture->text = mlx_xpm_file_to_image(data->mlx_ptr, path,
-			&texture->width, &texture->height);
-	if (texture->text == NULL)
-		return (throw_error(error_str));
-	texture->addr = (int *)mlx_get_data_addr(texture->text,
-			&texture->bpp, &texture->size_len, &texture->endian);
-	return (0);
-}
 
 static bool	str_to_uint_color(long *color, char *str)
 {

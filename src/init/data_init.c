@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/09 14:54:39 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:29:26 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ bool	data_init(t_data *data, const char *file)
 		return (free_matrix(file_content), free_scene(&data->scene), 1);
 	if (player_init(&data->player, &data->scene))
 		return (free_matrix(file_content), free_scene(&data->scene), 1);
+	sprites_init(data);
 	image_init(data);
 	free_matrix(file_content);
 	return (0);
