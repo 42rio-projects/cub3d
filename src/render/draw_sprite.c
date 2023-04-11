@@ -6,23 +6,23 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 02:12:09 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 15:52:22 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/10 22:05:29 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	sort_sprites(t_sprite *sprites)
+static void	sort_sprites(t_sprite *sprites, uint32_t sprites_len)
 {
 	t_sprite	tmp;
-	int			i;
-	int			j;
+	uint32_t	i;
+	uint32_t	j;
 
 	i = -1;
-	while (++i < NUM_SPRITES)
+	while (++i < sprites_len)
 	{
 		j = -1;
-		while (++j < NUM_SPRITES - 1)
+		while (++j < sprites_len - 1)
 		{
 			if (sprites[j].distance < sprites[j + 1].distance)
 			{
@@ -37,12 +37,14 @@ static void	sort_sprites(t_sprite *sprites)
 	}
 }
 
-static void	set_orders_and_distances(t_sprite *sprites, t_player *player)
+static void	set_orders_and_distances(t_sprite *sprites, t_data *data)
 {
-	int	i;
+	t_player	*player;
+	uint32_t	i;
 
+	player = &data->player;
 	i = -1;
-	while (++i < NUM_SPRITES)
+	while (++i < data->sprites_len)
 	{
 		sprites[i].order = i;
 		sprites[i].distance = ((player->pos_x - sprites[i].x)
@@ -54,7 +56,7 @@ static void	set_orders_and_distances(t_sprite *sprites, t_player *player)
 
 void	draw_sprite(t_data *data, t_sprite *sprites)
 {
-	set_orders_and_distances(sprites, &data->player);
-	sort_sprites(sprites);
+	set_orders_and_distances(sprites, data);
+	sort_sprites(sprites, data->sprites_len);
 	draw_animation(data, sprites);
 }

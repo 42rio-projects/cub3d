@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 15:52:24 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 15:54:12 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/10 22:16:23 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void	draw_stripe(t_sprite *sprite, t_image *image, int x)
 	while (++y_stripe < sprite->draw_end_y)
 	{
 		factor = (y_stripe) * 256 - WINDOW_HEIGHT * 128 + sprite->height * 128;
-		texture_y = ((factor * sprite->textures.height) / sprite->height) / 256;
-		color = sprite->textures.addr[sprite->textures.width * texture_y
+		texture_y = ((factor * sprite->texture->height) / sprite->height) / 256;
+		color = sprite->texture->addr[sprite->texture->width * texture_y
 			+ sprite->texture_x];
 		if (color != 0)
 			put_pixel(image, WINDOW_WIDTH - x, y_stripe, color);
@@ -53,29 +53,41 @@ static void	draw_all_stripes(t_data *data, t_sprite *sprite, bool invert)
 			sprite->texture_x = (int)(256 * ((sprite->draw_end_x
 							- x_stripe) - (-(sprite->width) / 2
 							+ (sprite->draw_end_x - sprite->screen_x)))
-					* sprite->textures.width / sprite->width) / 256;
+					* sprite->texture->width / sprite->width) / 256;
 		}
 		else
 		{
 			sprite->texture_x = (int)(256 * (x_stripe
 						- (-sprite->width / 2 + sprite->screen_x))
-					* sprite->textures.width / sprite->width) / 256;
+					* sprite->texture->width / sprite->width) / 256;
 		}
 		if (stripe_is_visible(sprite, data->wall_distances, x_stripe))
 			draw_stripe(sprite, &data->image, x_stripe);
 	}
 }
 
-void	draw_animation(t_data *data, t_sprite *sprites)
+static void	death_checker(t_data *data, t_sprite *sprite)
 {
-	int	i;
+	if (sprite->distance <= 0.15)
+	{
+		printf("You died\n");
+		mlx_destroy_window(data->mlx_ptr, data->win);
+		free(data->image.img);
+		free(data->image.addr);
+		free_scene(&data->scene);
+		free(data->sprites);
+		exit(EXIT_SUCCESS);
+	}
+}
+
+bool	draw_animation(t_data *data, t_sprite *sprites)
+{
+	uint32_t	i;
 
 	i = -1;
-	while (++i < NUM_SPRITES)
+	while (++i < data->sprites_len)
 	{
-		if (sprites[i].distance <= 0.1)
-			return (throw_error("You died\n"),
-				free_scene(&data->scene), exit(EXIT_FAILURE));
+		death_checker(data, &sprites[sprites[i].order]);
 		spritecast(&sprites[sprites[i].order], &data->player);
 		if (sprites[sprites[i].order].frames < 40)
 		{
@@ -90,4 +102,5 @@ void	draw_animation(t_data *data, t_sprite *sprites)
 				sprites[sprites[i].order].frames = 0;
 		}
 	}
+	return (0);
 }
