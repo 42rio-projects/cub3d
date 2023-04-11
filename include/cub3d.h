@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 14:29:20 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/10 21:48:24 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@
 # define MINIMAP_SCALE 6
 # define MOVE_SPEED 0.02
 # define ROTATION_SPEED 0.02
-# define NUM_SPRITES 3
 
 # ifdef __linux__
 
@@ -96,7 +95,7 @@ typedef struct s_sprite
 	int			width;
 	int			texture_x;
 	uint32_t	frames;
-	t_texture	textures;
+	t_texture	*texture;
 }	t_sprite;
 
 typedef struct s_image
@@ -127,6 +126,7 @@ typedef struct s_scene
 	t_texture	so_texture;
 	t_texture	we_texture;
 	t_texture	ea_texture;
+	t_texture	s1_texture;
 	long		ceil_color;
 	long		floor_color;
 	uint32_t	map_width;
@@ -170,7 +170,8 @@ typedef struct s_data
 	t_image		image;
 	t_scene		scene;
 	t_player	player;
-	t_sprite	sprites[NUM_SPRITES];
+	t_sprite	*sprites;
+	uint32_t	sprites_len;
 	double		wall_distances[WINDOW_WIDTH];
 }	t_data;
 
@@ -188,13 +189,14 @@ bool	elements_init(t_data *data, char **file_content);
 void	image_init(t_data *data);
 bool	map_init(t_scene *scene, char **file_content);
 bool	player_init(t_player *player, t_scene *scene);
-void	sprites_init(t_data *data);
+bool	sprites_init(t_data *data);
 
 //cast
 void	raycast(t_player *player, t_scene *scene, t_ray *ray);
 void	spritecast(t_sprite *sprite, t_player *player);
 
 // render
+bool	draw_animation(t_data *data, t_sprite *sprites);
 void	draw_ceil_wall_floor(t_data *data, t_player *player, t_scene *scene);
 void	draw_image(t_data *data);
 void	draw_sprite(t_data *data, t_sprite *sprites);
@@ -212,8 +214,6 @@ bool	is_map_line(const char *line);
 bool	is_wall_at(t_scene *scene, int x, int y);
 char	*read_file(int fd);
 int		throw_error(char *error_str);
-bool	load_texture(t_data *data, t_texture *texture,
-			char *path, char *error_str);
 
 // validations
 bool	validate_colors(char *colors);

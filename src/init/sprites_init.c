@@ -6,81 +6,70 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 02:12:27 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 14:38:43 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/10 21:17:18 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	sort_sprites(t_sprite *sprites)
+static void	set_textures(t_data *data, t_texture *texture)
 {
-	t_sprite	tmp;
-	int			i;
-	int			j;
+	t_sprite	*sprites;
+	uint32_t	i;
 
+	sprites = data->sprites;
 	i = -1;
-	while (++i < NUM_SPRITES)
+	while (++i < data->sprites_len)
+		sprites[i].texture = texture;
+}
+
+static void	set_coordinates(t_sprite *sprites, char **map_grid)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	while (map_grid[++y])
 	{
-		j = -1;
-		while (++j < NUM_SPRITES - 1)
+		x = -1;
+		while (map_grid[y][++x])
 		{
-			if (sprites[j].distance < sprites[j + 1].distance)
+			if (map_grid[y][x] == 'F')
 			{
-				tmp.distance = sprites[j].distance;
-				tmp.order = sprites[j].order;
-				sprites[j].distance = sprites[j + 1].distance;
-				sprites[j].order = sprites[j + 1].order;
-				sprites[j + 1].distance = tmp.distance;
-				sprites[j + 1].order = tmp.order;
+				(*sprites).y = y + 0.5;
+				(*sprites++).x = x + 0.5;
 			}
 		}
 	}
 }
 
-static void	set_orders_and_distances(t_sprite *sprites, t_player *player)
+static int	set_sprites_len(uint32_t *sprites_len, char **map_grid)
 {
-	int	i;
+	int	y;
+	int	x;
 
-	i = -1;
-	while (++i < NUM_SPRITES)
+	*sprites_len = 0;
+	y = -1;
+	while (map_grid[++y])
 	{
-		sprites[i].order = i;
-		sprites[i].distance = ((player->pos_x - sprites[i].x)
-				* (player->pos_x - sprites[i].x)
-				+ (player->pos_y - sprites[i].y)
-				* (player->pos_y - sprites[i].y));
+		x = -1;
+		while (map_grid[y][++x])
+		{
+			if (map_grid[y][x] == 'F')
+				(*sprites_len)++;
+		}
 	}
+	if (*sprites_len == 0)
+		return (1);
+	return (0);
 }
 
-static void	set_textures(t_data *data, t_sprite *sprites)
+bool	sprites_init(t_data *data)
 {
-	load_texture(data, &sprites[0].textures,
-		"./textures/xpm/fire.xpm", "visao\n");
-	load_texture(data, &sprites[1].textures,
-		"./textures/xpm/fire.xpm", "visao\n");
-	load_texture(data, &sprites[2].textures,
-		"./textures/xpm/fire.xpm", "visao\n");
-}
-
-static void	set_coordinates(t_sprite *sprites)
-{
-	sprites[0].x = 14.5;
-	sprites[0].y = 2.5;
-	sprites[1].x = 15.5;
-	sprites[1].y = 2.5;
-	sprites[2].x = 16.5;
-	sprites[2].y = 2.5;
-}
-
-void	sprites_init(t_data *data)
-{
-	t_sprite	*sprites;
-	t_player	*player;
-
-	sprites = data->sprites;
-	player = &data->player;
-	set_coordinates(sprites);
-	set_textures(data, sprites);
-	set_orders_and_distances(sprites, player);
-	sort_sprites(sprites);
+	if (set_sprites_len(&data->sprites_len, data->scene.map_grid))
+		return (throw_error("Map must have at least 1 sprite!\n"));
+	data->sprites = malloc(sizeof(t_sprite) * data->sprites_len);
+	set_coordinates(data->sprites, data->scene.map_grid);
+	set_textures(data, &data->scene.s1_texture);
+	return (0);
 }

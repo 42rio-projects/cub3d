@@ -6,84 +6,57 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 02:12:09 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 14:54:48 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/10 22:05:29 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	draw_stripe(t_sprite *sprite, t_image *image, int x)
+static void	sort_sprites(t_sprite *sprites, uint32_t sprites_len)
 {
-	int	stripe;
-	int	factor;
-	int	texture_y;
-	int	color;
+	t_sprite	tmp;
+	uint32_t	i;
+	uint32_t	j;
 
-	stripe = sprite->draw_start_y - 1;
-	while (++stripe < sprite->draw_end_y)
+	i = -1;
+	while (++i < sprites_len)
 	{
-		factor = (stripe) * 256 - WINDOW_HEIGHT * 128 + sprite->height * 128;
-		texture_y = ((factor * sprite->textures.height) / sprite->height) / 256;
-		color = sprite->textures.addr[sprite->textures.width * texture_y
-			+ sprite->texture_x];
-		if (color != 0)
-			put_pixel(image, WINDOW_WIDTH - x, stripe, color);
+		j = -1;
+		while (++j < sprites_len - 1)
+		{
+			if (sprites[j].distance < sprites[j + 1].distance)
+			{
+				tmp.distance = sprites[j].distance;
+				tmp.order = sprites[j].order;
+				sprites[j].distance = sprites[j + 1].distance;
+				sprites[j].order = sprites[j + 1].order;
+				sprites[j + 1].distance = tmp.distance;
+				sprites[j + 1].order = tmp.order;
+			}
+		}
 	}
 }
 
-static bool	stripe_is_visible(t_sprite *sprite, double *wall_distances)
+static void	set_orders_and_distances(t_sprite *sprites, t_data *data)
 {
-	if (sprite->transform_y > 0 && sprite->draw_start_x > 0
-		&& sprite->draw_start_x < WINDOW_WIDTH
-		&& sprite->transform_y < wall_distances[sprite->draw_start_x])
-		return (true);
-	return (false);
-}
+	t_player	*player;
+	uint32_t	i;
 
-static void	draw_all_stripes(t_data *data, t_sprite *sprite, bool invert)
-{
-	int	stripe;
-
-	stripe = sprite->draw_start_x - 1;
-	while (++stripe < sprite->draw_end_x)
+	player = &data->player;
+	i = -1;
+	while (++i < data->sprites_len)
 	{
-		if (invert == true)
-		{
-			sprite->texture_x = (int)(256 * ((sprite->draw_end_x
-							- stripe) - (-(sprite->width) / 2
-							+ (sprite->draw_end_x - sprite->screen_x)))
-					* sprite->textures.width / sprite->width) / 256;
-		}
-		else
-		{
-			sprite->texture_x = (int)(256 * (stripe
-						- (-sprite->width / 2 + sprite->screen_x))
-					* sprite->textures.width / sprite->width) / 256;
-		}
-		if (stripe_is_visible(sprite, data->wall_distances))
-			draw_stripe(sprite, &data->image, stripe);
+		sprites[i].order = i;
+		sprites[i].distance = ((player->pos_x - sprites[i].x)
+				* (player->pos_x - sprites[i].x)
+				+ (player->pos_y - sprites[i].y)
+				* (player->pos_y - sprites[i].y));
 	}
 }
 
 void	draw_sprite(t_data *data, t_sprite *sprites)
 {
-	int	i;
-
-	i = -1;
-	while (++i < NUM_SPRITES)
-	{
-		spritecast(&sprites[sprites[i].order], &data->player);
-		if (sprites[sprites[i].order].frames < 40)
-		{
-			draw_all_stripes(data, &sprites[sprites[i].order], false);
-			sprites[sprites[i].order].frames++;
-		}
-		else
-		{
-			draw_all_stripes(data, &sprites[sprites[i].order], true);
-			sprites[sprites[i].order].frames++;
-			if (sprites[sprites[i].order].frames > 80)
-				sprites[sprites[i].order].frames = 0;
-		}
-	}
+	set_orders_and_distances(sprites, data);
+	sort_sprites(sprites, data->sprites_len);
+	draw_animation(data, sprites);
 }
