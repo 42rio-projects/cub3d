@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/11 23:38:27 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/12 17:50:40 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define WINDOW_HEIGHT 480
 # define PLAYER_COLOR 0x0000ff
 # define RAY_COLOR 0xff0000
-# define MOVE_SPEED 0.02
-# define ROTATION_SPEED 0.02
+# define MOVE_SPEED 0.04
+# define ROTATION_SPEED 0.04
 
 # ifdef __linux__
 

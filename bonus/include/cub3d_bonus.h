@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/12 16:09:56 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/12 17:50:57 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define PLAYER_COLOR 0x0000ff
 # define RAY_COLOR 0xff0000
 # define MINIMAP_SCALE 6
-# define MOVE_SPEED 0.02
-# define ROTATION_SPEED 0.02
+# define MOVE_SPEED 0.04
+# define ROTATION_SPEED 0.04
 
 # ifdef __linux__
 
