@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 23:23:17 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/11 17:49:17 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/12 16:25:25 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	update_player(t_player *player, t_scene *scene)
 	double	new_x;
 	double	new_y;
 
-	rotation = player->turn_direction * ROTATION_SPEED;
+	rotation = (player->turn_direction + player->mouse_direction) * ROTATION_SPEED;
+	player->mouse_direction = 0;
 	old_dir_x = player->dir_x;
 	player->dir_x = player->dir_x
 		* cos(rotation) - player->dir_y * sin(rotation);
