@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:17:03 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/11 17:49:23 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/12 14:16:05 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ static void	open_door(t_scene *scene, t_player *player)
 	pos_y = player->pos_y + player->dir_y * 1;
 	pos_x = player->pos_x + player->dir_x * 1;
 	if (scene->map_grid[pos_y][pos_x] == '2')
-		scene->map_grid[pos_y][pos_x] = '0';
+		scene->map_grid[pos_y][pos_x] = '3';
+	else if (scene->map_grid[pos_y][pos_x] == '3')
+		scene->map_grid[pos_y][pos_x] = '2';
 }
 
 int	key_pressed(int keycode, t_data *data)
