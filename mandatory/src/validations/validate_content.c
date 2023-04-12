@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 17:34:34 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/10 19:20:41 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/11 22:53:00 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static const char	*find_map_line(const char *file_content)
 	{
 		while (*file_content == '\n')
 			file_content++;
-		while (*file_content && ft_strchr(" 012FNSWE", *file_content))
+		while (*file_content && ft_strchr(" 01NSWE", *file_content))
 			file_content++;
 		if (*file_content == '\n')
 			break ;
@@ -39,7 +39,7 @@ bool	validate_content(const char *file_content)
 		file_content++;
 		if (*file_content == '\n')
 			break ;
-		while (*file_content && ft_strchr(" 012FNSWE", *file_content))
+		while (*file_content && ft_strchr(" 01NSWE", *file_content))
 			file_content++;
 		if (*file_content != '\0' && *file_content != '\n')
 			break ;

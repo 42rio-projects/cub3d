@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 12:12:00 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/10 21:54:14 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/11 23:17:45 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ static char	**get_file_content(const char *file)
 
 static void	set_default_scene(t_scene *scene)
 {
-	ft_bzero(&scene->s1_texture, sizeof(t_texture));
-	ft_bzero(&scene->d_texture, sizeof(t_texture));
 	ft_bzero(&scene->no_texture, sizeof(t_texture));
 	ft_bzero(&scene->so_texture, sizeof(t_texture));
 	ft_bzero(&scene->we_texture, sizeof(t_texture));
@@ -53,15 +51,12 @@ bool	data_init(t_data *data, const char *file)
 	if (file_content == NULL)
 		return (1);
 	data->mlx_ptr = mlx_init();
-	data->sprites = NULL;
 	set_default_scene(&data->scene);
 	if (elements_init(data, file_content))
 		return (free_matrix(file_content), free_scene(&data->scene), 1);
 	if (map_init(&data->scene, file_content))
 		return (free_matrix(file_content), free_scene(&data->scene), 1);
 	if (player_init(&data->player, &data->scene))
-		return (free_matrix(file_content), free_scene(&data->scene), 1);
-	if (sprites_init(data))
 		return (free_matrix(file_content), free_scene(&data->scene), 1);
 	image_init(data);
 	free_matrix(file_content);

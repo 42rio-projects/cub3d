@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:43:25 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/10 14:30:55 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/11 22:57:02 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ static void	set_wall_position(t_ray *ray, t_draw_info *info)
 
 static void	get_texture(t_data *data, t_ray *ray, t_draw_info *info)
 {
-	if (ray->wall_type == '2')
-		info->texture = &data->scene.d_texture;
-	else if (ray->hit_direction == 'N')
+	if (ray->hit_direction == 'N')
 		info->texture = &data->scene.no_texture;
 	else if (ray->hit_direction == 'E')
 		info->texture = &data->scene.ea_texture;

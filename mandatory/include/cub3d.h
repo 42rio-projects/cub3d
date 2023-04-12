@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 21:48:24 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/11 23:38:27 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,8 @@
 
 # define WINDOW_WIDTH 854
 # define WINDOW_HEIGHT 480
-# define MINIMAP_WALL_COLOR 0x000000
-# define MINIMAP_FLOOR_COLOR 0xffffff
-# define MINIMAP_EMPTY_COLOR 0
 # define PLAYER_COLOR 0x0000ff
 # define RAY_COLOR 0xff0000
-# define MINIMAP_SCALE 6
 # define MOVE_SPEED 0.02
 # define ROTATION_SPEED 0.02
 
@@ -45,7 +41,6 @@
 #  define A 97
 #  define S 115
 #  define D 100
-#  define E 101
 #  define L_ARROW 65361
 #  define R_ARROW 65363
 
@@ -56,7 +51,6 @@
 #  define A 0
 #  define S 1
 #  define D 2
-#  define E 14
 #  define L_ARROW 123
 #  define R_ARROW 124
 
@@ -74,29 +68,6 @@ typedef struct s_texture
 	int		size_len;
 	int		endian;
 }	t_texture;
-
-typedef struct s_sprite
-{
-	double		x;
-	double		y;
-	int			order;
-	double		distance;
-	double		camera_x;
-	double		camera_y;
-	double		transform_x;
-	double		transform_y;
-	int			screen_x;
-	int			draw_start_y;
-	int			draw_end_y;
-	int			draw_start_x;
-	int			draw_end_x;
-	double		inv_det;
-	int			height;
-	int			width;
-	int			texture_x;
-	uint32_t	frames;
-	t_texture	*texture;
-}	t_sprite;
 
 typedef struct s_image
 {
@@ -121,12 +92,10 @@ typedef struct s_draw_info
 
 typedef struct s_scene
 {
-	t_texture	d_texture;
 	t_texture	no_texture;
 	t_texture	so_texture;
 	t_texture	we_texture;
 	t_texture	ea_texture;
-	t_texture	s1_texture;
 	long		ceil_color;
 	long		floor_color;
 	uint32_t	map_width;
@@ -136,8 +105,6 @@ typedef struct s_scene
 
 typedef struct s_ray
 {
-	double	wall_hit_x;
-	double	wall_hit_y;
 	double	distance;
 	double	dir_x;
 	double	dir_y;
@@ -148,7 +115,6 @@ typedef struct s_ray
 	int		step_x;
 	int		step_y;
 	char	hit_direction;
-	char	wall_type;
 }	t_ray;
 
 typedef struct s_player
@@ -170,9 +136,6 @@ typedef struct s_data
 	t_image		image;
 	t_scene		scene;
 	t_player	player;
-	t_sprite	*sprites;
-	uint32_t	sprites_len;
-	double		wall_distances[WINDOW_WIDTH];
 }	t_data;
 
 /* __________Functions__________ */
@@ -181,7 +144,6 @@ typedef struct s_data
 int		hook(t_data *data);
 int		key_pressed(int keycode, t_data *data);
 int		key_released(int keycode, t_data *data);
-int		mouse_hook(int x, int y, t_data *data);
 
 // init
 bool	data_init(t_data *data, const char *file);
@@ -189,20 +151,13 @@ bool	elements_init(t_data *data, char **file_content);
 void	image_init(t_data *data);
 bool	map_init(t_scene *scene, char **file_content);
 bool	player_init(t_player *player, t_scene *scene);
-bool	sprites_init(t_data *data);
 
 //cast
 void	raycast(t_player *player, t_scene *scene, t_ray *ray);
-void	spritecast(t_sprite *sprite, t_player *player);
 
 // render
-bool	draw_animation(t_data *data, t_sprite *sprites);
 void	draw_ceil_wall_floor(t_data *data, t_player *player, t_scene *scene);
-void	draw_image(t_data *data);
-void	draw_sprite(t_data *data, t_sprite *sprites);
 void	put_pixel(t_image *image, int x, int y, uint32_t color);
-void	render_tile(t_image *image,
-			uint32_t x_start, uint32_t y_start, uint32_t color);
 void	set_draw_info(t_data *data, t_player *player,
 			t_ray *ray, t_draw_info *info);
 

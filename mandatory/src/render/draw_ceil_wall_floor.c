@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:50:25 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 14:14:09 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/11 23:21:57 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	draw_ceil_wall_floor(t_data *data, t_player *player, t_scene *scene)
 		ray.dir_x = player->dir_x + player->plane_x * camera_x;
 		ray.dir_y = player->dir_y + player->plane_y * camera_x;
 		raycast(player, scene, &ray);
-		data->wall_distances[x] = ray.distance;
 		set_draw_info(data, player, &ray, &info);
 		draw_ceil_and_floor(data, &info, x);
 		draw_wall_texture(data, &info, x);

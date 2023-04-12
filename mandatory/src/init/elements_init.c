@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 12:35:52 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/10 21:25:38 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/11 22:40:21 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,7 @@ static bool	load_texture(t_data *data, t_texture *texture,
 
 static bool	set_elements(t_data *data, t_scene *scene, char *line)
 {
-	if (ft_strncmp(line, "D ", 2) == 0 && scene->d_texture.text == NULL)
-		return (load_texture(data,
-				&scene->d_texture, line + 2, "Invalid D path\n"));
-	else if (ft_strncmp(line, "S1 ", 3) == 0 && scene->s1_texture.text == NULL)
-		return (load_texture(data,
-				&scene->s1_texture, line + 3, "Invalid S1 path\n"));
-	else if (ft_strncmp(line, "NO ", 3) == 0 && scene->no_texture.text == NULL)
+	if (ft_strncmp(line, "NO ", 3) == 0 && scene->no_texture.text == NULL)
 		return (load_texture(data,
 				&scene->no_texture, line + 3, "Invalid NO path\n"));
 	else if (ft_strncmp(line, "SO ", 3) == 0 && scene->so_texture.text == NULL)
@@ -91,10 +85,8 @@ bool	elements_init(t_data *data, char **file_content)
 		if (set_elements(data, &data->scene, file_content[i]))
 			return (1);
 	}
-	if (!scene->d_texture.text || !scene->no_texture.text
-		|| !scene->s1_texture.text
-		|| !scene->so_texture.text || !scene->we_texture.text
-		|| !scene->ea_texture.text
+	if (!scene->no_texture.text || !scene->so_texture.text
+		|| !scene->we_texture.text || !scene->ea_texture.text
 		|| scene->floor_color == -1 || scene->ceil_color == -1)
 		return (throw_error("Missing scene information\n"));
 	return (0);
