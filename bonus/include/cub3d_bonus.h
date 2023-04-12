@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/12 11:43:35 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/12 15:23:03 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define WINDOW_HEIGHT 480
 # define MINIMAP_WALL_COLOR 0x000000
 # define MINIMAP_FLOOR_COLOR 0xffffff
-# define MINIMAP_EMPTY_COLOR 0
 # define PLAYER_COLOR 0x0000ff
 # define RAY_COLOR 0xff0000
 # define MINIMAP_SCALE 6
