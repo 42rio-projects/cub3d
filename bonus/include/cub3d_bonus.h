@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/12 15:23:03 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/12 16:09:56 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ typedef struct s_player
 	double	plane_x;
 	double	plane_y;
 	double	turn_direction;
+	double	mouse_direction;
 	double	walk_direction;
 }	t_player;
 

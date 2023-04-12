@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_ceil_wall_floor.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:50:25 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/11 23:21:57 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/12 16:19:58 by gguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	draw_wall_texture(t_data *data, t_draw_info *info, int x)
 		texture_y = (int)info->texture_pos & (texture->height - 1);
 		info->texture_pos += info->step;
 		color = texture->addr[(texture->height * texture_y + info->texture_x)];
-		put_pixel(&data->image, WINDOW_WIDTH - x, y, color);
+		put_pixel(&data->image, x, y, color);
 	}
 }
 
@@ -36,10 +36,10 @@ static void	draw_ceil_and_floor(t_data *data, t_draw_info *info, int x)
 
 	y = -1;
 	while (++y < info->wall_start)
-		put_pixel(&data->image, WINDOW_WIDTH - x, y, data->scene.ceil_color);
+		put_pixel(&data->image, x, y, data->scene.ceil_color);
 	y = info->wall_end - 1;
 	while (++y < WINDOW_HEIGHT)
-		put_pixel(&data->image, WINDOW_WIDTH - x, y, data->scene.floor_color);
+		put_pixel(&data->image, x, y, data->scene.floor_color);
 }
 
 void	draw_ceil_wall_floor(t_data *data, t_player *player, t_scene *scene)
@@ -53,8 +53,8 @@ void	draw_ceil_wall_floor(t_data *data, t_player *player, t_scene *scene)
 	while (++x < WINDOW_WIDTH)
 	{
 		camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
-		ray.dir_x = player->dir_x + player->plane_x * camera_x;
-		ray.dir_y = player->dir_y + player->plane_y * camera_x;
+		ray.dir_x = player->dir_x - player->plane_x * camera_x;
+		ray.dir_y = player->dir_y - player->plane_y * camera_x;
 		raycast(player, scene, &ray);
 		set_draw_info(data, player, &ray, &info);
 		draw_ceil_and_floor(data, &info, x);
