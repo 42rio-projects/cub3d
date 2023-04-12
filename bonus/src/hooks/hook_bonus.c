@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 23:23:17 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/12 16:25:25 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/12 18:21:00 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	update_player(t_player *player, t_scene *scene)
 	double	new_x;
 	double	new_y;
 
-	rotation = (player->turn_direction + player->mouse_direction) * ROTATION_SPEED;
-	player->mouse_direction = 0;
+	rotation = (player->turn_direction + player->mouse_direction)
+		* ROTATION_SPEED;
 	old_dir_x = player->dir_x;
 	player->dir_x = player->dir_x
 		* cos(rotation) - player->dir_y * sin(rotation);
@@ -44,6 +44,7 @@ static void	update_player(t_player *player, t_scene *scene)
 int	hook(t_data *data)
 {
 	update_player(&data->player, &data->scene);
+	data->player.mouse_direction = 0;
 	mlx_clear_window(data->mlx_ptr, data->win);
 	draw_image(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win, data->image.img, 0, 0);

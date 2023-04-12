@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_animation_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gguedes <gguedes@student.42.rio>           +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 15:52:24 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/12 17:08:42 by gguedes          ###   ########.fr       */
+/*   Updated: 2023/04/12 18:14:49 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ static void	draw_all_stripes(t_data *data, t_sprite *sprite, bool invert)
 						- (-sprite->width / 2 + sprite->screen_x))
 					* texture->width / sprite->width) / 256;
 		}
-		if (stripe_is_visible(sprite, data->wall_distances, WINDOW_WIDTH - x_stripe))
+		if (stripe_is_visible(sprite, data->wall_distances,
+				WINDOW_WIDTH - x_stripe))
 			draw_stripe(sprite, &data->image, texture, x_stripe);
 	}
 }
