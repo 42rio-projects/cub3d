@@ -3,8 +3,8 @@ SO ./textures/xpm/brick.xpm
 WE ./textures/xpm/grey.xpm
 EA ./textures/xpm/wood.xpm
 
-F 200,100,300
-C 25,110,4
+F 200,100,2
+C 25,110,300
 
 111111111111111111111111111111
 1E0000000001000000000000000001
