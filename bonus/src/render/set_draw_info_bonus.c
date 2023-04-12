@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_draw_info_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:43:25 by gguedes           #+#    #+#             */
-/*   Updated: 2023/04/11 17:50:57 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/12 00:02:22 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	set_wall_position(t_ray *ray, t_draw_info *info)
 static void	get_texture(t_data *data, t_ray *ray, t_draw_info *info)
 {
 	if (ray->wall_type == '2')
-		info->texture = &data->scene.d_texture;
+		info->texture = &data->scene.door_texture;
 	else if (ray->hit_direction == 'N')
 		info->texture = &data->scene.no_texture;
 	else if (ray->hit_direction == 'E')

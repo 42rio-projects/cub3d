@@ -1,6 +1,7 @@
 # Variables declarations
 
-NAME		=	cub3d
+EXE		=	cub3d
+EXE_BONUS		=	cub3d_bonus
 
 SRCS		=	$(addprefix mandatory/src/, main.c \
 				$(addprefix hooks/, hook.c key_pressed.c key_released.c) \
@@ -60,11 +61,9 @@ INCLUDE_BONUS		=	-I./bonus/include -I$(LIBFT_DIR) -I$(MLX_DIR)
 %.o: %.c ./mandatory/include/cub3d.h
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-all: $(NAME)
+all: $(EXE)
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
-	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(NAME)
-	@echo "\033[32m 💯 | cub3d mandatory created."
+bonus: $(EXE_BONUS)
 
 $(MLX):
 	@make -s -C $(MLX_DIR)
@@ -72,8 +71,12 @@ $(MLX):
 $(LIBFT):
 	@make -s -C $(LIBFT_DIR)
 
-bonus: $(OBJS_BONUS) $(LIBFT) $(MLX)
-	@$(CC) $(CFLAGS) $(INCLUDE_BONUS) $(OBJS_BONUS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(NAME)
+$(EXE): $(OBJS) $(LIBFT) $(MLX)
+	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $@
+	@echo "\033[32m 💯 | cub3d mandatory created."
+
+$(EXE_BONUS): $(OBJS_BONUS) $(LIBFT) $(MLX)
+	@$(CC) $(CFLAGS) $(INCLUDE_BONUS) $(OBJS_BONUS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $@
 	@echo "\033[32m ✨ | cub3d bonus created."
 
 clean:
@@ -85,7 +88,7 @@ clean:
 fclean:
 	@make -s -C $(LIBFT_DIR) fclean
 	@make -s -C $(MLX_DIR) clean
-	@$(RM) $(OBJS) $(OBJS_BONUS) $(NAME)
+	@$(RM) $(OBJS) $(OBJS_BONUS) $(EXE) $(EXE_BONUS)
 	@echo "\033[33m 🌪️  | cub3d all cleaned."
 
 re: fclean all

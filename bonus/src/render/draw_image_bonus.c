@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_image_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:02:48 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/11 17:50:38 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/12 00:10:38 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	draw_minimap(t_data *data, t_player *player, t_scene *scene)
 void	draw_image(t_data *data)
 {
 	draw_ceil_wall_floor(data, &data->player, &data->scene);
-	draw_sprite(data, data->sprites);
+	if (data->sprites_len > 0)
+		draw_sprite(data, data->sprites);
 	draw_minimap(data, &data->player, &data->scene);
 }

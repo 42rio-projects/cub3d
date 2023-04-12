@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:55:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/11 17:48:57 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/12 00:40:47 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	set_calc_variables(t_ray *ray, double pos_x, double pos_y)
 	}
 }
 
-static void	set_hit_variables(t_player *player, t_ray *ray, bool horizontal_hit)
+static void	set_hit_variables(t_ray *ray, bool horizontal_hit)
 {
 	if (horizontal_hit == false)
 	{
@@ -56,8 +56,6 @@ static void	set_hit_variables(t_player *player, t_ray *ray, bool horizontal_hit)
 		else
 			ray->hit_direction = 'S';
 	}
-	ray->wall_hit_x = player->pos_x + (ray->distance * ray->dir_x);
-	ray->wall_hit_y = player->pos_y + (ray->distance * ray->dir_y);
 }
 
 static void	closest_interception(t_player *player, t_scene *scene, t_ray *ray)
@@ -86,7 +84,7 @@ static void	closest_interception(t_player *player, t_scene *scene, t_ray *ray)
 			break ;
 	}
 	ray->wall_type = scene->map_grid[map_y][map_x];
-	set_hit_variables(player, ray, horizontal_hit);
+	set_hit_variables(ray, horizontal_hit);
 }
 
 void	raycast(t_player *player, t_scene *scene, t_ray *ray)

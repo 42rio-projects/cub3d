@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   draw_animation_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 15:52:24 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/11 17:50:27 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/12 00:34:27 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static void	draw_stripe(t_sprite *sprite, t_image *image, int x)
+static void	draw_stripe(t_sprite *sprite, t_image *image, t_texture *texture,
+int x)
 {
 	int	y_stripe;
 	int	factor;
@@ -23,8 +24,8 @@ static void	draw_stripe(t_sprite *sprite, t_image *image, int x)
 	while (++y_stripe < sprite->draw_end_y)
 	{
 		factor = (y_stripe) * 256 - WINDOW_HEIGHT * 128 + sprite->height * 128;
-		texture_y = ((factor * sprite->texture->height) / sprite->height) / 256;
-		color = sprite->texture->addr[sprite->texture->width * texture_y
+		texture_y = ((factor * texture->height) / sprite->height) / 256;
+		color = texture->addr[texture->width * texture_y
 			+ sprite->texture_x];
 		if (color != 0)
 			put_pixel(image, WINDOW_WIDTH - x, y_stripe, color);
@@ -43,8 +44,10 @@ static bool	stripe_is_visible(t_sprite *sprite, double *wall_distances,
 
 static void	draw_all_stripes(t_data *data, t_sprite *sprite, bool invert)
 {
-	int	x_stripe;
+	t_texture	*texture;
+	int			x_stripe;
 
+	texture = &data->scene.sprite_texture;
 	x_stripe = sprite->draw_start_x - 1;
 	while (++x_stripe < sprite->draw_end_x)
 	{
@@ -53,16 +56,16 @@ static void	draw_all_stripes(t_data *data, t_sprite *sprite, bool invert)
 			sprite->texture_x = (int)(256 * ((sprite->draw_end_x
 							- x_stripe) - (-(sprite->width) / 2
 							+ (sprite->draw_end_x - sprite->screen_x)))
-					* sprite->texture->width / sprite->width) / 256;
+					* texture->width / sprite->width) / 256;
 		}
 		else
 		{
 			sprite->texture_x = (int)(256 * (x_stripe
 						- (-sprite->width / 2 + sprite->screen_x))
-					* sprite->texture->width / sprite->width) / 256;
+					* texture->width / sprite->width) / 256;
 		}
 		if (stripe_is_visible(sprite, data->wall_distances, x_stripe))
-			draw_stripe(sprite, &data->image, x_stripe);
+			draw_stripe(sprite, &data->image, texture, x_stripe);
 	}
 }
 

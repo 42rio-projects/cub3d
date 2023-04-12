@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:48:11 by vsergio           #+#    #+#             */
-/*   Updated: 2023/04/11 17:48:43 by vsergio          ###   ########.fr       */
+/*   Updated: 2023/04/12 00:35:56 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ typedef struct s_sprite
 	int			width;
 	int			texture_x;
 	uint32_t	frames;
-	t_texture	*texture;
 }	t_sprite;
 
 typedef struct s_image
@@ -121,12 +120,12 @@ typedef struct s_draw_info
 
 typedef struct s_scene
 {
-	t_texture	d_texture;
 	t_texture	no_texture;
 	t_texture	so_texture;
 	t_texture	we_texture;
 	t_texture	ea_texture;
-	t_texture	s1_texture;
+	t_texture	door_texture;
+	t_texture	sprite_texture;
 	long		ceil_color;
 	long		floor_color;
 	uint32_t	map_width;
@@ -136,8 +135,6 @@ typedef struct s_scene
 
 typedef struct s_ray
 {
-	double	wall_hit_x;
-	double	wall_hit_y;
 	double	distance;
 	double	dir_x;
 	double	dir_y;
