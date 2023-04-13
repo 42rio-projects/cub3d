@@ -59,8 +59,8 @@ A simple version of the game required to pass in the project. It only includes w
 
 ### Examples
 ```c
-./cub3d maps/map1.cub
-./cub3d maps/map2.cub
+./cub3d maps/map1_mandatory.cub
+./cub3d maps/map2_mandatory.cub
 ```
 
 ## Controls (mandatory part)
